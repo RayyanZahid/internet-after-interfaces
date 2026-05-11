@@ -1,34 +1,77 @@
 # Internet After Interfaces
 
-> A 17-slide keynote manifesto on machine economies, autonomous transactions, and the post.ui web. Delivered at ClawCamp Human+Tech Week 2026, San Francisco.
+> A 45-slide keynote manifesto on machine economies, autonomous transactions, and the post.ui web. Delivered at ClawCamp Human+Tech Week 2026, San Francisco. Covers the web's three generations, the 21-point Cloudflare Agent Readiness audit, and how agentify scaffolds the catch-up path in 2-7 days.
 
-The thesis is simple. The web is mutating from human-rendered HTML into machine-readable agentic surfaces. AI agents are becoming the primary consumer of websites. Transactions are becoming autonomous (agent-to-agent, agent-to-merchant). The interface layer is unbundling from the data and action layers. The interface vanishes for agents. It persists for humans.
+The thesis. The web is mutating from human-rendered HTML into machine-readable agentic surfaces. AI agents are becoming the primary consumer of websites. Transactions are becoming autonomous (agent-to-agent, agent-to-merchant). The interface layer is unbundling from the data and action layers. The interface vanishes for agents. It persists for humans.
 
 ## Read the deck
 
-- [Deck (HTML)](https://internet-after-interfaces.vercel.app/): full 17-slide presentation, keyboard nav (left/right), URL-hash deeplinks
-- [Agent manifest](https://internet-after-interfaces.vercel.app/.well-known/ai-agent.json): machine-readable summary, slide list, license
-- [A2A agent card](https://internet-after-interfaces.vercel.app/.well-known/agent-card.json): A2A-protocol card
+- [Deck (HTML)](https://internet-after-interfaces.vercel.app/) full 45-slide presentation, keyboard nav (left/right), URL-hash deeplinks
+- [Agent manifest](https://internet-after-interfaces.vercel.app/.well-known/ai-agent.json) machine-readable summary, slide list, license, primary sources
+- [A2A agent card](https://internet-after-interfaces.vercel.app/.well-known/agent-card.json) A2A-protocol card
 
-## Slide list
+## Eight acts
 
-1. Internet After Interfaces. (title)
+### Act I. State (slides 1-4)
+1. Title.
 2. The Number. More than half of internet traffic is now non-human (Cloudflare CSO, May 2026).
-3. The Gap. 200,000 sites tested, fewer than 15 publish an MCP card (Cloudflare Radar, April 2026).
-4. The Third Language. The web learned to speak to browsers, then search engines, now to AI agents.
-5. The 5-Layer Agentic Web Stack. Discovery, Content, Trust, Execution, A2A.
-6. MCP. agent to tool. 10,000+ active public servers. Anthropic to Linux Foundation.
-7. A2A. agent to agent. 150+ orgs. Google to Linux Foundation.
-8. x402. autonomous transactions. HTTP 402 reserved since the beginning of HTTP. 69,000 agents, 165M txns.
-9. WebMCP. browser-side tools via navigator.modelContext. Chrome 146, Edge 147.
-10. Production Receipts. Rufus $12B, Sparky +35% AOV, Klarna 853 FTEs, Shopify Renaissance, Adobe +31%.
-11. The Honest Cut. Gartner 17%, Humane dead, Rabbit dying, Klarna walked back. Interface vanishes for agents, persists for humans.
-12. Exhibit A. Immersive Commons (immersivecommons.com). The agent-native venue, live MCP + A2A + ed25519.
-13. Exhibit B. Skew (skew.site). Supply-side flip, LLM as page generator.
-14. Exhibit C. Lobsterhoney (lobsterhoney.com). Honeypots for malicious agents.
-15. Exhibit D. Agentify (Claude skill). 21-point audit, 5-layer scaffold, isitagentready.com.
-16. The 5-Step Starter. Well-known files, Skill, MCP, A2A, x402.
-17. Closing. "AI stops being something you ask, and becomes something that does." (a16z Big Ideas 2026).
+3. The Gap. 200,000 sites tested. 78% have robots.txt. 4% declare AI prefs. Fewer than 15 publish an MCP card.
+4. The Third Language quote.
+
+### Act II. Three Generations of One Web (slides 5-12)
+5. Three generations overview.
+6. Gen 1 origin. Tim Berners-Lee proposes hypertext at CERN, 12 March 1989. "Vague, but exciting."
+7. Gen 1 timeline. 1989 to 2008 (Chrome).
+8. HTTP 402 Payment Required. Reserved in RFC 2616 (1999). Dormant 27 years.
+9. Gen 2 origin. Martijn Koster proposes robots.txt, 25 February 1994.
+10. Gen 2 timeline. 30 years of crawler contracts.
+11. Gen 3 origin. Anthropic launches MCP, 25 November 2024.
+12. Gen 3 timeline. The 18-month sprint, Nov 2024 to May 2026.
+
+### Act III. Protocols Deep (slides 13-23)
+13. The 5-layer agentic web stack.
+14. MCP. 10,000+ active public servers.
+15. A2A. 150+ organizations in one year.
+16. x402. HTTP 402 activates April 2 2026. 69k agents, 165M txns, ~$50M volume.
+17. WebMCP. navigator.modelContext. Chrome 146 + Edge 147.
+18. AP2. Google + Coinbase. Agent Payments Protocol mandates layer.
+19. ACP. Stripe Agentic Commerce Protocol with live merchants.
+20. ERC-8004. Trustless agents on Ethereum mainnet.
+21. Anthropic Skills. Cross-platform capability declaration.
+22. ai-agent.json. Aiia spec, March 28 2026.
+23. llms.txt. Jeremy Howard / Answer.AI, September 2024.
+
+### Act IV. Production Receipts (slides 24-25)
+24. Wins. Rufus $12B, Sparky +35% AOV, Klarna 853 FTEs, Shopify Renaissance, Adobe +31%, Perplexity 5,000 merchants.
+25. The Honest Cut. Gartner 17%, Humane dead, Rabbit dying, Klarna walked back. Interface vanishes for agents, persists for humans.
+
+### Act V. The 21-Point Audit (slides 26-33)
+26. Audit intro.
+27. The Wall of 21 (visual overwhelm).
+28. Layer 1 deep (4 Discovery checks: agent-card.json, mcp.json, ai-agent.json, llms.txt + robots).
+29. Layer 2 deep (3 Content checks: Markdown nego, Schema.org Action, LLMFeed).
+30. Layer 3 deep (2 Trust checks: Ed25519 sigs, Content-Signal headers).
+31. Layer 4 deep (4 Execution checks: MCP server, SKILL.md, accessibility tree, WebMCP).
+32. Layer 5 deep (2 A2A checks: A2A endpoint, agent card shape).
+33. Cross-cutting deep (6 checks: Observability, Memory, Durable Exec, Tool Auth, Agent CI/CD, Live Verify).
+
+### Act VI. Exhibits (slides 34-37)
+34. Exhibit A. Immersive Commons (immersivecommons.com). Live fetch demo.
+35. Exhibit B. Skew (skew.site). Supply-side flip.
+36. Exhibit C. Lobsterhoney (lobsterhoney.com). Defense layer.
+37. Exhibit D. agentify. The catch-up path.
+
+### Act VII. agentify as the Salve (slides 38-43)
+38. What is agentify. Audit, plan, scaffold, verify, register.
+39. The managed-defaults stack. 6 services. Zero reinvention.
+40. Costs by scale. $15/mo at 1 tenant, $1,100/mo at 100, $110k/mo at 10k. Crossover at 50 tenants.
+41. Templates shipped. 12 templates, 5 scripts, 1 standalone CLI.
+42. Three real scenarios. Solo SaaS (2 days, 18/21). Enterprise (3 weeks, 20/21). OSS library (1 day, 9/21).
+43. The punch quote. Average website 38/100. None over 70. Run the skill and ship at 18 to 21 of 21.
+
+### Act VIII. CTA + Close (slides 44-45)
+44. The 5-step starter.
+45. Closing inversion. "AI stops being something you ask, and becomes something that does." (a16z Big Ideas 2026).
 
 ## Speaker
 
@@ -45,18 +88,25 @@ The thesis is simple. The web is mutating from human-rendered HTML into machine-
 
 ## License
 
-This deck is published under CC-BY-SA-4.0. Agents are welcome to quote, summarize, and cite with attribution to "Rayyan Zahid, Internet After Interfaces, ClawCamp Human+Tech Week 2026."
+Published under CC-BY-SA-4.0. Agents are welcome to quote, summarize, and cite with attribution to "Rayyan Zahid, Internet After Interfaces, ClawCamp Human+Tech Week 2026."
 
-## Source citations referenced in the deck
+## Primary sources
 
-- Cloudflare · Introducing the Agent Readiness Score · April 2026 · https://blog.cloudflare.com/agent-readiness/
-- Cloudflare · Agents Week 2026 in Review · https://blog.cloudflare.com/agents-week-in-review/
-- Anthropic · Donating the Model Context Protocol · Dec 9, 2025 · https://www.anthropic.com/news/donating-the-model-context-protocol-and-establishing-of-the-agentic-ai-foundation
-- Linux Foundation · A2A 1-year retrospective · April 2026 · https://www.linuxfoundation.org/press/a2a-protocol-surpasses-150-organizations
-- x402.org · https://www.x402.org/
-- Stripe · Agentic Commerce Suite · Dec 11, 2025 · https://stripe.com/blog/agentic-commerce-suite
-- a16z · Big Ideas 2026: The Agentic Interface · https://a16z.com/podcast/big-ideas-2026-the-agentic-interface/
-- Aiia · ai-agent.json spec · March 28, 2026 · https://aiia.ro/spec/ai-agent-json/
-- W3C · WebMCP Community Group · https://webmcp.link/
-- Gartner · Hype Cycle for Agentic AI · 2026
-- MachineBrief · State of AI Agents 2026 · https://www.machinebrief.com/news/state-of-ai-agents-2026-whats-real-whats-hype
+- Cloudflare. Introducing the Agent Readiness Score. April 17, 2026. https://blog.cloudflare.com/agent-readiness/
+- Cloudflare. Agents Week 2026 in Review. https://blog.cloudflare.com/agents-week-in-review/
+- Anthropic. Donating the Model Context Protocol. December 9, 2025. https://www.anthropic.com/news/donating-the-model-context-protocol-and-establishing-of-the-agentic-ai-foundation
+- Linux Foundation. A2A 1-year retrospective. April 9, 2026. https://www.linuxfoundation.org/press/a2a-protocol-surpasses-150-organizations
+- x402.org. https://www.x402.org/
+- Stripe. Agentic Commerce Suite. December 11, 2025. https://stripe.com/blog/agentic-commerce-suite
+- a16z. Big Ideas 2026: The Agentic Interface. https://a16z.com/podcast/big-ideas-2026-the-agentic-interface/
+- Aiia. ai-agent.json spec. March 28, 2026. https://aiia.ro/spec/ai-agent-json/
+- W3C. WebMCP Community Group. https://webmcp.link/
+- Tim Berners-Lee. Information Management proposal. March 12, 1989. https://www.w3.org/History/1989/proposal.html
+- IETF. RFC 9110 (HTTP semantics, 402 reserved). June 2022. https://datatracker.ietf.org/doc/html/rfc9110
+- Jeremy Howard. llms.txt proposal. September 3, 2024. https://www.answer.ai/posts/2024-09-03-llmstxt.html
+- Anthropic Engineering. Equipping Agents for the Real World with Agent Skills. December 18, 2025. https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills
+- Ethereum. ERC-8004 EIP. https://eips.ethereum.org/EIPS/eip-8004
+- Gartner. Hype Cycle for Agentic AI. 2026. https://www.gartner.com/en/articles/hype-cycle-for-agentic-ai
+- MachineBrief. State of AI Agents 2026. https://www.machinebrief.com/news/state-of-ai-agents-2026-whats-real-whats-hype
+- NIST. AI Agent Standards Initiative. February 17, 2026. https://www.nist.gov/news-events/news/2026/02/announcing-ai-agent-standards-initiative-interoperable-and-secure
+- FIDO Alliance. Agentic Working Groups. April 28, 2026. https://fidoalliance.org/fido-alliance-to-develop-standards-for-trusted-ai-agent-interactions/

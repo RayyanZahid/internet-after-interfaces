@@ -8,3 +8,5 @@ node_modules/
 .vscode/
 Thumbs.db
 
+_smoke/
+report.json

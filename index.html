@@ -12,7 +12,7 @@
 <meta name="theme-color" content="#0a0a0a">
 <meta name="color-scheme" content="dark">
 <title>Internet After Interfaces · Human+Tech Week 2026</title>
-<meta name="description" content="A 17-slide manifesto on machine economies, autonomous transactions, and the post.ui web. Delivered at ClawCamp Human+Tech Week, San Francisco, May 11, 2026.">
+<meta name="description" content="A 45-slide manifesto on machine economies, autonomous transactions, and the post.ui web. The web's three generations, the 21-point agent-readiness audit, and how to ship. ClawCamp Human+Tech Week 2026.">
 <meta name="author" content="Rayyan Zahid">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://internet-after-interfaces.vercel.app/">
@@ -29,7 +29,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Internet After Interfaces">
-<meta name="twitter:description" content="Manifesto on the post.ui web. ClawCamp Human+Tech Week 2026.">
+<meta name="twitter:description" content="The web learned to speak to browsers, then search engines. Now it speaks to AI agents. 45-slide keynote.">
 <meta name="twitter:image" content="https://internet-after-interfaces.vercel.app/og.svg">
 
 <link rel="alternate" type="application/json" href="/.well-known/ai-agent.json" title="Agent Manifest">
@@ -45,7 +45,7 @@
   "@type": "PresentationDigitalDocument",
   "name": "Internet After Interfaces",
   "headline": "Internet After Interfaces. Machine economies, autonomous transactions, and the post.ui web.",
-  "description": "A 17-slide manifesto on machine economies, autonomous transactions, and the post.ui web.",
+  "description": "A 45-slide keynote manifesto on the post.ui agentic web. Covers the web's three generations, the 21-point agent-readiness audit, and how to ship agent-first products in days, not quarters.",
   "author": {"@type": "Person", "name": "Rayyan Zahid", "url": "https://x.com/supercoolraydude"},
   "datePublished": "2026-05-11",
   "inLanguage": "en",
@@ -64,11 +64,10 @@
 
 <style>
 /* ============================================================
-   CC-PRO TOKENS — inlined for single-file deploy
-   Forces are set on <html> above and derive all downstream values.
+   CC-PRO TOKENS — inlined.
+   Forces set on <html> derive all downstream values.
    ============================================================ */
 :root {
-  /* derived from forces */
   --force-space-scale: calc(1 + (1 - var(--force-density)) * 0.75);
   --force-radius-base: calc(var(--force-warmth) * 8px);
   --force-tracking-body: calc((1 - var(--force-volume)) * 0.02em);
@@ -78,35 +77,40 @@
   --force-leading: calc(1.2 + (1 - var(--force-density)) * 0.4);
   --force-hierarchy: calc(1 + var(--force-volume) * 1.5);
 
-  /* subject-derived palette — anchored on /.well-known/ + HTTP 402 */
+  /* subject-derived palette */
   --color-bg: #0a0a0a;
   --color-fg: #f4f1ea;
-  --color-accent: #d4ff00;            /* radioactive lime — status:OK */
+  --color-accent: #d4ff00;
   --color-muted: rgba(244, 241, 234, 0.55);
   --color-subtle: rgba(244, 241, 234, 0.08);
   --color-surface: rgba(244, 241, 234, 0.04);
   --color-border: rgba(244, 241, 234, 0.18);
-  --color-discord: #ff3b30;           /* HTTP 402 red — the honest cut */
+  --color-discord: #ff3b30;
   --color-success: #d4ff00;
+  /* layer colors for the audit wall */
+  --layer-1: #d4ff00; /* Discovery — lime */
+  --layer-2: #6affc8; /* Content — mint */
+  --layer-3: #7fa9ff; /* Trust — blue */
+  --layer-4: #ff9d4d; /* Execution — orange */
+  --layer-5: #ff6dd5; /* A2A — pink */
+  --layer-x: #f4f1ea; /* Cross-cutting — paper */
 
-  /* typography roles */
   --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-accent: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
-  /* fluid scale */
+  /* RESPONSIVE-TUNED type scale — lower mobile floors per Scher persona doc */
   --type-micro: clamp(0.6rem, 0.55rem + 0.2vw, 0.72rem);
-  --type-caption: clamp(0.72rem, 0.66rem + 0.3vw, 0.85rem);
-  --type-body-small: clamp(0.85rem, 0.78rem + 0.35vw, 1rem);
-  --type-body: clamp(1rem, 0.92rem + 0.4vw, 1.125rem);
-  --type-lede: clamp(1.2rem, 1.05rem + 0.7vw, 1.65rem);
-  --type-subhead: clamp(1.6rem, 1.3rem + 1.4vw, 2.5rem);
-  --type-headline: clamp(2.4rem, 1.6rem + 3.2vw, 4.5rem);
-  --type-display: clamp(3.5rem, 2rem + 7vw, 8rem);
-  --type-massive: clamp(5rem, 2.5rem + 12vw, 13rem);
-  --type-civic: clamp(5.5rem, 2rem + 16vw, 18rem);
+  --type-caption: clamp(0.7rem, 0.62rem + 0.32vw, 0.85rem);
+  --type-body-small: clamp(0.82rem, 0.74rem + 0.35vw, 1rem);
+  --type-body: clamp(0.95rem, 0.86rem + 0.4vw, 1.125rem);
+  --type-lede: clamp(1.1rem, 0.95rem + 0.7vw, 1.65rem);
+  --type-subhead: clamp(1.4rem, 1rem + 1.6vw, 2.5rem);
+  --type-headline: clamp(1.75rem, 1rem + 3.5vw, 4.5rem);
+  --type-display: clamp(2.25rem, 1.2rem + 5.5vw, 8rem);
+  --type-massive: clamp(3rem, 1.2rem + 9vw, 13rem);
+  --type-civic: clamp(2.75rem, 0.8rem + 11vw, 18rem);
 
-  /* tracking */
   --tracking-mega: -0.045em;
   --tracking-tight: -0.025em;
   --tracking-snug: -0.012em;
@@ -114,19 +118,16 @@
   --tracking-wide: 0.05em;
   --tracking-widest: 0.18em;
 
-  /* leading */
   --leading-crush: 0.88;
   --leading-tight: 1.02;
   --leading-snug: 1.18;
   --leading-normal: 1.4;
   --leading-relaxed: 1.6;
 
-  /* weights */
   --weight-regular: 400;
   --weight-medium: 500;
   --weight-bold: 700;
 
-  /* spacing */
   --space-3xs: calc(0.25rem * var(--force-space-scale));
   --space-2xs: calc(0.5rem * var(--force-space-scale));
   --space-xs: calc(0.75rem * var(--force-space-scale));
@@ -136,10 +137,9 @@
   --space-xl: calc(4rem * var(--force-space-scale));
   --space-2xl: calc(6rem * var(--force-space-scale));
 
-  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --gutter: clamp(1rem, 4vw, 4rem);
   --tap-min: 48px;
 
-  /* motion durations */
   --dur-snap: calc(180ms * var(--force-motion-scale));
   --dur-swift: calc(320ms * var(--force-motion-scale));
   --dur-flow: calc(600ms * var(--force-motion-scale));
@@ -154,7 +154,7 @@
    RESET + BASE
    ============================================================ */
 *, *::before, *::after { box-sizing: border-box; }
-html { background: var(--color-bg); color: var(--color-fg); }
+html { background: var(--color-bg); color: var(--color-fg); scrollbar-color: var(--color-border) transparent; }
 body {
   margin: 0;
   font-family: var(--font-body);
@@ -173,7 +173,7 @@ img, svg { max-width: 100%; height: auto; display: block; }
 ::selection { background: var(--color-accent); color: var(--color-bg); }
 :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
 
-/* grain overlay — defeats default-website smell */
+/* grain */
 body::after {
   content: "";
   position: fixed; inset: 0; pointer-events: none; z-index: 50;
@@ -185,8 +185,7 @@ body::after {
 
 /* ============================================================
    DECK ARCHITECTURE
-   Each slide is a fullscreen section. JS toggles .is-active.
-   Without JS: slides scroll vertically as fallback.
+   .slide overflows internally when content > viewport.
    ============================================================ */
 main#deck {
   position: relative;
@@ -201,13 +200,19 @@ main#deck {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: clamp(3rem, 8vh, 6rem) var(--gutter) clamp(4rem, 10vh, 7rem);
+  padding: clamp(2.5rem, 7vh, 5.5rem) var(--gutter) clamp(4rem, 10vh, 7rem);
+  overflow-y: auto;
+  overflow-x: hidden;
   opacity: 0;
   visibility: hidden;
   transition: opacity var(--dur-swift) ease-out, visibility 0s linear var(--dur-swift);
   min-height: 100vh;
   min-height: 100svh;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
 }
+.slide::-webkit-scrollbar { width: 4px; }
+.slide::-webkit-scrollbar-thumb { background: var(--color-border); }
 .slide.is-active {
   opacity: 1;
   visibility: visible;
@@ -215,19 +220,17 @@ main#deck {
   z-index: 2;
 }
 
-/* No-JS fallback — show all slides stacked vertically */
+/* No-JS fallback */
 html.no-js main#deck { min-height: auto; }
 html.no-js .slide {
-  position: relative;
-  inset: auto;
-  opacity: 1;
-  visibility: visible;
+  position: relative; inset: auto;
+  opacity: 1; visibility: visible;
   border-bottom: 1px solid var(--color-border);
-  min-height: 100vh;
+  min-height: 100vh; overflow: visible;
 }
 
 /* ============================================================
-   PERSISTENT FURNITURE — counter, kbd, ticker
+   PERSISTENT FURNITURE
    ============================================================ */
 .chrome {
   position: fixed;
@@ -238,20 +241,16 @@ html.no-js .slide {
   color: var(--color-muted);
   pointer-events: none;
 }
-.chrome a, .chrome button { pointer-events: auto; }
-
 #counter {
-  top: clamp(0.9rem, 2.2vh, 1.8rem);
-  right: clamp(1rem, 3vw, 2.5rem);
+  top: clamp(0.7rem, 1.8vh, 1.6rem);
+  right: clamp(0.8rem, 3vw, 2.5rem);
   text-transform: uppercase;
 }
 #counter .num { color: var(--color-accent); }
-
 #kbd {
   bottom: clamp(2.6rem, 5.5vh, 3.6rem);
-  right: clamp(1rem, 3vw, 2.5rem);
+  right: clamp(0.8rem, 3vw, 2.5rem);
 }
-
 #progress {
   position: fixed;
   top: 0; left: 0;
@@ -261,11 +260,10 @@ html.no-js .slide {
   transition: width var(--dur-swift) ease-out;
   width: 0%;
 }
-
 footer#ticker {
   position: fixed;
   bottom: 0; left: 0; right: 0;
-  height: clamp(2rem, 4.5vh, 2.6rem);
+  height: clamp(1.9rem, 4vh, 2.4rem);
   padding: 0 var(--gutter);
   display: flex; align-items: center;
   font-family: var(--font-accent);
@@ -283,9 +281,9 @@ footer#ticker {
 #ticker-line .ok { color: var(--color-accent); }
 #ticker-line .err { color: var(--color-discord); }
 
-@media (max-width: 480px) {
+@media (max-width: 520px) {
   #kbd { display: none; }
-  footer#ticker { font-size: 0.6rem; height: 1.9rem; }
+  footer#ticker { font-size: 0.58rem; height: 1.7rem; }
 }
 
 /* ============================================================
@@ -304,7 +302,6 @@ a { color: inherit; }
   color: var(--color-muted);
 }
 .eyebrow .dot { color: var(--color-accent); }
-
 .cite {
   font-family: var(--font-accent);
   font-size: var(--type-caption);
@@ -312,7 +309,6 @@ a { color: inherit; }
   color: var(--color-muted);
   text-transform: uppercase;
 }
-
 .mono { font-family: var(--font-accent); }
 .upper { text-transform: uppercase; }
 .accent { color: var(--color-accent); }
@@ -327,7 +323,6 @@ a { color: inherit; }
   line-height: var(--leading-crush);
   text-transform: uppercase;
 }
-
 .massive {
   font-family: var(--font-display);
   font-size: var(--type-massive);
@@ -336,7 +331,6 @@ a { color: inherit; }
   line-height: var(--leading-crush);
   text-transform: uppercase;
 }
-
 .display {
   font-family: var(--font-display);
   font-size: var(--type-display);
@@ -344,7 +338,6 @@ a { color: inherit; }
   letter-spacing: var(--tracking-tight);
   line-height: var(--leading-tight);
 }
-
 .headline {
   font-family: var(--font-display);
   font-size: var(--type-headline);
@@ -352,7 +345,6 @@ a { color: inherit; }
   letter-spacing: var(--tracking-tight);
   line-height: var(--leading-tight);
 }
-
 .lede {
   font-family: var(--font-display);
   font-size: var(--type-lede);
@@ -360,7 +352,6 @@ a { color: inherit; }
   line-height: var(--leading-snug);
   letter-spacing: var(--tracking-snug);
 }
-
 .kicker {
   font-family: var(--font-accent);
   font-size: var(--type-caption);
@@ -369,35 +360,32 @@ a { color: inherit; }
   color: var(--color-accent);
 }
 
-.measure { max-width: 22ch; }
-.measure-wide { max-width: 36ch; }
-
 /* ============================================================
-   PUNCTUATING REVEAL — animates when slide becomes active
+   PUNCTUATING REVEAL
    ============================================================ */
 .slide .m-up {
   opacity: 0;
-  transform: translateY(18px);
+  transform: translateY(14px);
   transition: opacity var(--dur-flow) ease-out, transform var(--dur-flow) ease-out;
 }
 .slide.is-active .m-up { opacity: 1; transform: none; }
-.slide.is-active .m-up:nth-child(2) { transition-delay: 60ms; }
-.slide.is-active .m-up:nth-child(3) { transition-delay: 120ms; }
-.slide.is-active .m-up:nth-child(4) { transition-delay: 180ms; }
-.slide.is-active .m-up:nth-child(5) { transition-delay: 240ms; }
-.slide.is-active .m-up:nth-child(6) { transition-delay: 300ms; }
-.slide.is-active .m-up:nth-child(7) { transition-delay: 360ms; }
-.slide.is-active .m-up:nth-child(8) { transition-delay: 420ms; }
-
+.slide.is-active .m-up:nth-child(2) { transition-delay: 50ms; }
+.slide.is-active .m-up:nth-child(3) { transition-delay: 100ms; }
+.slide.is-active .m-up:nth-child(4) { transition-delay: 150ms; }
+.slide.is-active .m-up:nth-child(5) { transition-delay: 200ms; }
+.slide.is-active .m-up:nth-child(6) { transition-delay: 250ms; }
+.slide.is-active .m-up:nth-child(7) { transition-delay: 300ms; }
+.slide.is-active .m-up:nth-child(8) { transition-delay: 350ms; }
+.slide.is-active .m-up:nth-child(9) { transition-delay: 400ms; }
+.slide.is-active .m-up:nth-child(10) { transition-delay: 450ms; }
 @media (prefers-reduced-motion: reduce) {
   .slide .m-up { opacity: 1; transform: none; transition: none; }
 }
 
 /* ============================================================
    SLIDE 1 — TITLE
-   Scher civic-scale typewriter with cursor; supporting matter in margins
    ============================================================ */
-.slide--title { justify-content: space-between; }
+.slide--title { justify-content: space-between; gap: var(--space-l); }
 .slide--title .top-strip,
 .slide--title .bot-strip {
   display: flex; justify-content: space-between; gap: var(--space-m); flex-wrap: wrap;
@@ -405,12 +393,11 @@ a { color: inherit; }
 .slide--title .stamp {
   font-family: var(--font-accent);
   font-size: var(--type-caption);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
   color: var(--color-muted);
 }
 .slide--title .stamp.ok { color: var(--color-accent); }
-
 .title-civic {
   font-family: var(--font-display);
   font-size: var(--type-civic);
@@ -427,11 +414,8 @@ a { color: inherit; }
   margin-left: 0.04em;
 }
 .title-civic.done .typed::after { content: ""; }
-
 @keyframes blink { 50% { opacity: 0; } }
-
 .title-civic .row { display: block; }
-
 .subtitle-line {
   font-family: var(--font-accent);
   font-size: var(--type-lede);
@@ -440,8 +424,7 @@ a { color: inherit; }
   margin-top: var(--space-m);
   max-width: 32ch;
 }
-.subtitle-line .sep { color: var(--color-accent); margin: 0 0.6ch; }
-
+.subtitle-line .sep { color: var(--color-accent); margin: 0 0.4ch; }
 .boot-block {
   font-family: var(--font-accent);
   font-size: var(--type-caption);
@@ -450,18 +433,20 @@ a { color: inherit; }
   line-height: 1.5;
 }
 .boot-block .ok { color: var(--color-accent); }
-@media (max-width: 768px) { .boot-block { text-align: left; } }
+@media (max-width: 768px) {
+  .boot-block { text-align: left; }
+}
 
 /* ============================================================
    SLIDE 2 — THE NUMBER
    ============================================================ */
-.slide--punch { justify-content: center; text-align: left; }
+.slide--punch { justify-content: center; }
 .punch-stat {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: var(--type-civic);
+  font-size: var(--type-massive);
   letter-spacing: var(--tracking-mega);
-  line-height: 0.88;
+  line-height: 0.92;
   text-transform: uppercase;
 }
 .punch-stat .accent { color: var(--color-accent); }
@@ -486,39 +471,38 @@ a { color: inherit; }
 }
 
 /* ============================================================
-   SLIDE 3 — THE GAP (data block)
+   SLIDE 3 — THE GAP
    ============================================================ */
-.gap-list { display: flex; flex-direction: column; gap: var(--space-s); margin-top: var(--space-l); max-width: 950px; }
+.gap-list { display: flex; flex-direction: column; gap: var(--space-2xs); margin-top: var(--space-m); max-width: 950px; }
 .gap-row {
   display: grid;
-  grid-template-columns: minmax(7ch, 12ch) 1fr;
-  gap: clamp(1rem, 3vw, 2.5rem);
+  grid-template-columns: minmax(6ch, 10ch) 1fr;
+  gap: clamp(0.8rem, 2.5vw, 2.5rem);
   align-items: baseline;
-  padding: var(--space-s) 0;
+  padding: var(--space-2xs) 0;
   border-top: 1px solid var(--color-subtle);
 }
 .gap-row:first-child { border-top: 1px solid var(--color-border); }
 .gap-pct {
   font-family: var(--font-accent);
-  font-size: clamp(1.6rem, 1.1rem + 3.5vw, 3.8rem);
+  font-size: clamp(1.4rem, 0.9rem + 3vw, 3.2rem);
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   color: var(--color-fg);
   letter-spacing: var(--tracking-tight);
   line-height: 1;
 }
-.gap-pct.bad { color: var(--color-discord); }
-.gap-pct.crit { color: var(--color-discord); }
+.gap-pct.bad, .gap-pct.crit { color: var(--color-discord); }
 .gap-label {
   font-family: var(--font-display);
   font-size: var(--type-lede);
   font-weight: 500;
-  line-height: 1.25;
+  line-height: 1.2;
   letter-spacing: var(--tracking-snug);
 }
 .gap-label .sub {
   display: block;
-  margin-top: 0.2em;
+  margin-top: 0.18em;
   font-family: var(--font-accent);
   font-size: var(--type-caption);
   font-weight: 400;
@@ -528,14 +512,13 @@ a { color: inherit; }
 }
 .gap-bar {
   grid-column: 1 / -1;
-  height: 4px;
+  height: 3px;
   background: var(--color-subtle);
   overflow: hidden;
-  margin-top: var(--space-2xs);
+  margin-top: 0.4rem;
 }
 .gap-bar > span {
-  display: block;
-  height: 100%;
+  display: block; height: 100%;
   background: var(--color-accent);
   transform: scaleX(0);
   transform-origin: left;
@@ -545,7 +528,7 @@ a { color: inherit; }
 .slide.is-active .gap-bar > span { transform: scaleX(var(--bar, 1)); transition-delay: 280ms; }
 
 /* ============================================================
-   SLIDE 4 — PULL QUOTE
+   PULL-QUOTE (slides 4, 13, 23)
    ============================================================ */
 .slide--quote { justify-content: center; }
 .pull-quote-large {
@@ -554,32 +537,140 @@ a { color: inherit; }
   font-weight: 700;
   letter-spacing: var(--tracking-tight);
   line-height: var(--leading-tight);
-  max-width: 18ch;
+  max-width: 22ch;
 }
 .pull-quote-large .accent { color: var(--color-accent); }
 .pull-quote-large::before {
   content: "“";
   display: inline-block;
   color: var(--color-accent);
-  margin-right: 0.1em;
+  margin-right: 0.08em;
 }
 
 /* ============================================================
-   SLIDE 5 — STACK DIAGRAM
+   HISTORY / GENERATION SLIDES (new — slides 5–12)
    ============================================================ */
-.stack { display: flex; flex-direction: column; gap: var(--space-2xs); max-width: 1180px; }
+.gen-mark {
+  font-family: var(--font-accent);
+  font-size: var(--type-massive);
+  font-weight: 600;
+  color: var(--color-accent);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.gen-strap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: end;
+}
+@media (max-width: 768px) { .gen-strap { grid-template-columns: 1fr; align-items: start; } }
+.gen-title {
+  font-family: var(--font-display);
+  font-size: var(--type-display);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+.gen-date {
+  font-family: var(--font-accent);
+  font-size: var(--type-lede);
+  letter-spacing: 0.02em;
+  color: var(--color-accent);
+}
+.gen-body {
+  font-family: var(--font-display);
+  font-size: var(--type-lede);
+  font-weight: 500;
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-snug);
+  max-width: 38ch;
+}
+.gen-quote {
+  font-family: var(--font-display);
+  font-size: var(--type-subhead);
+  font-weight: 500;
+  line-height: var(--leading-snug);
+  max-width: 36ch;
+  font-style: italic;
+}
+.gen-quote::before { content: "“"; color: var(--color-accent); font-style: normal; }
+.gen-quote::after { content: "”"; color: var(--color-accent); font-style: normal; }
+
+/* Timeline strip */
+.timeline {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: flex; flex-direction: column;
+  gap: 0;
+  font-family: var(--font-accent);
+  font-size: var(--type-body-small);
+  max-width: 900px;
+}
+.timeline li {
+  display: grid;
+  grid-template-columns: minmax(7ch, 11ch) 1fr;
+  gap: clamp(0.8rem, 2vw, 1.8rem);
+  align-items: baseline;
+  padding: 0.32rem 0;
+  border-top: 1px solid var(--color-subtle);
+  letter-spacing: 0;
+  line-height: 1.35;
+}
+.timeline li:first-child { border-top: 1px solid var(--color-border); }
+.timeline li:last-child { border-bottom: 1px solid var(--color-border); }
+.timeline .dt { color: var(--color-accent); font-variant-numeric: tabular-nums; }
+.timeline .ev { color: var(--color-fg); }
+.timeline li.hi .ev { color: var(--color-accent); }
+.timeline li.hi { background: rgba(212,255,0,0.04); }
+.timeline li.warn { background: rgba(255,59,48,0.04); }
+.timeline li.warn .dt { color: var(--color-discord); }
+@media (max-width: 520px) {
+  .timeline li { grid-template-columns: minmax(6ch, 9ch) 1fr; padding: 0.25rem 0; gap: 0.6rem; font-size: 0.78rem; }
+}
+
+/* 27-year-dormancy slide */
+.dormancy-stat {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--type-massive);
+  letter-spacing: var(--tracking-mega);
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+.dormancy-stat .accent { color: var(--color-accent); }
+.dormancy-stat .discord { color: var(--color-discord); }
+.dormancy-rfc {
+  font-family: var(--font-accent);
+  font-size: var(--type-body-small);
+  color: var(--color-muted);
+  margin-top: var(--space-m);
+  letter-spacing: 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  padding: 0.7rem 0.9rem;
+  max-width: 60ch;
+}
+.dormancy-rfc .num { color: var(--color-discord); font-weight: 600; }
+
+/* ============================================================
+   STACK DIAGRAM (slide 13)
+   ============================================================ */
+.stack { display: flex; flex-direction: column; gap: 0.45rem; max-width: 1180px; }
 .stack-row {
   display: grid;
-  grid-template-columns: minmax(5ch, 7ch) minmax(11ch, 16ch) 1fr;
-  gap: clamp(1rem, 3vw, 2.5rem);
+  grid-template-columns: minmax(4ch, 6ch) minmax(10ch, 14ch) 1fr;
+  gap: clamp(0.7rem, 2.5vw, 2rem);
   align-items: center;
-  padding: clamp(0.85rem, 1.6vh, 1.4rem) clamp(1rem, 2.2vw, 1.6rem);
+  padding: clamp(0.7rem, 1.4vh, 1.2rem) clamp(0.8rem, 2vw, 1.4rem);
   border: 1px solid var(--color-border);
   background: var(--color-surface);
 }
 .stack-row .num {
   font-family: var(--font-accent);
-  font-size: clamp(1.3rem, 1rem + 1.2vw, 2rem);
+  font-size: clamp(1.1rem, 0.8rem + 1.2vw, 1.9rem);
   font-weight: 600;
   color: var(--color-accent);
   font-variant-numeric: tabular-nums;
@@ -587,7 +678,7 @@ a { color: inherit; }
 }
 .stack-row .name {
   font-family: var(--font-display);
-  font-size: clamp(1.25rem, 1rem + 1.2vw, 2.1rem);
+  font-size: clamp(1.05rem, 0.85rem + 1.1vw, 1.9rem);
   font-weight: 700;
   letter-spacing: var(--tracking-tight);
   text-transform: uppercase;
@@ -596,14 +687,13 @@ a { color: inherit; }
   font-family: var(--font-accent);
   font-size: var(--type-body-small);
   color: var(--color-muted);
-  letter-spacing: 0.01em;
-  line-height: 1.35;
+  letter-spacing: 0;
+  line-height: 1.3;
 }
 @media (max-width: 640px) {
-  .stack-row { grid-template-columns: minmax(4ch, 5ch) 1fr; row-gap: 0.3rem; }
-  .stack-row .desc { grid-column: 1 / -1; padding-top: 0.25rem; }
+  .stack-row { grid-template-columns: minmax(3ch, 4ch) 1fr; row-gap: 0.2rem; }
+  .stack-row .desc { grid-column: 1 / -1; padding-top: 0.2rem; }
 }
-
 .stack-footnote {
   font-family: var(--font-accent);
   font-size: var(--type-caption);
@@ -611,45 +701,45 @@ a { color: inherit; }
   letter-spacing: 0.04em;
   text-transform: uppercase;
   margin-top: var(--space-m);
+  line-height: 1.5;
 }
 
 /* ============================================================
-   SLIDES 6–9 — STACK DEEP DIVE (MCP / A2A / x402 / WebMCP)
-   Shared layout: huge headline + pull stat + 3 mono lines
+   PROTO SLIDES (14–23 — MCP, A2A, x402, WebMCP, AP2, ACP, ERC-8004, Skills, ai-agent.json, llms.txt)
    ============================================================ */
-.slide--proto {}
 .proto-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-  gap: clamp(2rem, 5vw, 6rem);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: clamp(1.5rem, 4vw, 5rem);
   align-items: end;
   max-width: 1500px;
   width: 100%;
 }
 @media (max-width: 900px) {
-  .proto-grid { grid-template-columns: 1fr; align-items: start; gap: var(--space-l); }
+  .proto-grid { grid-template-columns: 1fr; align-items: start; gap: var(--space-m); }
 }
 .proto-name {
   font-family: var(--font-display);
-  font-size: var(--type-civic);
+  font-size: var(--type-display);
   font-weight: 700;
   letter-spacing: var(--tracking-mega);
-  line-height: 0.86;
+  line-height: 0.92;
   text-transform: uppercase;
 }
 .proto-name .sub {
   display: block;
   font-family: var(--font-accent);
-  font-size: var(--type-lede);
+  font-size: var(--type-body);
   font-weight: 500;
   letter-spacing: 0.02em;
   text-transform: lowercase;
   color: var(--color-muted);
-  margin-top: var(--space-s);
+  margin-top: 0.4em;
+  line-height: 1.35;
 }
 .proto-stat {
   font-family: var(--font-display);
-  font-size: var(--type-headline);
+  font-size: var(--type-subhead);
   font-weight: 700;
   line-height: var(--leading-tight);
   letter-spacing: var(--tracking-tight);
@@ -658,44 +748,42 @@ a { color: inherit; }
 }
 .proto-stat .quote {
   display: block;
-  font-size: var(--type-subhead);
+  font-size: var(--type-lede);
   font-weight: 500;
   color: var(--color-fg);
   letter-spacing: var(--tracking-snug);
   line-height: var(--leading-snug);
+  margin-top: 0.5em;
 }
 .proto-stat .quote::before { content: "“"; color: var(--color-accent); margin-right: 0.05em; }
 .proto-lines {
-  display: flex; flex-direction: column; gap: var(--space-2xs);
+  display: flex; flex-direction: column; gap: 0.45rem;
   border-top: 1px solid var(--color-border);
-  padding-top: var(--space-m);
+  padding-top: var(--space-s);
+  margin: 0;
+  list-style: none;
 }
 .proto-lines li {
   font-family: var(--font-accent);
   font-size: var(--type-body-small);
   color: var(--color-fg);
-  list-style: none;
-  letter-spacing: 0.01em;
-  line-height: 1.45;
+  letter-spacing: 0;
+  line-height: 1.4;
+  padding-left: 0;
 }
-.proto-lines li::before {
-  content: "→ ";
-  color: var(--color-accent);
-}
-
-/* x402 highlight */
+.proto-lines li::before { content: "→ "; color: var(--color-accent); }
 .x402-status {
   display: inline-block;
-  padding: 0.15em 0.5em;
+  padding: 0.12em 0.45em;
   background: var(--color-discord);
   color: var(--color-bg);
   font-family: var(--font-accent);
   font-weight: 600;
   letter-spacing: 0.04em;
-  font-size: 0.85em;
+  font-size: 0.5em;
+  vertical-align: middle;
+  margin-right: 0.3em;
 }
-
-/* WebMCP code line */
 .code-inline {
   font-family: var(--font-accent);
   background: var(--color-surface);
@@ -703,18 +791,23 @@ a { color: inherit; }
   padding: 0.05em 0.4em;
   color: var(--color-accent);
   font-weight: 500;
+  display: inline-block;
+  max-width: 100%;
+  word-break: break-all;
+  white-space: normal;
+  font-size: 0.7em;
 }
 
 /* ============================================================
-   SLIDE 10 — RECEIPTS LIST
+   RECEIPTS (slide 24)
    ============================================================ */
-.receipts { display: flex; flex-direction: column; gap: 0; max-width: 1200px; margin-top: var(--space-m); }
+.receipts { display: flex; flex-direction: column; gap: 0; max-width: 1200px; margin-top: var(--space-s); }
 .receipt {
   display: grid;
-  grid-template-columns: minmax(11ch, 18ch) 1fr;
-  gap: clamp(1rem, 3vw, 3rem);
+  grid-template-columns: minmax(10ch, 16ch) 1fr;
+  gap: clamp(0.9rem, 2.5vw, 2.5rem);
   align-items: baseline;
-  padding: clamp(0.85rem, 1.5vh, 1.3rem) 0;
+  padding: clamp(0.65rem, 1.2vh, 1.1rem) 0;
   border-top: 1px solid var(--color-subtle);
 }
 .receipt:first-child { border-top: 1px solid var(--color-border); }
@@ -730,20 +823,19 @@ a { color: inherit; }
 .receipt-line {
   font-family: var(--font-accent);
   font-size: var(--type-body-small);
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
   color: var(--color-fg);
-  line-height: 1.4;
+  line-height: 1.35;
 }
 .receipt-line .num { color: var(--color-accent); font-weight: 500; }
 @media (max-width: 720px) {
-  .receipt { grid-template-columns: 1fr; gap: 0.3rem; padding: 1rem 0; }
+  .receipt { grid-template-columns: 1fr; gap: 0.25rem; padding: 0.85rem 0; }
 }
 
 /* ============================================================
-   SLIDE 11 — HONEST CUT (discord lives here)
-   Brutalist grid + ONE off-grid italic intruder
+   CUT (slide 25 — discord lives here)
    ============================================================ */
-.slide--cut { justify-content: space-between; }
+.slide--cut { justify-content: space-between; gap: var(--space-m); }
 .cut-head { display: flex; align-items: baseline; gap: var(--space-m); flex-wrap: wrap; }
 .cut-title {
   font-family: var(--font-display);
@@ -754,57 +846,49 @@ a { color: inherit; }
   text-transform: uppercase;
 }
 .cut-title .discord { color: var(--color-discord); }
-
 .cut-quote {
   font-family: var(--font-display);
   font-size: var(--type-subhead);
   font-weight: 500;
   letter-spacing: var(--tracking-snug);
   line-height: var(--leading-snug);
-  max-width: 32ch;
-  margin-top: var(--space-m);
+  max-width: 30ch;
 }
 .cut-quote::before { content: "“"; color: var(--color-discord); margin-right: 0.05em; }
-
-/* THE DISCORD — italic, tilted, body-scale fragment
-   The only off-grid moment in 17 slides. Load-bearing. */
 .cut-intruder {
   position: absolute;
   right: clamp(1rem, 4vw, 4rem);
-  top: 38%;
+  top: 36%;
   transform: rotate(-3deg);
   font-family: var(--font-body);
   font-style: italic;
   font-weight: 400;
-  font-size: var(--type-body);
+  font-size: var(--type-body-small);
   color: var(--color-muted);
   max-width: 22ch;
   line-height: 1.35;
-  letter-spacing: 0;
   pointer-events: none;
+  z-index: 1;
 }
 .cut-intruder::before { content: "✕ "; color: var(--color-discord); font-style: normal; }
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .cut-intruder {
     position: static;
-    transform: rotate(-2deg) translateX(2vw);
+    transform: rotate(-2deg);
     align-self: flex-end;
-    margin-top: var(--space-s);
-    margin-bottom: var(--space-s);
+    margin: 0.5rem 0;
+    max-width: 26ch;
   }
 }
-
-.cut-facts { display: flex; flex-direction: column; gap: var(--space-2xs); margin-top: var(--space-m); }
+.cut-facts { display: flex; flex-direction: column; gap: 0.3rem; margin: 0; list-style: none; padding: 0; }
 .cut-facts li {
-  list-style: none;
   font-family: var(--font-accent);
   font-size: var(--type-body-small);
   color: var(--color-fg);
-  letter-spacing: 0.01em;
-  line-height: 1.4;
+  letter-spacing: 0;
+  line-height: 1.35;
 }
 .cut-facts li::before { content: "× "; color: var(--color-discord); }
-
 .cut-law {
   font-family: var(--font-display);
   font-size: var(--type-subhead);
@@ -813,26 +897,223 @@ a { color: inherit; }
   text-transform: uppercase;
   line-height: 1.05;
   max-width: 28ch;
-  margin-top: var(--space-l);
 }
 .cut-law .accent { color: var(--color-accent); }
 
 /* ============================================================
-   SLIDES 12–15 — EXHIBITS
-   Split: label on left, terminal/content on right
+   AUDIT WALL (slide 27 — THE OVERWHELM)
    ============================================================ */
-.slide--exhibit {}
+.audit-wall-head {
+  display: flex; justify-content: space-between; align-items: end;
+  flex-wrap: wrap; gap: var(--space-s);
+  margin-bottom: var(--space-s);
+}
+.audit-wall-head h2 {
+  font-family: var(--font-display);
+  font-size: var(--type-headline);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  line-height: 0.98;
+  text-transform: uppercase;
+}
+.audit-wall-head .ledger {
+  font-family: var(--font-accent);
+  font-size: var(--type-caption);
+  color: var(--color-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.audit-wall {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 4px;
+  max-width: 1500px;
+}
+@media (max-width: 900px) { .audit-wall { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .audit-wall { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.audit-wall .cell {
+  position: relative;
+  padding: clamp(0.55rem, 1vw, 0.95rem) clamp(0.45rem, 1vw, 0.85rem);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  aspect-ratio: 1 / 1.05;
+  display: flex; flex-direction: column; justify-content: space-between;
+  overflow: hidden;
+}
+.audit-wall .cell .n {
+  font-family: var(--font-accent);
+  font-size: clamp(1.4rem, 0.8rem + 2.2vw, 2.4rem);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--color-fg);
+}
+.audit-wall .cell .nm {
+  font-family: var(--font-accent);
+  font-size: clamp(0.55rem, 0.4rem + 0.5vw, 0.7rem);
+  color: var(--color-muted);
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+  word-break: break-word;
+}
+.audit-wall .cell .lyr {
+  position: absolute; top: 4px; right: 6px;
+  font-family: var(--font-accent);
+  font-size: 0.55rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.audit-wall .cell.layer-1 { border-color: color-mix(in srgb, var(--layer-1) 35%, var(--color-border)); }
+.audit-wall .cell.layer-1 .lyr { color: var(--layer-1); }
+.audit-wall .cell.layer-2 { border-color: color-mix(in srgb, var(--layer-2) 35%, var(--color-border)); }
+.audit-wall .cell.layer-2 .lyr { color: var(--layer-2); }
+.audit-wall .cell.layer-3 { border-color: color-mix(in srgb, var(--layer-3) 35%, var(--color-border)); }
+.audit-wall .cell.layer-3 .lyr { color: var(--layer-3); }
+.audit-wall .cell.layer-4 { border-color: color-mix(in srgb, var(--layer-4) 35%, var(--color-border)); }
+.audit-wall .cell.layer-4 .lyr { color: var(--layer-4); }
+.audit-wall .cell.layer-5 { border-color: color-mix(in srgb, var(--layer-5) 35%, var(--color-border)); }
+.audit-wall .cell.layer-5 .lyr { color: var(--layer-5); }
+.audit-wall .cell.layer-x .lyr { color: var(--layer-x); }
+.audit-wall-legend {
+  display: flex; gap: clamp(0.6rem, 2vw, 1.4rem); flex-wrap: wrap;
+  margin-top: var(--space-s);
+  font-family: var(--font-accent);
+  font-size: var(--type-caption);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+.audit-wall-legend .swatch {
+  display: inline-block; width: 0.7em; height: 0.7em;
+  margin-right: 0.45em; vertical-align: middle;
+}
+/* stagger reveal */
+.slide.is-active .audit-wall .cell { animation: cell-in 320ms both; }
+.slide.is-active .audit-wall .cell:nth-child(n) { animation-delay: 0ms; }
+.slide.is-active .audit-wall .cell:nth-child(1) { animation-delay: 40ms; }
+.slide.is-active .audit-wall .cell:nth-child(2) { animation-delay: 80ms; }
+.slide.is-active .audit-wall .cell:nth-child(3) { animation-delay: 120ms; }
+.slide.is-active .audit-wall .cell:nth-child(4) { animation-delay: 160ms; }
+.slide.is-active .audit-wall .cell:nth-child(5) { animation-delay: 200ms; }
+.slide.is-active .audit-wall .cell:nth-child(6) { animation-delay: 240ms; }
+.slide.is-active .audit-wall .cell:nth-child(7) { animation-delay: 280ms; }
+.slide.is-active .audit-wall .cell:nth-child(n+8) { animation-delay: 320ms; }
+.slide.is-active .audit-wall .cell:nth-child(n+15) { animation-delay: 380ms; }
+@keyframes cell-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .slide.is-active .audit-wall .cell { animation: none; }
+}
+
+/* ============================================================
+   LAYER-DEEP CARD GRIDS (slides 28–33)
+   ============================================================ */
+.layer-deep {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: clamp(0.7rem, 1.5vw, 1.2rem);
+  margin-top: var(--space-s);
+  max-width: 1500px;
+}
+.check-card {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  padding: clamp(0.85rem, 1.8vw, 1.4rem);
+  display: flex; flex-direction: column; gap: 0.55rem;
+  min-width: 0;
+}
+.check-card-head {
+  display: flex; align-items: baseline; gap: 0.7rem;
+  font-family: var(--font-accent);
+  font-size: var(--type-caption);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+}
+.check-card-head .n {
+  font-size: clamp(1rem, 0.7rem + 1.2vw, 1.6rem);
+  font-weight: 600;
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.check-card h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 0.85rem + 1.2vw, 1.6rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: var(--tracking-tight);
+}
+.check-card .path {
+  font-family: var(--font-accent);
+  font-size: var(--type-caption);
+  color: var(--color-muted);
+  letter-spacing: 0;
+  word-break: break-all;
+}
+.check-card .why {
+  font-family: var(--font-body);
+  font-size: var(--type-body-small);
+  line-height: 1.4;
+  color: var(--color-fg);
+}
+.check-card .meta {
+  margin-top: auto;
+  font-family: var(--font-accent);
+  font-size: var(--type-caption);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  border-top: 1px solid var(--color-subtle);
+  padding-top: 0.5rem;
+}
+.check-card .meta .accent { color: var(--color-accent); }
+.check-card .meta .discord { color: var(--color-discord); }
+/* per-layer accent stripes */
+.check-card.layer-1 { border-left: 3px solid var(--layer-1); }
+.check-card.layer-2 { border-left: 3px solid var(--layer-2); }
+.check-card.layer-3 { border-left: 3px solid var(--layer-3); }
+.check-card.layer-4 { border-left: 3px solid var(--layer-4); }
+.check-card.layer-5 { border-left: 3px solid var(--layer-5); }
+.check-card.layer-x { border-left: 3px solid var(--layer-x); }
+.layer-deep-head {
+  display: flex; align-items: baseline; gap: var(--space-s);
+  margin-bottom: var(--space-s); flex-wrap: wrap;
+}
+.layer-deep-head h2 {
+  font-family: var(--font-display);
+  font-size: var(--type-headline);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  line-height: 0.98;
+  text-transform: uppercase;
+}
+.layer-deep-head .num {
+  font-family: var(--font-accent);
+  font-size: var(--type-headline);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-accent);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+/* ============================================================
+   EXHIBITS (slides 34–37)
+   ============================================================ */
 .exhibit-grid {
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  gap: clamp(2rem, 5vw, 5rem);
+  gap: clamp(1.5rem, 4vw, 5rem);
   align-items: start;
   max-width: 1500px;
   width: 100%;
 }
-@media (max-width: 900px) { .exhibit-grid { grid-template-columns: 1fr; gap: var(--space-l); } }
-
-.exhibit-label {}
+@media (max-width: 900px) { .exhibit-grid { grid-template-columns: 1fr; gap: var(--space-m); } }
 .exhibit-eyebrow {
   font-family: var(--font-accent);
   font-size: var(--type-caption);
@@ -842,30 +1123,31 @@ a { color: inherit; }
 }
 .exhibit-name {
   font-family: var(--font-display);
-  font-size: var(--type-display);
+  font-size: clamp(2rem, 1rem + 5vw, 5rem);
   font-weight: 700;
-  letter-spacing: var(--tracking-tight);
-  line-height: 0.95;
+  letter-spacing: var(--tracking-mega);
+  line-height: 0.94;
   text-transform: uppercase;
   margin-top: var(--space-s);
 }
 .exhibit-name .sub {
   display: block;
-  margin-top: var(--space-2xs);
+  margin-top: 0.4em;
   font-family: var(--font-accent);
-  font-size: var(--type-lede);
+  font-size: var(--type-body);
   font-weight: 500;
   letter-spacing: 0.02em;
   text-transform: lowercase;
   color: var(--color-muted);
+  line-height: 1.35;
 }
 .exhibit-url {
   display: inline-block;
-  margin-top: var(--space-m);
+  margin-top: var(--space-s);
   font-family: var(--font-accent);
   font-size: var(--type-body-small);
   color: var(--color-accent);
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
   word-break: break-all;
 }
 .exhibit-tag {
@@ -874,23 +1156,22 @@ a { color: inherit; }
   font-weight: 500;
   line-height: var(--leading-snug);
   letter-spacing: var(--tracking-snug);
-  margin-top: var(--space-m);
+  margin-top: var(--space-s);
   max-width: 26ch;
 }
 .exhibit-tag::before { content: "“"; color: var(--color-accent); }
 .exhibit-tag::after { content: "”"; color: var(--color-accent); }
-
-.exhibit-bullets { margin-top: var(--space-m); display: flex; flex-direction: column; gap: var(--space-2xs); }
+.exhibit-bullets { margin-top: var(--space-s); display: flex; flex-direction: column; gap: 0.3rem; padding: 0; list-style: none; }
 .exhibit-bullets li {
-  list-style: none;
   font-family: var(--font-accent);
   font-size: var(--type-body-small);
   color: var(--color-fg);
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
+  line-height: 1.35;
 }
 .exhibit-bullets li::before { content: "→ "; color: var(--color-accent); }
 
-/* Terminal window — slide 12 hero */
+/* Terminal block */
 .terminal {
   border: 1px solid var(--color-border);
   background: rgba(244,241,234,0.025);
@@ -898,84 +1179,77 @@ a { color: inherit; }
   font-size: var(--type-body-small);
   line-height: 1.5;
   letter-spacing: 0;
+  min-width: 0;
 }
 .terminal-bar {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.45rem 0.9rem;
+  display: flex; align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
   border-bottom: 1px solid var(--color-border);
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   color: var(--color-muted);
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
 }
 .terminal-bar .dot {
-  display: inline-block;
-  width: 0.55em; height: 0.55em;
-  border-radius: 50%;
-  background: var(--color-subtle);
+  display: inline-block; width: 0.55em; height: 0.55em;
+  border-radius: 50%; background: var(--color-subtle);
 }
 .terminal-bar .dot.live { background: var(--color-accent); animation: pulse-dot 2.4s ease-in-out infinite; }
 @keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
 .terminal-bar .right { margin-left: auto; }
-
 .terminal-body {
-  padding: 0.9rem 1.1rem;
-  max-height: clamp(280px, 50vh, 460px);
+  padding: 0.7rem 0.9rem;
+  max-height: clamp(220px, 42vh, 400px);
   overflow: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--color-border) transparent;
+  font-size: clamp(0.7rem, 0.6rem + 0.3vw, 0.85rem);
 }
-.terminal-body::-webkit-scrollbar { width: 6px; }
+.terminal-body::-webkit-scrollbar { width: 4px; }
 .terminal-body::-webkit-scrollbar-thumb { background: var(--color-border); }
-
-.t-line { white-space: pre-wrap; }
+.t-line { white-space: pre-wrap; word-break: break-word; }
 .t-line.cmd { color: var(--color-muted); }
 .t-line.ok { color: var(--color-accent); }
 .t-line.err { color: var(--color-discord); }
 .t-line.note { color: var(--color-muted); font-style: italic; }
 .t-cursor::after {
-  content: "█";
-  color: var(--color-accent);
+  content: "█"; color: var(--color-accent);
   animation: blink 1s steps(2) infinite;
   margin-left: 0.2ch;
 }
 .t-line.done.t-cursor::after { content: ""; }
 .t-json { color: var(--color-fg); }
-.t-json .k { color: var(--color-accent); }
-.t-json .s { color: var(--color-fg); }
-.t-json .p { color: var(--color-muted); }
 
 .tools-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22ch), 1fr));
-  gap: var(--space-2xs);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20ch), 1fr));
+  gap: 0.4rem;
   margin-top: var(--space-s);
+  padding: 0; list-style: none;
 }
 .tools-list li {
-  list-style: none;
   font-family: var(--font-accent);
   font-size: var(--type-caption);
   color: var(--color-fg);
-  padding: 0.4rem 0.7rem;
+  padding: 0.35rem 0.6rem;
   border: 1px solid var(--color-subtle);
   background: var(--color-surface);
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
+  word-break: break-all;
 }
 .tools-list li::before { content: "tool "; color: var(--color-accent); opacity: 0.7; }
-
-/* Exhibits 13-15 stat block */
 .exhibit-stats {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-s);
-  margin-top: var(--space-m);
+  gap: 0.7rem;
+  margin-top: var(--space-s);
 }
 .exhibit-stats > div {
   border: 1px solid var(--color-border);
-  padding: var(--space-s);
+  padding: 0.85rem;
   background: var(--color-surface);
+  min-width: 0;
 }
 .exhibit-stats .num {
   font-family: var(--font-display);
@@ -984,27 +1258,173 @@ a { color: inherit; }
   color: var(--color-accent);
   line-height: 1;
   letter-spacing: var(--tracking-tight);
+  word-break: break-word;
 }
 .exhibit-stats .lbl {
   display: block;
-  margin-top: var(--space-2xs);
+  margin-top: 0.35rem;
   font-family: var(--font-accent);
   font-size: var(--type-caption);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--color-muted);
 }
 
 /* ============================================================
-   SLIDE 16 — STARTER PACK
-   5 numbered cards / mono command-line block
+   AGENTIFY DEEP (slides 38–43)
    ============================================================ */
-.starter { display: flex; flex-direction: column; gap: var(--space-2xs); margin-top: var(--space-m); max-width: 1200px; }
+.cost-table-wrap { overflow-x: auto; max-width: 100%; }
+.cost-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-accent);
+  font-size: var(--type-body-small);
+  margin-top: var(--space-s);
+  min-width: 540px;
+}
+.cost-table th, .cost-table td {
+  padding: 0.55rem 0.7rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-subtle);
+  letter-spacing: 0;
+}
+.cost-table thead th {
+  font-family: var(--font-accent);
+  font-size: var(--type-caption);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-accent);
+  border-bottom: 1px solid var(--color-border);
+}
+.cost-table tbody tr:hover { background: var(--color-surface); }
+.cost-table .scale { color: var(--color-accent); white-space: nowrap; }
+.cost-table .crossover {
+  background: rgba(212,255,0,0.06);
+}
+.cost-table .crossover .scale { color: var(--color-discord); }
+
+.managed-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 0.7rem;
+  margin-top: var(--space-s);
+  max-width: 1500px;
+  padding: 0; list-style: none;
+}
+.managed-item {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  padding: clamp(0.8rem, 1.5vw, 1.2rem);
+  min-width: 0;
+  display: flex; flex-direction: column; gap: 0.4rem;
+}
+.managed-item .vend {
+  font-family: var(--font-display);
+  font-size: var(--type-lede);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  text-transform: uppercase;
+  line-height: 1.05;
+}
+.managed-item .role {
+  font-family: var(--font-accent);
+  font-size: var(--type-caption);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+.managed-item .desc {
+  font-family: var(--font-body);
+  font-size: var(--type-body-small);
+  line-height: 1.4;
+}
+.managed-item .price {
+  font-family: var(--font-accent);
+  font-size: var(--type-caption);
+  letter-spacing: 0;
+  color: var(--color-muted);
+  margin-top: auto;
+  border-top: 1px solid var(--color-subtle);
+  padding-top: 0.45rem;
+}
+
+.scenario {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  padding: clamp(0.9rem, 1.8vw, 1.4rem);
+  display: flex; flex-direction: column; gap: 0.5rem;
+  min-width: 0;
+}
+.scenario-head {
+  font-family: var(--font-display);
+  font-size: var(--type-subhead);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-tight);
+  line-height: 1.05;
+}
+.scenario-line {
+  font-family: var(--font-accent);
+  font-size: var(--type-body-small);
+  letter-spacing: 0;
+  line-height: 1.4;
+}
+.scenario-line .lbl {
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.85em;
+  display: inline-block;
+  min-width: 8ch;
+  margin-right: 0.5ch;
+}
+.scenario-line .num { color: var(--color-accent); font-weight: 500; }
+.scenario-killer {
+  font-family: var(--font-body);
+  font-size: var(--type-body-small);
+  font-style: italic;
+  color: var(--color-accent);
+  border-top: 1px solid var(--color-subtle);
+  padding-top: 0.5rem;
+  margin-top: auto;
+  line-height: 1.4;
+}
+.scenarios {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 0.7rem;
+  margin-top: var(--space-s);
+}
+
+.templates-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 0.4rem;
+  margin-top: var(--space-s);
+  padding: 0; list-style: none;
+}
+.templates-list li {
+  font-family: var(--font-accent);
+  font-size: var(--type-body-small);
+  border: 1px solid var(--color-subtle);
+  background: var(--color-surface);
+  padding: 0.55rem 0.75rem;
+  letter-spacing: 0;
+  line-height: 1.35;
+  word-break: break-word;
+}
+.templates-list li::before { content: "▸ "; color: var(--color-accent); }
+.templates-list li .nm { color: var(--color-accent); }
+
+/* ============================================================
+   STARTER (slide 44)
+   ============================================================ */
+.starter { display: flex; flex-direction: column; gap: 0; margin-top: var(--space-s); max-width: 1200px; }
 .starter-step {
   display: grid;
   grid-template-columns: minmax(3ch, 4ch) 1fr;
-  gap: clamp(0.8rem, 2vw, 1.6rem);
-  padding: clamp(0.7rem, 1.5vh, 1.1rem) 0;
+  gap: clamp(0.7rem, 1.5vw, 1.4rem);
+  padding: clamp(0.6rem, 1.2vh, 1rem) 0;
   border-top: 1px solid var(--color-subtle);
   align-items: baseline;
 }
@@ -1028,21 +1448,17 @@ a { color: inherit; }
 .starter-cmd .pre { color: var(--color-accent); }
 .starter-cmd .note {
   display: block;
-  margin-top: 0.3em;
+  margin-top: 0.2em;
   font-size: var(--type-caption);
   color: var(--color-muted);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.07em;
 }
 
 /* ============================================================
-   SLIDE 17 — CLOSING (REGISTER SHIFT — paper bg, intimate scale)
-   This is the editorial palate cleanser, not the discord.
+   CLOSING (slide 45 — register shift)
    ============================================================ */
-.slide--close {
-  background: var(--color-fg);
-  color: var(--color-bg);
-}
+.slide--close { background: var(--color-fg); color: var(--color-bg); }
 .slide--close .pull {
   font-family: var(--font-display);
   font-size: var(--type-display);
@@ -1052,10 +1468,7 @@ a { color: inherit; }
   max-width: 22ch;
   color: var(--color-bg);
 }
-.slide--close .pull::before {
-  content: "“";
-  color: var(--color-discord);
-}
+.slide--close .pull::before { content: "“"; color: var(--color-discord); }
 .slide--close .attr {
   font-family: var(--font-accent);
   font-size: var(--type-caption);
@@ -1066,63 +1479,62 @@ a { color: inherit; }
   margin-top: var(--space-m);
 }
 .slide--close .ctas {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2xs);
-  margin-top: var(--space-2xl);
+  display: flex; flex-direction: column; gap: 0.4rem;
+  margin-top: var(--space-l);
   font-family: var(--font-accent);
   font-size: var(--type-body-small);
   color: var(--color-bg);
 }
-.slide--close .ctas a { text-decoration: none; color: inherit; border-bottom: 1px dotted rgba(10,10,10,0.4); }
+.slide--close .ctas a {
+  text-decoration: none; color: inherit;
+  border-bottom: 1px dotted rgba(10,10,10,0.4);
+  word-break: break-all;
+}
 .slide--close .ctas a:hover { border-bottom-color: var(--color-discord); color: var(--color-discord); }
 .slide--close .ctas .arrow { color: var(--color-discord); margin-right: 0.5ch; }
 .slide--close::after { display: none !important; }
 
 /* ============================================================
-   OVERVIEW MODE — grid of all 17 thumbnails
+   OVERVIEW MODE
    ============================================================ */
 .overview-mode #deck {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 0.5rem;
-  padding: 4rem var(--gutter) 4rem;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.35rem;
+  padding: 3rem var(--gutter) 4rem;
   height: 100vh;
   overflow-y: auto;
   position: relative;
 }
 .overview-mode .slide {
-  position: relative;
-  inset: auto;
+  position: relative; inset: auto;
   opacity: 1; visibility: visible;
-  min-height: auto;
-  height: 130px;
-  padding: 0.7rem;
+  min-height: auto; height: 110px;
+  padding: 0.55rem;
   border: 1px solid var(--color-border);
-  cursor: pointer;
-  overflow: hidden;
+  cursor: pointer; overflow: hidden;
   transform: scale(1);
   transition: border-color var(--dur-snap) ease-out, transform var(--dur-snap) ease-out;
 }
 .overview-mode .slide:hover { border-color: var(--color-accent); transform: scale(1.02); }
 .overview-mode .slide.is-active { border-color: var(--color-accent); }
 .overview-mode .slide > * {
-  font-size: 0.55rem !important;
-  line-height: 1.15 !important;
+  font-size: 0.45rem !important;
+  line-height: 1.1 !important;
   letter-spacing: 0 !important;
   max-width: none !important;
 }
 .overview-mode .slide .punch-counter,
 .overview-mode .slide .terminal,
-.overview-mode .slide .cut-intruder {
-  display: none;
-}
+.overview-mode .slide .cut-intruder,
+.overview-mode .slide .audit-wall,
+.overview-mode .slide .cost-table,
+.overview-mode .slide .timeline { display: none; }
 .overview-mode .slide::before {
   content: attr(data-slide);
-  position: absolute;
-  top: 0.4rem; right: 0.5rem;
+  position: absolute; top: 0.3rem; right: 0.4rem;
   font-family: var(--font-accent);
-  font-size: 0.55rem;
+  font-size: 0.5rem;
   color: var(--color-accent);
   z-index: 1;
 }
@@ -1131,12 +1543,9 @@ a { color: inherit; }
 .overview-mode #progress,
 .overview-mode #ticker { display: none; }
 
-/* ============================================================
-   PRINT — basic clean-up
-   ============================================================ */
 @media print {
   body { overflow: visible; }
-  .slide { position: relative; opacity: 1; visibility: visible; page-break-after: always; }
+  .slide { position: relative; opacity: 1; visibility: visible; page-break-after: always; min-height: auto; overflow: visible; }
   #counter, #kbd, #ticker, #progress { display: none; }
 }
 </style>
@@ -1148,32 +1557,30 @@ a { color: inherit; }
 <a href="#1" class="visually-hidden" style="position:absolute;left:-9999px;">Skip to slide 1</a>
 
 <div id="progress" aria-hidden="true"></div>
-<div id="counter" class="chrome" aria-live="polite"><span class="num" id="counter-num">01</span> / 17</div>
+<div id="counter" class="chrome" aria-live="polite"><span class="num" id="counter-num">01</span> / 45</div>
 <div id="kbd" class="chrome" aria-hidden="true">← / → · F fullscreen · O overview</div>
 
 <main id="deck" aria-label="Internet After Interfaces keynote slides">
 
-  <!-- =========================================================
-       SLIDE 1 — TITLE
-       ========================================================= -->
+  <!-- ============================================================
+       ACT I — STATE (Slides 1-4)
+       ============================================================ -->
+
+  <!-- SLIDE 1 — TITLE -->
   <section class="slide slide--title is-active" id="s1" data-slide="01" aria-labelledby="t1">
     <div class="top-strip">
-      <div class="stamp">Human+Tech Week · ClawCamp · May 11 · 2026 · The Hibernia Bank · SF</div>
+      <div class="stamp">Human+Tech Week · ClawCamp · May 11 · 2026 · Hibernia Bank · SF</div>
       <div class="stamp ok">● live</div>
     </div>
-
     <div>
       <h1 id="t1" class="title-civic">
         <span class="row"><span class="typed" data-text="INTERNET"></span></span>
         <span class="row"><span class="typed" data-text="AFTER"></span></span>
-        <span class="row"><span class="typed" data-text="INTERFACES"></span></span>
+        <span class="row"><span class="typed" data-text="INTERFACES."></span></span>
       </h1>
-      <p class="subtitle-line">
-        machine economies <span class="sep">/</span> autonomous transactions <span class="sep">/</span> the post.ui web
-      </p>
+      <p class="subtitle-line">machine economies <span class="sep">/</span> autonomous transactions <span class="sep">/</span> the post.ui web</p>
     </div>
-
-    <div class="bot-strip">
+    <div class="top-strip">
       <div class="stamp">Rayyan Zahid · @supercoolraydude · floor10 · immersivecommons.com</div>
       <div class="boot-block">
         <div>&gt; system boot</div>
@@ -1183,269 +1590,651 @@ a { color: inherit; }
     </div>
   </section>
 
-  <!-- =========================================================
-       SLIDE 2 — THE NUMBER
-       ========================================================= -->
+  <!-- SLIDE 2 — THE NUMBER -->
   <section class="slide slide--punch" id="s2" data-slide="02" aria-labelledby="t2">
-    <div class="eyebrow m-up"><span class="dot">●</span> ACT I &nbsp;&nbsp;&nbsp; the web is re-rendering</div>
-
+    <div class="eyebrow m-up"><span class="dot">●</span> ACT I &nbsp;&nbsp; the web is re-rendering</div>
     <h2 id="t2" class="punch-stat m-up" style="margin-top: var(--space-m);">
       <span class="punch-counter" id="punch-counter" data-target="51">0</span><span class="accent">%+</span>
-      <br>
-      of internet<br>traffic is now<br><span class="accent">non&#8209;human.</span>
+      <br>of internet traffic<br>is now <span class="accent">non&#8209;human.</span>
     </h2>
-
-    <p class="cite m-up" style="margin-top: var(--space-l);">→ Cloudflare CSO · May 2026 · interview with CoinDesk</p>
+    <p class="cite m-up" style="margin-top: var(--space-l);">→ Cloudflare CSO · CoinDesk interview · May 2026</p>
   </section>
 
-  <!-- =========================================================
-       SLIDE 3 — THE GAP
-       ========================================================= -->
+  <!-- SLIDE 3 — THE GAP -->
   <section class="slide" id="s3" data-slide="03" aria-labelledby="t3">
     <div class="eyebrow m-up"><span class="dot">●</span> the readiness baseline</div>
-    <h2 id="t3" class="display m-up" style="margin-top: var(--space-s);">200,000 SITES TESTED.<br><span class="muted">most of them are not ready.</span></h2>
-
+    <h2 id="t3" class="display m-up" style="margin-top: var(--space-2xs);">200,000 sites tested.<br><span class="muted">almost none are ready.</span></h2>
     <div class="gap-list m-up">
-      <div class="gap-row" style="--bar: 0.78;">
-        <div class="gap-pct">78%</div>
-        <div class="gap-label">have <span class="accent">robots.txt</span><span class="sub">the search-engine era already shipped</span></div>
-        <div class="gap-bar"><span></span></div>
-      </div>
-      <div class="gap-row crit" style="--bar: 0.04;">
-        <div class="gap-pct bad">4%</div>
-        <div class="gap-label">declare <span class="discord">AI usage preferences</span><span class="sub">content-signal headers · ai-train · search · ai-input</span></div>
-        <div class="gap-bar"><span></span></div>
-      </div>
-      <div class="gap-row crit" style="--bar: 0.039;">
-        <div class="gap-pct bad">3.9%</div>
-        <div class="gap-label">support <span class="discord">Markdown content negotiation</span><span class="sub">31% fewer tokens · 66% faster answers · Cloudflare Docs</span></div>
-        <div class="gap-bar"><span></span></div>
-      </div>
-      <div class="gap-row crit" style="--bar: 0.005;">
-        <div class="gap-pct crit">&lt;15</div>
-        <div class="gap-label">publish an <span class="discord">MCP server card</span><span class="sub">out of 200,000. fifteen.</span></div>
-        <div class="gap-bar"><span></span></div>
-      </div>
+      <div class="gap-row" style="--bar: 0.78;"><div class="gap-pct">78%</div><div class="gap-label">have <span class="accent">robots.txt</span><span class="sub">the search-engine era already shipped</span></div><div class="gap-bar"><span></span></div></div>
+      <div class="gap-row crit" style="--bar: 0.04;"><div class="gap-pct bad">4%</div><div class="gap-label">declare <span class="discord">AI usage preferences</span><span class="sub">content-signal · ai-train · ai-input · search</span></div><div class="gap-bar"><span></span></div></div>
+      <div class="gap-row crit" style="--bar: 0.039;"><div class="gap-pct bad">3.9%</div><div class="gap-label">support <span class="discord">Markdown content negotiation</span><span class="sub">agents pay 5× more in tokens reading HTML soup</span></div><div class="gap-bar"><span></span></div></div>
+      <div class="gap-row crit" style="--bar: 0.005;"><div class="gap-pct crit">&lt;15</div><div class="gap-label">publish an <span class="discord">MCP server card</span><span class="sub">out of 200,000. fifteen.</span></div><div class="gap-bar"><span></span></div></div>
     </div>
-
-    <p class="cite m-up" style="margin-top: var(--space-l);">→ Cloudflare Radar · Agent Readiness Score · April 2026</p>
+    <p class="cite m-up" style="margin-top: var(--space-s);">→ Cloudflare Radar · Agent Readiness Score · April 17, 2026</p>
   </section>
 
-  <!-- =========================================================
-       SLIDE 4 — THE THIRD LANGUAGE
-       ========================================================= -->
+  <!-- SLIDE 4 — THE THIRD LANGUAGE -->
   <section class="slide slide--quote" id="s4" data-slide="04" aria-labelledby="t4">
     <div class="eyebrow m-up"><span class="dot">●</span> the third language</div>
-    <h2 id="t4" class="pull-quote-large m-up" style="margin-top: var(--space-s);">
-      The web learned to speak to <span class="accent">web browsers.</span> Then to <span class="accent">search engines.</span> Now, it needs to speak to <span class="accent">AI agents.</span>
-    </h2>
-    <p class="cite m-up" style="margin-top: var(--space-l);">→ Cloudflare · Introducing the Agent Readiness Score · April 2026</p>
+    <h2 id="t4" class="pull-quote-large m-up" style="margin-top: var(--space-s);">The web learned to speak to <span class="accent">browsers.</span> Then to <span class="accent">search engines.</span> Now it learns a <span class="accent">third language.</span></h2>
+    <p class="cite m-up" style="margin-top: var(--space-l);">→ Cloudflare · Introducing the Agent Readiness Score · April 17, 2026</p>
   </section>
 
-  <!-- =========================================================
-       SLIDE 5 — THE STACK
-       ========================================================= -->
-  <section class="slide" id="s5" data-slide="05" aria-labelledby="t5">
-    <div class="eyebrow m-up"><span class="dot">●</span> ACT II &nbsp;&nbsp;&nbsp; the stack assembled in five months</div>
-    <h2 id="t5" class="display m-up" style="margin-top: var(--space-s); margin-bottom: var(--space-m);">THE 5-LAYER AGENTIC WEB</h2>
+  <!-- ============================================================
+       ACT II — THREE GENERATIONS (Slides 5-12)
+       ============================================================ -->
 
-    <div class="stack">
-      <div class="stack-row m-up">
-        <div class="num">05</div>
-        <div class="name">A2A</div>
-        <div class="desc">agent ↔ agent · JSON-RPC 2.0 · authenticated by default</div>
+  <!-- SLIDE 5 — THREE GENERATIONS title -->
+  <section class="slide" id="s5" data-slide="05" aria-labelledby="t5">
+    <div class="eyebrow m-up"><span class="dot">●</span> ACT II &nbsp;&nbsp; three generations of one web</div>
+    <h2 id="t5" class="display m-up" style="margin-top: var(--space-2xs);">EVERY 15 YEARS, THE WEB LEARNS A <span class="accent">NEW LANGUAGE.</span></h2>
+    <div class="gen-strap m-up" style="margin-top: var(--space-l);">
+      <div>
+        <span class="gen-mark">01</span>
+        <div class="gen-body" style="margin-top: var(--space-2xs);"><strong style="color:var(--color-accent);">THE READ WEB.</strong> 1989—2008. Hypertext for humans. HTTP, HTML, browsers.</div>
       </div>
-      <div class="stack-row m-up">
-        <div class="num">04</div>
-        <div class="name">Execution</div>
-        <div class="desc">MCP · WebMCP · Anthropic Skills · accessibility tree</div>
+      <div>
+        <span class="gen-mark">02</span>
+        <div class="gen-body" style="margin-top: var(--space-2xs);"><strong style="color:var(--color-accent);">THE SEARCHABLE WEB.</strong> 1994—2024. Machines indexing for humans. robots.txt, sitemap.xml, schema.org.</div>
       </div>
-      <div class="stack-row m-up">
-        <div class="num">03</div>
-        <div class="name">Trust</div>
-        <div class="desc">Ed25519 signatures · LLMCA certs · Content-Signal headers</div>
-      </div>
-      <div class="stack-row m-up">
-        <div class="num">02</div>
-        <div class="name">Content</div>
-        <div class="desc">Markdown content negotiation · Schema.org · LLMFeed v2.1</div>
-      </div>
-      <div class="stack-row m-up">
-        <div class="num">01</div>
-        <div class="name">Discovery</div>
-        <div class="desc">agent-card.json · mcp.json · ai-agent.json · llms.txt · robots.txt</div>
+      <div>
+        <span class="gen-mark">03</span>
+        <div class="gen-body" style="margin-top: var(--space-2xs);"><strong style="color:var(--color-accent);">THE AGENTIC WEB.</strong> 2024—now. Agents calling agents. MCP, A2A, x402, WebMCP.</div>
       </div>
     </div>
-
-    <p class="stack-footnote m-up">→ RFC 8615 well-known URIs · Anthropic MCP · Google A2A · W3C WebMCP · Aiia ai-agent.json · x402 Foundation</p>
   </section>
 
-  <!-- =========================================================
-       SLIDE 6 — MCP
-       ========================================================= -->
-  <section class="slide slide--proto" id="s6" data-slide="06" aria-labelledby="t6">
-    <div class="eyebrow m-up"><span class="dot">●</span> layer 04 · execution</div>
+  <!-- SLIDE 6 — GEN 1 origin -->
+  <section class="slide" id="s6" data-slide="06" aria-labelledby="t6">
+    <div class="eyebrow m-up"><span class="dot">●</span> generation 01 · the read web</div>
+    <span class="gen-date m-up" style="margin-top: var(--space-2xs);">March 12, 1989 · CERN</span>
+    <h2 id="t6" class="gen-title m-up" style="margin-top: var(--space-2xs);">"VAGUE,<br>BUT EXCITING."</h2>
+    <p class="gen-body m-up" style="margin-top: var(--space-m);">Mike Sendall's two words, scribbled on the cover of Tim Berners-Lee's proposal. CERN's hypertext system was born from a knowledge-loss problem. Two years was a typical length of stay; information kept walking out the door.</p>
+    <p class="gen-quote m-up" style="margin-top: var(--space-m);">This proposal concerns the management of general information about accelerators and experiments at CERN. It discusses the problems of loss of information about complex evolving systems and derives a solution based on a distributed hypertext system.</p>
+    <p class="cite m-up" style="margin-top: var(--space-s);">→ Tim Berners-Lee · "Information Management: A Proposal" · 12 March 1989</p>
+  </section>
+
+  <!-- SLIDE 7 — GEN 1 timeline -->
+  <section class="slide" id="s7" data-slide="07" aria-labelledby="t7">
+    <div class="eyebrow m-up"><span class="dot">●</span> generation 01 · timeline</div>
+    <h2 id="t7" class="display m-up" style="margin-top: var(--space-2xs);">19 YEARS. <span class="accent">FROM PROPOSAL TO CHROME.</span></h2>
+    <ul class="timeline m-up" style="margin-top: var(--space-m);">
+      <li class="hi"><span class="dt">1989-03-12</span><span class="ev">Berners-Lee submits "Information Management" to Mike Sendall, CERN</span></li>
+      <li><span class="dt">1990-12-20</span><span class="ev">First website (info.cern.ch) goes live on a NeXT cube</span></li>
+      <li class="hi"><span class="dt">1991-08-06</span><span class="ev">TBL posts to alt.hypertext announcing WWW. HTTP/0.9 ships</span></li>
+      <li><span class="dt">1993</span><span class="ev">NCSA Mosaic. The first popular browser</span></li>
+      <li><span class="dt">1994-12-15</span><span class="ev">Netscape Navigator 1.0</span></li>
+      <li><span class="dt">1995-08-16</span><span class="ev">Internet Explorer 1.0 ships with Windows 95 Plus!</span></li>
+      <li><span class="dt">1996-05</span><span class="ev">HTTP/1.0 codified · RFC 1945</span></li>
+      <li><span class="dt">1997-01</span><span class="ev">HTTP/1.1 · RFC 2068</span></li>
+      <li class="warn"><span class="dt">1999-06</span><span class="ev">HTTP 402 Payment Required enters RFC 2616. "Reserved for future use."</span></li>
+      <li><span class="dt">2003-06</span><span class="ev">Apple Safari 1.0</span></li>
+      <li><span class="dt">2008-09-02</span><span class="ev">Google Chrome 1.0</span></li>
+    </ul>
+  </section>
+
+  <!-- SLIDE 8 — HTTP 402 dormancy -->
+  <section class="slide slide--punch" id="s8" data-slide="08" aria-labelledby="t8">
+    <div class="eyebrow m-up"><span class="dot">●</span> the reserved cipher</div>
+    <h2 id="t8" class="dormancy-stat m-up" style="margin-top: var(--space-s);">
+      HTTP <span class="discord">402</span> WAS RESERVED IN <span class="accent">1999.</span><br>
+      <span style="font-size: 0.55em; opacity: 0.65;">it sat <span class="accent">DORMANT</span> for <span class="discord">27 YEARS.</span></span>
+    </h2>
+    <p class="dormancy-rfc m-up">RFC 2616 (1999) · restated verbatim in RFC 7231 §6.5.2 (2014) and RFC 9110 §15.5.3 (2022):<br>
+      <strong style="color:var(--color-fg);">"The 402 (Payment Required) status code is reserved for future use."</strong>
+    </p>
+    <p class="cite m-up" style="margin-top: var(--space-m);">→ that future arrived on <span class="accent">April 2, 2026.</span> see slide 16.</p>
+  </section>
+
+  <!-- SLIDE 9 — GEN 2 origin -->
+  <section class="slide" id="s9" data-slide="09" aria-labelledby="t9">
+    <div class="eyebrow m-up"><span class="dot">●</span> generation 02 · the searchable web</div>
+    <span class="gen-date m-up" style="margin-top: var(--space-2xs);">February 25, 1994 · www-talk mailing list</span>
+    <h2 id="t9" class="gen-title m-up" style="margin-top: var(--space-2xs);">A ROGUE CRAWLER<br>DDOSED KOSTER'S SITE.</h2>
+    <p class="gen-body m-up" style="margin-top: var(--space-m);">Martijn Koster, then at Nexor, wrote a single text file to ask robots to go elsewhere. He proposed it on the www-talk mailing list. By June 1994 WebCrawler, Lycos, and AltaVista honored it. <strong>The first publisher-to-machine contract.</strong></p>
+    <p class="gen-quote m-up" style="margin-top: var(--space-m);">[robots.txt is] a method of guiding robots away from certain areas in a Web server's URL space, by providing a simple text file on the server.</p>
+    <p class="cite m-up" style="margin-top: var(--space-s);">→ Martijn Koster · A Standard for Robot Exclusion · 1994 · formalized 28 years later as RFC 9309</p>
+  </section>
+
+  <!-- SLIDE 10 — GEN 2 timeline -->
+  <section class="slide" id="s10" data-slide="10" aria-labelledby="t10">
+    <div class="eyebrow m-up"><span class="dot">●</span> generation 02 · 30 years of crawler contracts</div>
+    <h2 id="t10" class="display m-up" style="margin-top: var(--space-2xs);">EACH ARTIFACT IS A <span class="accent">PROMISE</span> TO A MACHINE.</h2>
+    <ul class="timeline m-up" style="margin-top: var(--space-m);">
+      <li class="hi"><span class="dt">1994-02-25</span><span class="ev">Martijn Koster proposes robots.txt on www-talk</span></li>
+      <li><span class="dt">2005-06</span><span class="ev">Google launches Sitemaps 0.84 (XML site index)</span></li>
+      <li><span class="dt">2006-11</span><span class="ev">Google + Yahoo + Microsoft adopt sitemaps.org jointly</span></li>
+      <li><span class="dt">2010-04</span><span class="ev">RFC 5785 defines the /.well-known/ URI prefix</span></li>
+      <li class="hi"><span class="dt">2010-04-21</span><span class="ev">Facebook launches Open Graph at f8. Every page is an object</span></li>
+      <li class="hi"><span class="dt">2011-06-02</span><span class="ev">Schema.org launches (Google + Bing + Yahoo, then Yandex)</span></li>
+      <li><span class="dt">2019-05</span><span class="ev">RFC 8615 updates /.well-known/ for HTTPS/WSS/non-Web URIs</span></li>
+      <li><span class="dt">2022-09</span><span class="ev">RFC 9309 formalizes robots.txt (28 years late)</span></li>
+      <li class="hi"><span class="dt">2024-09-03</span><span class="ev">Jeremy Howard / Answer.AI proposes /llms.txt</span></li>
+    </ul>
+    <p class="cite m-up" style="margin-top: var(--space-s);">→ a 30-year publisher-to-machine vocabulary. seven artifacts. all still in production.</p>
+  </section>
+
+  <!-- SLIDE 11 — GEN 3 origin -->
+  <section class="slide" id="s11" data-slide="11" aria-labelledby="t11">
+    <div class="eyebrow m-up"><span class="dot">●</span> generation 03 · the agentic web</div>
+    <span class="gen-date m-up" style="margin-top: var(--space-2xs);">November 25, 2024 · Anthropic launches MCP</span>
+    <h2 id="t11" class="gen-title m-up" style="margin-top: var(--space-2xs);">EIGHTEEN MONTHS<br>FROM <span class="accent">PROTOCOL</span> TO <span class="accent">PRODUCTION.</span></h2>
+    <p class="gen-body m-up" style="margin-top: var(--space-m);">Anthropic open-sourced the Model Context Protocol. By Dec 9, 2025 it was donated to the Linux Foundation under a new Agentic AI Foundation. Google's A2A donated June 23, 2025. x402 Foundation formed April 2, 2026. The stack was assembled inside a single calendar year by every hyperscaler that matters.</p>
+    <p class="gen-quote m-up" style="margin-top: var(--space-m);">Open-source software is essential for building a secure and innovative ecosystem for agentic AI.</p>
+    <p class="cite m-up" style="margin-top: var(--space-s);">→ Anthropic · MCP donation to Linux Foundation · December 9, 2025</p>
+  </section>
+
+  <!-- SLIDE 12 — GEN 3 timeline (the 18 months) -->
+  <section class="slide" id="s12" data-slide="12" aria-labelledby="t12">
+    <div class="eyebrow m-up"><span class="dot">●</span> generation 03 · the 18-month sprint</div>
+    <h2 id="t12" class="display m-up" style="margin-top: var(--space-2xs);">THE STACK WAS ASSEMBLED<br>WHILE YOU WEREN'T LOOKING.</h2>
+    <ul class="timeline m-up" style="margin-top: var(--space-m);">
+      <li class="hi"><span class="dt">2024-11-25</span><span class="ev">Anthropic launches MCP (Model Context Protocol)</span></li>
+      <li><span class="dt">2025-04-09</span><span class="ev">Google launches A2A at Cloud Next with 50+ partners</span></li>
+      <li><span class="dt">2025-06-23</span><span class="ev">A2A donated to Linux Foundation</span></li>
+      <li><span class="dt">2025-08-13</span><span class="ev">ERC-8004 "Trustless Agents" EIP proposed</span></li>
+      <li><span class="dt">2025-09-16</span><span class="ev">Google + Coinbase announce AP2 with 60+ orgs</span></li>
+      <li class="hi"><span class="dt">2025-12-09</span><span class="ev">MCP donated to Linux Foundation · Agentic AI Foundation founded</span></li>
+      <li><span class="dt">2025-12-11</span><span class="ev">Stripe Agentic Commerce Suite launches with live merchants</span></li>
+      <li><span class="dt">2025-12-18</span><span class="ev">Anthropic Skills open standard. VS Code + ChatGPT add it in 48h</span></li>
+      <li><span class="dt">2026-01-29</span><span class="ev">ERC-8004 live on Ethereum mainnet. 22,900 agents in 3 days</span></li>
+      <li><span class="dt">2026-02-17</span><span class="ev">NIST AI Agent Standards Initiative launches at CAISI</span></li>
+      <li><span class="dt">2026-03-10</span><span class="ev">WebMCP in Chrome 146 + Edge 147. navigator.modelContext</span></li>
+      <li><span class="dt">2026-03-28</span><span class="ev">Aiia working group publishes ai-agent.json spec</span></li>
+      <li class="hi"><span class="dt">2026-04-02</span><span class="ev">x402 Foundation launches. HTTP 402 activates after 27 years dormant</span></li>
+      <li><span class="dt">2026-04-13/17</span><span class="ev">Cloudflare Agents Week. 27 product launches</span></li>
+      <li><span class="dt">2026-04-17</span><span class="ev">isitagentready.com goes live. "The third language."</span></li>
+      <li><span class="dt">2026-04-28/29</span><span class="ev">FIDO Alliance Agentic Auth + Payments Working Groups</span></li>
+      <li><span class="dt">2026-05-07</span><span class="ev">AWS Bedrock AgentCore Payments preview · 4 days ago</span></li>
+      <li class="hi"><span class="dt">2026-05-11</span><span class="ev">today. you are standing in this room.</span></li>
+    </ul>
+  </section>
+
+  <!-- ============================================================
+       ACT III — PROTOCOLS DEEP (Slides 13-23)
+       ============================================================ -->
+
+  <!-- SLIDE 13 — THE STACK -->
+  <section class="slide" id="s13" data-slide="13" aria-labelledby="t13">
+    <div class="eyebrow m-up"><span class="dot">●</span> ACT III &nbsp;&nbsp; the 5-layer agentic web</div>
+    <h2 id="t13" class="display m-up" style="margin-top: var(--space-2xs); margin-bottom: var(--space-s);">FIVE LAYERS. <span class="accent">EACH STANDARDIZED IN 2026.</span></h2>
+    <div class="stack">
+      <div class="stack-row m-up"><div class="num">05</div><div class="name">A2A</div><div class="desc">agent ↔ agent · JSON-RPC 2.0 · LF · authenticated by default</div></div>
+      <div class="stack-row m-up"><div class="num">04</div><div class="name">Execution</div><div class="desc">MCP · WebMCP · Anthropic Skills · accessibility tree</div></div>
+      <div class="stack-row m-up"><div class="num">03</div><div class="name">Trust</div><div class="desc">Ed25519 sigs · LLMCA certs · Content-Signal headers</div></div>
+      <div class="stack-row m-up"><div class="num">02</div><div class="name">Content</div><div class="desc">Markdown content negotiation · Schema.org/JSON-LD · LLMFeed v2.1</div></div>
+      <div class="stack-row m-up"><div class="num">01</div><div class="name">Discovery</div><div class="desc">agent-card.json · mcp.json · ai-agent.json · llms.txt · robots.txt</div></div>
+    </div>
+    <p class="stack-footnote m-up">→ RFC 8615 well-known URIs · Anthropic MCP · Google A2A · W3C WebMCP · Aiia ai-agent.json · x402 Foundation · Linux Foundation Agentic AI Foundation (AAIF)</p>
+  </section>
+
+  <!-- SLIDE 14 — MCP -->
+  <section class="slide" id="s14" data-slide="14" aria-labelledby="t14">
+    <div class="eyebrow m-up"><span class="dot">●</span> layer 04 · execution · agent ↔ tool</div>
     <div class="proto-grid">
-      <h2 id="t6" class="proto-name m-up">MCP<span class="sub">agent ↔ tool</span></h2>
+      <h2 id="t14" class="proto-name m-up">MCP<span class="sub">model context protocol · anthropic to linux foundation</span></h2>
       <div>
-        <p class="proto-stat m-up">
-          <span class="quote">More than 10,000 active public MCP servers.</span>
-        </p>
+        <p class="proto-stat m-up"><span class="quote">More than 10,000 active public MCP servers, covering everything from developer tools to Fortune 500 deployments.</span></p>
         <ul class="proto-lines m-up">
-          <li>9,400+ public servers · 7.8× YoY · Q1 2026</li>
+          <li>9,400+ public servers · 7.8× YoY through Q1 2026</li>
           <li>78% of enterprise AI teams have one in production</li>
           <li>Anthropic → Linux Foundation Agentic AI Foundation · Dec 9, 2025</li>
-          <li>Spec 2025-11-25 · async ops · server identity · official extensions</li>
+          <li>Spec 2025-11-25 · async ops · OIDC discovery · official extensions</li>
         </ul>
       </div>
     </div>
-    <p class="cite m-up" style="margin-top: var(--space-l);">→ Anthropic · Digital Applied MCP Adoption Stats · Q1 2026</p>
+    <p class="cite m-up" style="margin-top: var(--space-l);">→ Anthropic announcement · December 9, 2025</p>
   </section>
 
-  <!-- =========================================================
-       SLIDE 7 — A2A
-       ========================================================= -->
-  <section class="slide slide--proto" id="s7" data-slide="07" aria-labelledby="t7">
-    <div class="eyebrow m-up"><span class="dot">●</span> layer 05 · agent to agent</div>
+  <!-- SLIDE 15 — A2A -->
+  <section class="slide" id="s15" data-slide="15" aria-labelledby="t15">
+    <div class="eyebrow m-up"><span class="dot">●</span> layer 05 · agent ↔ agent</div>
     <div class="proto-grid">
-      <h2 id="t7" class="proto-name m-up">A2A<span class="sub">agent ↔ agent</span></h2>
+      <h2 id="t15" class="proto-name m-up">A2A<span class="sub">agent-to-agent protocol · google to linux foundation</span></h2>
       <div>
-        <p class="proto-stat m-up">150+ organizations.<br><span class="quote" style="color:var(--color-fg);font-size:var(--type-lede);font-weight:400;margin-top:var(--space-s);">In one year.</span></p>
+        <p class="proto-stat m-up">150+ organizations.<br><span class="quote" style="font-size:var(--type-body);font-weight:400;margin-top:0.4em;">In a single year. Across Azure AI Foundry, Bedrock AgentCore, and Google Cloud.</span></p>
         <ul class="proto-lines m-up">
-          <li>Google → Linux Foundation · June 2025 · Apache 2.0</li>
+          <li>Google → Linux Foundation · June 23, 2025 · Apache 2.0</li>
           <li>Azure AI Foundry · Bedrock AgentCore · Google Cloud · production</li>
           <li>MCP is agent ↔ tool. A2A is agent ↔ agent. They compose.</li>
           <li>Supply chain · financial services · insurance · IT ops</li>
         </ul>
       </div>
     </div>
-    <p class="cite m-up" style="margin-top: var(--space-l);">→ Linux Foundation · A2A 1-year retrospective · April 2026</p>
+    <p class="cite m-up" style="margin-top: var(--space-l);">→ Linux Foundation · A2A 1-year retrospective · April 9, 2026</p>
   </section>
 
-  <!-- =========================================================
-       SLIDE 8 — x402
-       ========================================================= -->
-  <section class="slide slide--proto" id="s8" data-slide="08" aria-labelledby="t8">
-    <div class="eyebrow m-up"><span class="dot">●</span> autonomous transactions</div>
+  <!-- SLIDE 16 — x402 -->
+  <section class="slide" id="s16" data-slide="16" aria-labelledby="t16">
+    <div class="eyebrow m-up"><span class="dot">●</span> 27 years dormant. activated april 2, 2026.</div>
     <div class="proto-grid">
-      <h2 id="t8" class="proto-name m-up"><span class="x402-status">HTTP&nbsp;402</span><br>x402<span class="sub">payments for agents</span></h2>
+      <h2 id="t16" class="proto-name m-up"><span class="x402-status">HTTP 402</span>x402<span class="sub">payments for agents · coinbase to linux foundation</span></h2>
       <div>
-        <p class="proto-stat m-up">
-          <span class="quote">A status code reserved since the beginning of HTTP for exactly this purpose.</span>
-        </p>
+        <p class="proto-stat m-up"><span class="quote">x402 uses the HTTP 402 status code. A status code reserved since the beginning of HTTP for exactly this purpose.</span></p>
         <ul class="proto-lines m-up">
           <li><span class="accent">69,000</span> active agents · April 2026</li>
           <li><span class="accent">165M</span> transactions · ~$50M cumulative volume</li>
-          <li>x402 Foundation @ Linux Foundation · April 2, 2026</li>
-          <li>22 launch members: Adyen · AWS · Amex · Base · Circle · Google · Mastercard · Microsoft · Shopify · Stripe · Visa · +11</li>
+          <li>x402 Foundation @ Linux Foundation · April 2, 2026 · 22 launch members</li>
+          <li>Adyen · AWS · Amex · Base · Circle · Cloudflare · Google · Mastercard · Microsoft · Shopify · Stripe · Visa · +10</li>
         </ul>
       </div>
     </div>
-    <p class="cite m-up" style="margin-top: var(--space-l);">→ x402.org · Coinbase CDP · LF announcement · April 2026</p>
+    <p class="cite m-up" style="margin-top: var(--space-l);">→ x402.org · Coinbase Developer Platform · LF launch press</p>
   </section>
 
-  <!-- =========================================================
-       SLIDE 9 — WebMCP
-       ========================================================= -->
-  <section class="slide slide--proto" id="s9" data-slide="09" aria-labelledby="t9">
+  <!-- SLIDE 17 — WebMCP -->
+  <section class="slide" id="s17" data-slide="17" aria-labelledby="t17">
     <div class="eyebrow m-up"><span class="dot">●</span> the browser is the runtime</div>
     <div class="proto-grid">
-      <h2 id="t9" class="proto-name m-up">WebMCP<span class="sub">browser-side tools</span></h2>
+      <h2 id="t17" class="proto-name m-up">WebMCP<span class="sub">browser-side tools · w3c community group · google + microsoft</span></h2>
       <div>
-        <p class="proto-stat m-up">
-          <span class="code-inline">navigator.modelContext</span>
-        </p>
+        <p class="proto-stat m-up"><span class="code-inline">navigator.modelContext.registerTool()</span></p>
         <ul class="proto-lines m-up">
-          <li>Chrome 146 Canary · Microsoft Edge 147 · March 2026</li>
-          <li>W3C Community Group · joint Google + Microsoft</li>
-          <li>provideContext() · registerTool() · unregisterTool()</li>
-          <li>Same DOM. Two callers. Humans see a button. Agents see a tool.</li>
+          <li>Chrome 146 Canary · Microsoft Edge 147 · March 10, 2026</li>
+          <li>W3C Web Machine Learning Community Group draft</li>
+          <li>Same DOM. Two callers. Humans see a button, agents see a tool.</li>
+          <li>No server required. Inherits the browser auth session.</li>
         </ul>
       </div>
     </div>
-    <p class="cite m-up" style="margin-top: var(--space-l);">→ webmcp.link · Anthropic Claude for Chrome · all paid plans · 2026</p>
+    <p class="cite m-up" style="margin-top: var(--space-l);">→ webmcp.link · Claude for Chrome · all paid plans · 2026</p>
   </section>
 
-  <!-- =========================================================
-       SLIDE 10 — THE WINS
-       ========================================================= -->
-  <section class="slide" id="s10" data-slide="10" aria-labelledby="t10">
-    <div class="eyebrow m-up"><span class="dot">●</span> ACT III &nbsp;&nbsp;&nbsp; production receipts</div>
-    <h2 id="t10" class="display m-up" style="margin-top: var(--space-s); margin-bottom: var(--space-m);">THIS IS ALREADY <span class="accent">REVENUE.</span></h2>
+  <!-- SLIDE 18 — AP2 -->
+  <section class="slide" id="s18" data-slide="18" aria-labelledby="t18">
+    <div class="eyebrow m-up"><span class="dot">●</span> agent payments protocol</div>
+    <div class="proto-grid">
+      <h2 id="t18" class="proto-name m-up">AP2<span class="sub">mandates layer · google + coinbase · sep 16 2025</span></h2>
+      <div>
+        <p class="proto-stat m-up"><span class="quote">Tamper-proof, cryptographically signed digital contracts that prove a user's instructions.</span></p>
+        <ul class="proto-lines m-up">
+          <li>v0.2.0 shipped April 2026. Python, TypeScript, Kotlin, Go SDKs</li>
+          <li>60+ orgs at launch: Adyen, Amex, Mastercard, PayPal, Worldpay, Etsy, Salesforce, ServiceNow</li>
+          <li>x402 is execution (machine pays machine). AP2 is authorization (did the human consent).</li>
+          <li>Composes with x402. AP2 issues mandate, x402 settles payment.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="cite m-up" style="margin-top: var(--space-l);">→ ap2-protocol.org · github.com/google-agentic-commerce/AP2</p>
+  </section>
 
+  <!-- SLIDE 19 — ACP -->
+  <section class="slide" id="s19" data-slide="19" aria-labelledby="t19">
+    <div class="eyebrow m-up"><span class="dot">●</span> the first live commerce standard</div>
+    <div class="proto-grid">
+      <h2 id="t19" class="proto-name m-up">ACP<span class="sub">stripe agentic commerce protocol · dec 11 2025</span></h2>
+      <div>
+        <p class="proto-stat m-up"><span class="quote">The first live standard with live merchants on day one. Not a spec waiting for adoption.</span></p>
+        <ul class="proto-lines m-up">
+          <li>Day-1 merchants: Coach · Kate Spade · URBN · Revolve · Ashley Furniture · Halara · ABT · Nectar</li>
+          <li>Platform partners: Squarespace · Wix · Etsy · WooCommerce · commercetools · BigCommerce</li>
+          <li>Shared Payment Tokens · agent passes buyer credentials to any merchant via one Stripe integration</li>
+          <li>Native SDK integrations with OpenAI Agents, Vercel AI, LangChain, CrewAI</li>
+        </ul>
+      </div>
+    </div>
+    <p class="cite m-up" style="margin-top: var(--space-l);">→ Stripe Agentic Commerce Suite · December 11, 2025</p>
+  </section>
+
+  <!-- SLIDE 20 — ERC-8004 -->
+  <section class="slide" id="s20" data-slide="20" aria-labelledby="t20">
+    <div class="eyebrow m-up"><span class="dot">●</span> trustless agents on-chain</div>
+    <div class="proto-grid">
+      <h2 id="t20" class="proto-name m-up">ERC&#8209;8004<span class="sub">ethereum identity + reputation + validation · live jan 29 2026</span></h2>
+      <div>
+        <p class="proto-stat m-up"><span class="accent">22,900</span> agents registered in 3 days.<br><span class="quote" style="font-size:var(--type-body);font-weight:400;margin-top:0.4em;">21,000+ active on-chain by April.</span></p>
+        <ul class="proto-lines m-up">
+          <li>Authors: De Rossi (MetaMask) · Crapis (Ethereum Foundation) · Ellis (Google) · Reppel (Coinbase)</li>
+          <li>3 registries: Identity (who) · Reputation (trustworthiness) · Validation (re-execution proofs)</li>
+          <li>Composes with A2A · gives the agent card a portable cryptographic identity</li>
+          <li>Composes with x402 · pay agent with x402, verify reputation on ERC-8004</li>
+        </ul>
+      </div>
+    </div>
+    <p class="cite m-up" style="margin-top: var(--space-l);">→ eips.ethereum.org/EIPS/eip-8004</p>
+  </section>
+
+  <!-- SLIDE 21 — Skills -->
+  <section class="slide" id="s21" data-slide="21" aria-labelledby="t21">
+    <div class="eyebrow m-up"><span class="dot">●</span> anthropic skills · the open standard</div>
+    <div class="proto-grid">
+      <h2 id="t21" class="proto-name m-up">SKILL<wbr>.MD<span class="sub">portable capability declaration · anthropic · dec 18 2025</span></h2>
+      <div>
+        <p class="proto-stat m-up">32 tools, one format.<br><span class="quote" style="font-size:var(--type-body);font-weight:400;margin-top:0.4em;">Claude, ChatGPT, Cursor, Copilot, Gemini CLI, JetBrains Junie, AWS Kiro, Block Goose all read the same file.</span></p>
+        <ul class="proto-lines m-up">
+          <li>VS Code added Skills in 48 hours. OpenAI added them to ChatGPT + Codex CLI</li>
+          <li>Cross-platform by design. Plugins are Claude-Code-only; Skills are everywhere</li>
+          <li>Repo crossed 20,000 stars. Tens of thousands of community Skills</li>
+          <li>Directory: <span class="accent">agentskills.io</span></li>
+        </ul>
+      </div>
+    </div>
+    <p class="cite m-up" style="margin-top: var(--space-l);">→ Anthropic Engineering · Equipping Agents for the Real World · December 18, 2025</p>
+  </section>
+
+  <!-- SLIDE 22 — ai-agent.json -->
+  <section class="slide" id="s22" data-slide="22" aria-labelledby="t22">
+    <div class="eyebrow m-up"><span class="dot">●</span> the agent-readable site manifest</div>
+    <div class="proto-grid">
+      <h2 id="t22" class="proto-name m-up">ai&#8209;agent<wbr>.json<span class="sub">aiia working group · march 28 2026</span></h2>
+      <div>
+        <p class="proto-stat m-up"><span class="quote">The .agent equivalent of robots.txt and package.json. Lives at /.well-known/ai-agent.json.</span></p>
+        <ul class="proto-lines m-up">
+          <li>Sister to A2A's agent-card.json. Different registry. Ship both, cost is zero.</li>
+          <li>.agent TLD application open at ICANN · April 30 to August 12, 2026</li>
+          <li>NIST AI Agent Standards Initiative (Feb 17, 2026) · CAISI · industry standards layer</li>
+          <li>FIDO Alliance (April 28, 2026) Agentic Auth + Payments working groups · OpenAI joined</li>
+        </ul>
+      </div>
+    </div>
+    <p class="cite m-up" style="margin-top: var(--space-l);">→ aiia.ro/spec/ai-agent-json · this deck has one. recursive proof.</p>
+  </section>
+
+  <!-- SLIDE 23 — llms.txt -->
+  <section class="slide" id="s23" data-slide="23" aria-labelledby="t23">
+    <div class="eyebrow m-up"><span class="dot">●</span> the table of contents for LLMs</div>
+    <div class="proto-grid">
+      <h2 id="t23" class="proto-name m-up">llms<wbr>.txt<span class="sub">jeremy howard / answer.ai · sep 3 2024</span></h2>
+      <div>
+        <p class="proto-stat m-up"><span class="quote">The table of contents you'd hand a smart intern on day one.</span></p>
+        <ul class="proto-lines m-up">
+          <li>Curated. NOT exhaustive like sitemap.xml. NOT restrictive like robots.txt.</li>
+          <li>High-signal markdown only. Context windows don't waste on nav + ads + JS.</li>
+          <li>Mintlify rolled it across all docs Nov 2024 (the inflection moment)</li>
+          <li>Anthropic, Stripe, Cursor, Cloudflare, Vercel, Supabase, LangGraph all ship it</li>
+        </ul>
+      </div>
+    </div>
+    <p class="cite m-up" style="margin-top: var(--space-l);">→ llmstxt.org · answer.ai/posts/2024-09-03-llmstxt.html</p>
+  </section>
+
+  <!-- ============================================================
+       ACT IV — PRODUCTION RECEIPTS (Slides 24-25)
+       ============================================================ -->
+
+  <!-- SLIDE 24 — WINS -->
+  <section class="slide" id="s24" data-slide="24" aria-labelledby="t24">
+    <div class="eyebrow m-up"><span class="dot">●</span> ACT IV &nbsp;&nbsp; production receipts</div>
+    <h2 id="t24" class="display m-up" style="margin-top: var(--space-2xs); margin-bottom: var(--space-s);">THIS IS ALREADY <span class="accent">REVENUE.</span></h2>
     <div class="receipts">
-      <div class="receipt m-up">
-        <div class="receipt-co">Amazon<br>Rufus</div>
-        <div class="receipt-line"><span class="num">$10B</span> to <span class="num">$12B</span> incremental annualized sales · <span class="num">+60%</span> purchase completion · MAU <span class="num">+149%</span> YoY · 300M customers · Q4 2025 earnings</div>
-      </div>
-      <div class="receipt m-up">
-        <div class="receipt-co">Walmart<br>Sparky</div>
-        <div class="receipt-line"><span class="num">+35%</span> average order value · half of app users have tried it</div>
-      </div>
-      <div class="receipt m-up">
-        <div class="receipt-co">Klarna</div>
-        <div class="receipt-line"><span class="num">2/3</span> of customer service chats handled by AI · work of <span class="num">853 FTEs</span> · <span class="num">82%</span> resolution-time cut · $60M cost saving</div>
-      </div>
-      <div class="receipt m-up">
-        <div class="receipt-co">Shopify<br>(The Renaissance)</div>
-        <div class="receipt-line">Full re-architecting around agentic commerce · Checkout MCP · Catalog API live to ChatGPT, Copilot, Perplexity</div>
-      </div>
-      <div class="receipt m-up">
-        <div class="receipt-co">Adobe<br>Analytics</div>
-        <div class="receipt-line">AI-referred shoppers convert <span class="num">+31%</span> · AI traffic to US retail <span class="num">+693%</span> holiday 2025 · Shopify AI orders <span class="num">15×</span> YoY</div>
-      </div>
+      <div class="receipt m-up"><div class="receipt-co">Amazon<br>Rufus</div><div class="receipt-line"><span class="num">$10B</span> to <span class="num">$12B</span> incremental annualized sales · <span class="num">+60%</span> purchase completion · MAU <span class="num">+149%</span> YoY · 300M customers · Q4 2025 earnings call</div></div>
+      <div class="receipt m-up"><div class="receipt-co">Walmart<br>Sparky</div><div class="receipt-line"><span class="num">+35%</span> average order value · half of all app users have tried it</div></div>
+      <div class="receipt m-up"><div class="receipt-co">Klarna</div><div class="receipt-line"><span class="num">2/3</span> of customer service chats handled by AI · work of <span class="num">853 FTEs</span> · <span class="num">82%</span> resolution-time cut · $60M cost saving</div></div>
+      <div class="receipt m-up"><div class="receipt-co">Shopify<br>(The Renaissance)</div><div class="receipt-line">Full re-architecting around agentic commerce. Checkout MCP. Catalog API live to ChatGPT, Copilot, Perplexity.</div></div>
+      <div class="receipt m-up"><div class="receipt-co">Adobe<br>Analytics</div><div class="receipt-line">AI-referred shoppers convert <span class="num">+31%</span> more · AI traffic to US retail <span class="num">+693%</span> holiday 2025 · Shopify AI orders <span class="num">15×</span> YoY</div></div>
+      <div class="receipt m-up"><div class="receipt-co">Perplexity<br>Buy with Pro</div><div class="receipt-line"><span class="num">5,000+</span> merchants via PayPal partnership · launched Nov 2024 · early agentic-commerce mover</div></div>
     </div>
   </section>
 
-  <!-- =========================================================
-       SLIDE 11 — THE HONEST CUT  (DISCORD)
-       ========================================================= -->
-  <section class="slide slide--cut" id="s11" data-slide="11" aria-labelledby="t11">
+  <!-- SLIDE 25 — HONEST CUT (DISCORD HERE) -->
+  <section class="slide slide--cut" id="s25" data-slide="25" aria-labelledby="t25">
     <div class="eyebrow m-up"><span class="dot">●</span> the part nobody puts on a keynote</div>
-
     <div>
-      <h2 id="t11" class="cut-title m-up">THE <span class="discord">HONEST</span> CUT.</h2>
+      <h2 id="t25" class="cut-title m-up">THE <span class="discord">HONEST</span> CUT.</h2>
       <p class="cut-quote m-up">Our agents are like really good interns. You'd never leave them unsupervised on anything that matters.</p>
       <p class="cite m-up" style="margin-top: var(--space-s);">→ MachineBrief · State of AI Agents 2026</p>
     </div>
-
-    <!-- DISCORD: the only off-grid moment in 17 slides -->
     <aside class="cut-intruder" aria-hidden="true">
       every keynote shows you the wins. the wins are the screenshot. the losses are the unit economics.
     </aside>
-
     <ul class="cut-facts m-up">
-      <li>Gartner: only <strong>17%</strong> of orgs have deployed agents.</li>
-      <li><strong>40%+</strong> of agentic AI projects predicted cancelled by 2027.</li>
+      <li>Gartner: only <strong>17%</strong> of orgs have actually deployed agents.</li>
+      <li>Gartner: <strong>40%+</strong> of agentic AI projects predicted cancelled by 2027.</li>
       <li>Klarna CEO walked back: <em>"we need to rebuild human expertise."</em></li>
-      <li>Humane AI Pin: dead. $230M raised → sold to HP for $116M.</li>
+      <li>Humane AI Pin: dead. $230M raised. Sold to HP for $116M.</li>
       <li>Rabbit R1: mass returns. RabbitOS 2 quietly dropped "autonomous."</li>
     </ul>
+    <p class="cut-law m-up">The new law. The interface <span class="accent">vanishes for agents.</span> It <span class="accent">persists for humans.</span> <span class="muted">Hybrid won.</span></p>
+  </section>
 
-    <p class="cut-law m-up">
-      The new law. The interface <span class="accent">vanishes for agents</span>. It <span class="accent">persists for humans</span>. <span class="muted">Hybrid won.</span>
+  <!-- ============================================================
+       ACT V — THE 21-POINT AUDIT (Slides 26-33)
+       ============================================================ -->
+
+  <!-- SLIDE 26 — AUDIT INTRO -->
+  <section class="slide" id="s26" data-slide="26" aria-labelledby="t26">
+    <div class="eyebrow m-up"><span class="dot">●</span> ACT V &nbsp;&nbsp; the 21-point readiness audit</div>
+    <h2 id="t26" class="display m-up" style="margin-top: var(--space-2xs);">21 CHECKS. <span class="accent">5 LAYERS.</span></h2>
+    <p class="gen-body m-up" style="margin-top: var(--space-m); max-width: 50ch;">
+      Cloudflare published the Agent Readiness Score on April 17, 2026. Same week, Anthropic donated MCP. Same month, x402 activated. Same fortnight, FIDO chartered Agentic Auth.<br><br>
+      <strong style="color: var(--color-fg);">The audit is no longer aspirational. It is a checklist.</strong>
+    </p>
+    <p class="cute m-up" style="margin-top: var(--space-m); font-family: var(--font-accent); font-size: var(--type-body-small); color: var(--color-muted);">
+      Your turn. We'll click through all 21 in two minutes.
     </p>
   </section>
 
-  <!-- =========================================================
-       SLIDE 12 — EXHIBIT A: IMMERSIVE COMMONS  (SIGNATURE: LIVE FETCH)
-       ========================================================= -->
-  <section class="slide slide--exhibit" id="s12" data-slide="12" aria-labelledby="t12">
-    <div class="eyebrow m-up"><span class="dot">●</span> ACT IV &nbsp;&nbsp;&nbsp; exhibits · what we shipped</div>
+  <!-- SLIDE 27 — THE WALL OF 21 (OVERWHELM) -->
+  <section class="slide" id="s27" data-slide="27" aria-labelledby="t27">
+    <div class="audit-wall-head">
+      <h2 id="t27" class="m-up">THE WALL OF 21.<br><span style="color: var(--color-discord); font-size: 0.7em;">average website scores 38/100.</span></h2>
+      <div class="ledger m-up">none of 62 cf-tested domains scored above 70</div>
+    </div>
+    <div class="audit-wall m-up">
+      <div class="cell layer-1"><span class="n">01</span><span class="nm">agent-card.json</span><span class="lyr">D</span></div>
+      <div class="cell layer-1"><span class="n">02</span><span class="nm">mcp.json</span><span class="lyr">D</span></div>
+      <div class="cell layer-1"><span class="n">03</span><span class="nm">ai-agent.json</span><span class="lyr">D</span></div>
+      <div class="cell layer-1"><span class="n">04</span><span class="nm">llms.txt + robots</span><span class="lyr">D</span></div>
+      <div class="cell layer-2"><span class="n">05</span><span class="nm">Markdown nego</span><span class="lyr">C</span></div>
+      <div class="cell layer-2"><span class="n">06</span><span class="nm">Schema.org Action</span><span class="lyr">C</span></div>
+      <div class="cell layer-2"><span class="n">07</span><span class="nm">LLMFeed export</span><span class="lyr">C</span></div>
+      <div class="cell layer-3"><span class="n">08</span><span class="nm">Ed25519 sigs</span><span class="lyr">T</span></div>
+      <div class="cell layer-3"><span class="n">09</span><span class="nm">Content-Signal</span><span class="lyr">T</span></div>
+      <div class="cell layer-4"><span class="n">10</span><span class="nm">MCP server</span><span class="lyr">E</span></div>
+      <div class="cell layer-4"><span class="n">11</span><span class="nm">SKILL.md</span><span class="lyr">E</span></div>
+      <div class="cell layer-4"><span class="n">12</span><span class="nm">a11y tree</span><span class="lyr">E</span></div>
+      <div class="cell layer-4"><span class="n">13</span><span class="nm">WebMCP</span><span class="lyr">E</span></div>
+      <div class="cell layer-5"><span class="n">14</span><span class="nm">A2A endpoint</span><span class="lyr">A</span></div>
+      <div class="cell layer-5"><span class="n">15</span><span class="nm">Agent card shape</span><span class="lyr">A</span></div>
+      <div class="cell layer-x"><span class="n">16</span><span class="nm">Observability</span><span class="lyr">X</span></div>
+      <div class="cell layer-x"><span class="n">17</span><span class="nm">Memory</span><span class="lyr">X</span></div>
+      <div class="cell layer-x"><span class="n">18</span><span class="nm">Durable exec</span><span class="lyr">X</span></div>
+      <div class="cell layer-x"><span class="n">19</span><span class="nm">Tool auth</span><span class="lyr">X</span></div>
+      <div class="cell layer-x"><span class="n">20</span><span class="nm">Agent CI/CD</span><span class="lyr">X</span></div>
+      <div class="cell layer-x"><span class="n">21</span><span class="nm">Live verify</span><span class="lyr">X</span></div>
+    </div>
+    <div class="audit-wall-legend m-up">
+      <span><span class="swatch" style="background:var(--layer-1);"></span>Discovery</span>
+      <span><span class="swatch" style="background:var(--layer-2);"></span>Content</span>
+      <span><span class="swatch" style="background:var(--layer-3);"></span>Trust</span>
+      <span><span class="swatch" style="background:var(--layer-4);"></span>Execution</span>
+      <span><span class="swatch" style="background:var(--layer-5);"></span>A2A</span>
+      <span><span class="swatch" style="background:var(--layer-x);"></span>Cross-cutting</span>
+    </div>
+  </section>
 
+  <!-- SLIDE 28 — LAYER 1 DEEP -->
+  <section class="slide" id="s28" data-slide="28" aria-labelledby="t28">
+    <div class="layer-deep-head"><span class="num m-up">01</span><h2 id="t28" class="m-up">DISCOVERY <span class="muted" style="font-weight:500;">· 4 checks · free, static files</span></h2></div>
+    <div class="layer-deep">
+      <article class="check-card layer-1 m-up">
+        <div class="check-card-head"><span class="n">01</span> A2A · RFC 8615</div>
+        <h3>agent-card.json</h3>
+        <p class="path">/.well-known/agent-card.json</p>
+        <p class="why">The de facto entry point. Declares your service, capabilities, A2A endpoint, auth posture. Without it, no agent finds you outside hand-coded integrations.</p>
+        <p class="meta"><span class="accent">1 hour · free</span> · open discovery is irreversible once registries cache</p>
+      </article>
+      <article class="check-card layer-1 m-up">
+        <div class="check-card-head"><span class="n">02</span> MCP · PR #2127</div>
+        <h3>mcp.json</h3>
+        <p class="path">/.well-known/mcp.json</p>
+        <p class="why">Sister to agent-card. Tells MCP-only clients (Claude Desktop, ChatGPT, Cursor) where your server lives, what transport, what auth flow.</p>
+        <p class="meta"><span class="accent">30 min · free</span> · CORS Access-Control-Allow-Origin or WebMCP breaks</p>
+      </article>
+      <article class="check-card layer-1 m-up">
+        <div class="check-card-head"><span class="n">03</span> Aiia · March 28, 2026</div>
+        <h3>ai-agent.json</h3>
+        <p class="path">/.well-known/ai-agent.json</p>
+        <p class="why">Aiia-flavored manifest. Different registry from agent-card.json. Ship BOTH; cost is zero and indexers diverge.</p>
+        <p class="meta"><span class="accent">30 min · free</span> · shipped 6 weeks before today. retro-fit later or now</p>
+      </article>
+      <article class="check-card layer-1 m-up">
+        <div class="check-card-head"><span class="n">04</span> Howard / Koster</div>
+        <h3>llms.txt + robots.txt</h3>
+        <p class="path">/llms.txt (NOT well-known) + /robots.txt</p>
+        <p class="why">Curated site map for LLMs plus crawler-class distinction (training vs search vs agents). Anthropic ships llms.txt while their own research shows mixed results. Ship anyway. Cost zero.</p>
+        <p class="meta"><span class="accent">1 hour · free</span> · llms.txt sits at root, NOT /.well-known/</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- SLIDE 29 — LAYER 2 DEEP -->
+  <section class="slide" id="s29" data-slide="29" aria-labelledby="t29">
+    <div class="layer-deep-head"><span class="num m-up">02</span><h2 id="t29" class="m-up">CONTENT <span class="muted" style="font-weight:500;">· 3 checks · 80% token savings</span></h2></div>
+    <div class="layer-deep">
+      <article class="check-card layer-2 m-up">
+        <div class="check-card-head"><span class="n">05</span> Cloudflare · accept: text/markdown</div>
+        <h3>Markdown content negotiation</h3>
+        <p class="why">Agents pay per token. Serving HTML burns 5× more tokens than the same content as Markdown. The cheapest single optimization on the audit. CF Markdown is bundled in Workers Paid.</p>
+        <p class="meta"><span class="accent">free–$5/mo</span> · CF Docs ate 31% fewer tokens, answered 66% faster</p>
+      </article>
+      <article class="check-card layer-2 m-up">
+        <div class="check-card-head"><span class="n">06</span> Schema.org + Action</div>
+        <h3>JSON-LD + Actions</h3>
+        <p class="why">Structured data on key pages PLUS Schema.org Action declarations on functional touchpoints. Without Action, agents read but can't bind to verbs. With it, every product page becomes an MCP-equivalent.</p>
+        <p class="meta"><span class="accent">2-4 hours per template</span> · partial credit if Action missing</p>
+      </article>
+      <article class="check-card layer-2 m-up">
+        <div class="check-card-head"><span class="n">07</span> WellKnownMCP · v2.1</div>
+        <h3>LLMFeed export</h3>
+        <p class="why">Static signed JSON feeds at well-known URIs. Required input for the trust layer (Ed25519 + LLMCA cert). Skipping it cascades into Layer-3 misses.</p>
+        <p class="meta"><span class="accent">4-8 hours · free</span> · LLMCA cert wraps the signature at $99/yr</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- SLIDE 30 — LAYER 3 DEEP -->
+  <section class="slide" id="s30" data-slide="30" aria-labelledby="t30">
+    <div class="layer-deep-head"><span class="num m-up">03</span><h2 id="t30" class="m-up">TRUST <span class="muted" style="font-weight:500;">· 2 checks · before the agents start spending</span></h2></div>
+    <div class="layer-deep">
+      <article class="check-card layer-3 m-up">
+        <div class="check-card-head"><span class="n">08</span> Ed25519 · LLMFeed</div>
+        <h3>Content signatures</h3>
+        <p class="why">Cryptographic provenance and integrity on your feeds. Once agents spend money (x402) and delegate authority (A2A), provenance becomes load-bearing. No signature, no third-party trust.</p>
+        <p class="meta"><span class="accent">2-3 hours · free</span> · key pair plus signing step in build</p>
+      </article>
+      <article class="check-card layer-3 m-up">
+        <div class="check-card-head"><span class="n">09</span> Cloudflare · HTTP headers</div>
+        <h3>Content-Signal headers</h3>
+        <p class="why">Legible consent flags for crawler classes. ai-train, search, ai-input. Without them, every agent and trainer must guess your policy. With them, you have a defensible "no" for training and "yes" for inference.</p>
+        <p class="meta"><span class="accent">30 min · free</span> · cheapest future-proofing on the audit</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- SLIDE 31 — LAYER 4 DEEP -->
+  <section class="slide" id="s31" data-slide="31" aria-labelledby="t31">
+    <div class="layer-deep-head"><span class="num m-up">04</span><h2 id="t31" class="m-up">EXECUTION <span class="muted" style="font-weight:500;">· 4 checks · the actual product surface</span></h2></div>
+    <div class="layer-deep">
+      <article class="check-card layer-4 m-up">
+        <div class="check-card-head"><span class="n">10</span> MCP · Streamable HTTP</div>
+        <h3>Remote MCP server</h3>
+        <p class="why">How agents take actions on your stack. Stdio transport is dev-only. Production = Streamable HTTP plus real OAuth. Edge-deploy (CF Workers + Durable Objects) preferred.</p>
+        <p class="meta"><span class="accent">1-2 weeks · $5+/mo</span> · stdio in production = auto-fail</p>
+      </article>
+      <article class="check-card layer-4 m-up">
+        <div class="check-card-head"><span class="n">11</span> Anthropic Skills</div>
+        <h3>SKILL.md (cross-platform)</h3>
+        <p class="why">Cross-platform capability declaration. Frontmatter description + body teaches agents how to use your tool. Skills ship to Claude, ChatGPT, Cursor, Copilot. Plugins are Claude-Code-only.</p>
+        <p class="meta"><span class="accent">4-8 hours · free</span> · description must be "pushy" or skill never invokes</p>
+      </article>
+      <article class="check-card layer-4 m-up">
+        <div class="check-card-head"><span class="n">12</span> ARIA · semantic HTML</div>
+        <h3>Accessibility tree</h3>
+        <p class="why">Real &lt;button&gt; and &lt;a&gt; tags, not &lt;div onClick&gt;. Agents read the accessibility tree, not your JS handlers. SPA-only without SSR shows agents a blank page.</p>
+        <p class="meta"><span class="discord">P19 · #1 production fail</span> · 0 of 62 CF-tested sites scored &gt;70 because of this</p>
+      </article>
+      <article class="check-card layer-4 m-up">
+        <div class="check-card-head"><span class="n">13</span> W3C · navigator.modelContext</div>
+        <h3>WebMCP exposure</h3>
+        <p class="why">Browser-side tools via navigator.modelContext. Same DOM, two callers: humans click, agents call, both hit the same handler. No server required, inherits browser session.</p>
+        <p class="meta"><span class="accent">1-3 days · free</span> · Chrome 146 flag-gated; ship server MCP first</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- SLIDE 32 — LAYER 5 DEEP -->
+  <section class="slide" id="s32" data-slide="32" aria-labelledby="t32">
+    <div class="layer-deep-head"><span class="num m-up">05</span><h2 id="t32" class="m-up">A2A <span class="muted" style="font-weight:500;">· 2 checks · how agents delegate</span></h2></div>
+    <div class="layer-deep">
+      <article class="check-card layer-5 m-up">
+        <div class="check-card-head"><span class="n">14</span> Google A2A · JSON-RPC 2.0</div>
+        <h3>A2A endpoint live</h3>
+        <p class="why">Agent-to-agent JSON-RPC handler. Other agents call yours, you can call theirs. Most production systems run MCP and A2A simultaneously. MCP is for tools, A2A is for delegation.</p>
+        <p class="meta"><span class="accent">1-2 weeks · $0-50/mo</span> · open A2A without auth field = auto-fail</p>
+      </article>
+      <article class="check-card layer-5 m-up">
+        <div class="check-card-head"><span class="n">15</span> A2A · agent-card schema</div>
+        <h3>Agent card correct shape</h3>
+        <p class="why">Same file as check 01, graded on COMPLETENESS. Declares capabilities, auth, A2A endpoint, works with the live endpoint from check 14. Bearer tokens in URL params instead of Authorization header = auto-fail.</p>
+        <p class="meta"><span class="accent">incremental from #01</span> · default authenticated, open is opt-in</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- SLIDE 33 — CROSS-CUTTING DEEP -->
+  <section class="slide" id="s33" data-slide="33" aria-labelledby="t33">
+    <div class="layer-deep-head"><span class="num m-up">X</span><h2 id="t33" class="m-up">CROSS-CUTTING <span class="muted" style="font-weight:500;">· 6 checks · the connective tissue</span></h2></div>
+    <div class="layer-deep">
+      <article class="check-card layer-x m-up">
+        <div class="check-card-head"><span class="n">16</span> Braintrust · Galileo · Helicone</div>
+        <h3>Observability</h3>
+        <p class="why">Trace every agent call with per-call eval scores. Agent failures are non-deterministic; without per-call evals you cannot debug, regress, or roll back. Free tier on Braintrust is 10k traces/mo.</p>
+        <p class="meta"><span class="accent">1-2 days · $0-99/mo</span> · shipping blind is auto-fail</p>
+      </article>
+      <article class="check-card layer-x m-up">
+        <div class="check-card-head"><span class="n">17</span> Mem0 · Zep · Letta · CF</div>
+        <h3>Persistent memory</h3>
+        <p class="why">Agents without memory restart context every call. Mem0 = user preferences, Zep = temporal knowledge graph, Letta = LLM-managed. Pick by USE CASE, not LOCOMO benchmark.</p>
+        <p class="meta"><span class="accent">1 day · $20-99/mo</span> · CF Agent Memory bundled in Workers Paid</p>
+      </article>
+      <article class="check-card layer-x m-up">
+        <div class="check-card-head"><span class="n">18</span> Inngest · CF Workflows · Temporal</div>
+        <h3>Durable execution</h3>
+        <p class="why">Avoids re-running expensive steps on retry. Each step checkpointed. A network blip should not re-spend the LLM and tool budget. Pick before architecture, migration is expensive.</p>
+        <p class="meta"><span class="accent">2-3 days · $0-200/mo</span> · CF Workflows caps at 50k concurrency, not infinity</p>
+      </article>
+      <article class="check-card layer-x m-up">
+        <div class="check-card-head"><span class="n">19</span> Composio · Arcade</div>
+        <h3>Tool auth · 500+ integrations</h3>
+        <p class="why">Stop rebuilding tool integrations. Composio has 500+ OAuth-wired apps (Gmail, Slack, Linear, Notion, Stripe). Arcade has 112. Hand-rolled OAuth is a year of bugs you don't need.</p>
+        <p class="meta"><span class="discord">P5 · hand-rolled = auto-fail</span> · $49-150/mo at 100 tenants</p>
+      </article>
+      <article class="check-card layer-x m-up">
+        <div class="check-card-head"><span class="n">20</span> GitHub Actions · skill-validate</div>
+        <h3>Agent CI/CD</h3>
+        <p class="why">MCP-validate + Skill-validate + A2A conformance + behavioral evals + canary deploy + telemetry-gated rollback. Agentic regressions are silent. Only behavioral evals catch them before users do.</p>
+        <p class="meta"><span class="accent">2-3 days · free</span> · GitHub Actions covers it</p>
+      </article>
+      <article class="check-card layer-x m-up">
+        <div class="check-card-head"><span class="n">21</span> isitagentready.com</div>
+        <h3>Live verification</h3>
+        <p class="why">Post-deploy scan against Cloudflare's free Agent Readiness scanner. Self-attestation is unreliable. Third-party proof is the only way to know the other 20 checks actually shipped.</p>
+        <p class="meta"><span class="accent">5 min · free</span> · average site scores 38/100; aim for 18+/21</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ACT VI — EXHIBITS (Slides 34-37)
+       ============================================================ -->
+
+  <!-- SLIDE 34 — EXHIBIT A: IC (LIVE FETCH) -->
+  <section class="slide" id="s34" data-slide="34" aria-labelledby="t34">
+    <div class="eyebrow m-up"><span class="dot">●</span> ACT VI &nbsp;&nbsp; exhibits · what an agent-native site looks like</div>
     <div class="exhibit-grid" style="margin-top: var(--space-s);">
-      <div class="exhibit-label">
+      <div>
         <div class="exhibit-eyebrow m-up">Exhibit A</div>
-        <h2 id="t12" class="exhibit-name m-up">Immersive<br>Commons<span class="sub">the agent-native venue</span></h2>
+        <h2 id="t34" class="exhibit-name m-up">Immersive<br>Commons<span class="sub">the agent-native venue · floor10 · ft sf</span></h2>
         <a class="exhibit-url m-up" href="https://immersivecommons.com" target="_blank" rel="noopener">immersivecommons.com</a>
         <p class="exhibit-tag m-up">Same data. Eyes or agents. The interface is the contract.</p>
         <ul class="exhibit-bullets m-up">
-          <li>Floor 10 · Frontier Tower SF</li>
-          <li>MCP · A2A · ed25519 signed</li>
+          <li>Floor 10 · Frontier Tower · SF</li>
+          <li>MCP · A2A · ed25519 (Web Bot Auth)</li>
           <li>agt_ bearer tokens · human-minted</li>
+          <li>Score: 18/21 · run on agentify</li>
         </ul>
       </div>
-
       <div class="m-up">
         <div class="terminal" aria-live="polite">
           <div class="terminal-bar">
@@ -1457,8 +2246,7 @@ a { color: inherit; }
             <div class="t-line cmd t-cursor" id="ic-cmd">&gt; curl https://www.immersivecommons.com/.well-known/ai-agent.json</div>
           </div>
         </div>
-
-        <ul class="tools-list" style="margin-top: var(--space-m);">
+        <ul class="tools-list">
           <li>floor10_get_my_floor_member</li>
           <li>floor10_list_claimable_events</li>
           <li>floor10_list_my_pending</li>
@@ -1470,20 +2258,16 @@ a { color: inherit; }
     </div>
   </section>
 
-  <!-- =========================================================
-       SLIDE 13 — EXHIBIT B: SKEW
-       ========================================================= -->
-  <section class="slide slide--exhibit" id="s13" data-slide="13" aria-labelledby="t13">
+  <!-- SLIDE 35 — EXHIBIT B: SKEW -->
+  <section class="slide" id="s35" data-slide="35" aria-labelledby="t35">
     <div class="eyebrow m-up"><span class="dot">●</span> exhibit B · the supply-side flip</div>
-
     <div class="exhibit-grid">
-      <div class="exhibit-label">
+      <div>
         <div class="exhibit-eyebrow m-up">Exhibit B</div>
-        <h2 id="t13" class="exhibit-name m-up">Skew<span class="sub">pages by Claude, not designers</span></h2>
+        <h2 id="t35" class="exhibit-name m-up">Skew<span class="sub">pages by claude, not designers</span></h2>
         <a class="exhibit-url m-up" href="https://skew.site" target="_blank" rel="noopener">skew.site</a>
         <p class="exhibit-tag m-up">Skew, don't slop. Bootstrap the page you'd ship yourself.</p>
       </div>
-
       <div class="m-up">
         <ul class="exhibit-bullets">
           <li>LLM as page generator.</li>
@@ -1491,35 +2275,24 @@ a { color: inherit; }
           <li>Subject-derived aesthetic DNA per brief.</li>
           <li>The archive, not the index.</li>
         </ul>
-
-        <div class="exhibit-stats" style="margin-top: var(--space-l);">
-          <div>
-            <div class="num">∞</div>
-            <span class="lbl">pages possible from one brief</span>
-          </div>
-          <div>
-            <div class="num">0</div>
-            <span class="lbl">templates · 0 reuse · every run novel</span>
-          </div>
+        <div class="exhibit-stats" style="margin-top: var(--space-m);">
+          <div><div class="num">∞</div><span class="lbl">pages possible from one brief</span></div>
+          <div><div class="num">0</div><span class="lbl">templates · every run novel</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- =========================================================
-       SLIDE 14 — EXHIBIT C: LOBSTERHONEY
-       ========================================================= -->
-  <section class="slide slide--exhibit" id="s14" data-slide="14" aria-labelledby="t14">
+  <!-- SLIDE 36 — EXHIBIT C: LOBSTERHONEY -->
+  <section class="slide" id="s36" data-slide="36" aria-labelledby="t36">
     <div class="eyebrow m-up"><span class="dot">●</span> exhibit C · the defense layer</div>
-
     <div class="exhibit-grid">
-      <div class="exhibit-label">
+      <div>
         <div class="exhibit-eyebrow m-up">Exhibit C</div>
-        <h2 id="t14" class="exhibit-name m-up">Lobster<br>Honey<span class="sub">honeypots for agents</span></h2>
+        <h2 id="t36" class="exhibit-name m-up">Lobster<br>Honey<span class="sub">honeypots for malicious agents</span></h2>
         <a class="exhibit-url m-up" href="https://lobsterhoney.com" target="_blank" rel="noopener">lobsterhoney.com</a>
         <p class="exhibit-tag m-up">Honeypots for malicious agents.</p>
       </div>
-
       <div class="m-up">
         <ul class="exhibit-bullets">
           <li>Autonomous AI-led security audits.</li>
@@ -1527,72 +2300,196 @@ a { color: inherit; }
           <li>First pitch: 3-step account-takeover chain, 11 findings.</li>
           <li>As agents become a delivery vector, so do agent attacks.</li>
         </ul>
-
-        <div class="exhibit-stats" style="margin-top: var(--space-l);">
-          <div>
-            <div class="num discord">+693%</div>
-            <span class="lbl">AI traffic to US sites · holiday 2025</span>
-          </div>
-          <div>
-            <div class="num discord">10,000:1</div>
-            <span class="lbl">crawler-to-human · top AI scrapers</span>
-          </div>
+        <div class="exhibit-stats" style="margin-top: var(--space-m);">
+          <div><div class="num discord">+693%</div><span class="lbl">AI traffic to US sites · holiday 2025</span></div>
+          <div><div class="num discord">10,000:1</div><span class="lbl">crawler-to-human · top AI scrapers</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- =========================================================
-       SLIDE 15 — EXHIBIT D: AGENTIFY
-       ========================================================= -->
-  <section class="slide slide--exhibit" id="s15" data-slide="15" aria-labelledby="t15">
-    <div class="eyebrow m-up"><span class="dot">●</span> exhibit D · audit any repo</div>
-
+  <!-- SLIDE 37 — EXHIBIT D: AGENTIFY (intro) -->
+  <section class="slide" id="s37" data-slide="37" aria-labelledby="t37">
+    <div class="eyebrow m-up"><span class="dot">●</span> exhibit D · the catch-up path</div>
     <div class="exhibit-grid">
-      <div class="exhibit-label">
+      <div>
         <div class="exhibit-eyebrow m-up">Exhibit D</div>
-        <h2 id="t15" class="exhibit-name m-up">agentify<span class="sub">the 21-point audit</span></h2>
+        <h2 id="t37" class="exhibit-name m-up">agentify<span class="sub">audit. plan. scaffold. verify.</span></h2>
         <div class="exhibit-url m-up">claude skill · isitagentready.com</div>
         <p class="exhibit-tag m-up">The harness is the product. Compose, don't reinvent.</p>
       </div>
-
       <div class="m-up">
         <ul class="exhibit-bullets">
-          <li>5-layer stack scaffold (Discovery → A2A).</li>
-          <li>21 checks. live verify via Cloudflare scanner.</li>
-          <li>Managed defaults: Cloudflare · Anthropic · Composio · Mem0 · Braintrust · x402.</li>
-          <li>Compose, don't reinvent.</li>
+          <li>21-point readiness audit (same as Cloudflare's, extended).</li>
+          <li>12 templates, 5 scripts, opinionated managed defaults.</li>
+          <li>Atomic commit per layer. Per-layer rollback.</li>
+          <li>2-7 days from 38/100 to 18-21/21.</li>
         </ul>
-
-        <div class="exhibit-stats" style="margin-top: var(--space-l); grid-template-columns: repeat(4, 1fr);">
-          <div>
-            <div class="num">21</div>
-            <span class="lbl">checks</span>
-          </div>
-          <div>
-            <div class="num">5</div>
-            <span class="lbl">layers</span>
-          </div>
-          <div>
-            <div class="num discord">38</div>
-            <span class="lbl">avg score · /100</span>
-          </div>
-          <div>
-            <div class="num">2-7</div>
-            <span class="lbl">days to 18/21</span>
-          </div>
+        <div class="exhibit-stats" style="margin-top: var(--space-m); grid-template-columns: repeat(4, 1fr);">
+          <div><div class="num">21</div><span class="lbl">checks</span></div>
+          <div><div class="num">5</div><span class="lbl">layers</span></div>
+          <div><div class="num discord">38</div><span class="lbl">avg · /100</span></div>
+          <div><div class="num">2-7</div><span class="lbl">days</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- =========================================================
-       SLIDE 16 — STARTER PACK
-       ========================================================= -->
-  <section class="slide" id="s16" data-slide="16" aria-labelledby="t16">
-    <div class="eyebrow m-up"><span class="dot">●</span> ACT V &nbsp;&nbsp;&nbsp; how you get ready</div>
-    <h2 id="t16" class="display m-up" style="margin-top: var(--space-s); margin-bottom: var(--space-m);">THE 5-STEP STARTER.</h2>
+  <!-- ============================================================
+       ACT VII — AGENTIFY AS THE SALVE (Slides 38-43)
+       ============================================================ -->
 
+  <!-- SLIDE 38 — WHAT IS AGENTIFY -->
+  <section class="slide" id="s38" data-slide="38" aria-labelledby="t38">
+    <div class="eyebrow m-up"><span class="dot">●</span> ACT VII &nbsp;&nbsp; how you catch up</div>
+    <h2 id="t38" class="display m-up" style="margin-top: var(--space-2xs);">AGENTIFY IS A <span class="accent">CLAUDE SKILL.</span><br>POINT IT AT A REPO. WATCH IT SCAFFOLD.</h2>
+    <div class="proto-lines m-up" style="margin-top: var(--space-m); border-top: 0; padding-top: 0; max-width: 70ch;">
+      <ul style="padding:0; list-style: none; display: flex; flex-direction: column; gap: 0.45rem;">
+        <li style="font-family: var(--font-accent); font-size: var(--type-body-small); line-height: 1.4;"><span style="color: var(--color-accent);">→</span> AUDIT · the 21-point scan locally + live verify via Cloudflare's free scanner</li>
+        <li style="font-family: var(--font-accent); font-size: var(--type-body-small); line-height: 1.4;"><span style="color: var(--color-accent);">→</span> PLAN · every missing layer, every build-vs-buy fork surfaced in dollar terms</li>
+        <li style="font-family: var(--font-accent); font-size: var(--type-body-small); line-height: 1.4;"><span style="color: var(--color-accent);">→</span> SCAFFOLD · 12 templates with repo-specific values. atomic commit per layer.</li>
+        <li style="font-family: var(--font-accent); font-size: var(--type-body-small); line-height: 1.4;"><span style="color: var(--color-accent);">→</span> VERIFY · post-deploy scan against isitagentready.com. score before vs after.</li>
+        <li style="font-family: var(--font-accent); font-size: var(--type-body-small); line-height: 1.4;"><span style="color: var(--color-accent);">→</span> REGISTER · agentskills.io · MCP catalogs · A2A registry · Aiia.</li>
+      </ul>
+    </div>
+    <p class="gen-quote m-up" style="margin-top: var(--space-l);">The harness is the product. Don't rebuild infrastructure that Cloudflare, Anthropic, Composio, Mem0, Braintrust, and x402 ship as managed services. Compose, don't reinvent.</p>
+    <p class="cite m-up" style="margin-top: var(--space-s);">→ agentify · SKILL.md · May 2026 · MIT</p>
+  </section>
+
+  <!-- SLIDE 39 — MANAGED DEFAULTS -->
+  <section class="slide" id="s39" data-slide="39" aria-labelledby="t39">
+    <div class="eyebrow m-up"><span class="dot">●</span> the managed-defaults stack</div>
+    <h2 id="t39" class="display m-up" style="margin-top: var(--space-2xs); margin-bottom: var(--space-s);">SIX SERVICES. <span class="accent">ZERO REINVENTION.</span></h2>
+    <ul class="managed-list">
+      <li class="managed-item m-up">
+        <span class="role">Layer 4 · runtime + OAuth</span>
+        <span class="vend">Cloudflare Agents</span>
+        <p class="desc">Workers + Durable Objects + Workflows v2 + Browser Run + Voice + Email + Managed OAuth (RFC 9728) + Markdown for Agents.</p>
+        <p class="price">$5/mo flat + $0.30 to $1.50/mo per tenant</p>
+      </li>
+      <li class="managed-item m-up">
+        <span class="role">Orchestration + eval</span>
+        <span class="vend">Anthropic Managed Agents</span>
+        <p class="desc">Hosted runtime. Dreaming (memory consolidation), Outcomes (rubric grading), Multiagent Orchestration. v2 shipped May 7, 2026.</p>
+        <p class="price">~$8 per agent-hour · ~$2 to $10/mo per tenant</p>
+      </li>
+      <li class="managed-item m-up">
+        <span class="role">Tool auth · 500+ apps</span>
+        <span class="vend">Composio</span>
+        <p class="desc">Pre-wired OAuth for Gmail, Slack, Linear, Notion, Stripe, and 495+ others. Per-user scopes. Eliminates the year-of-bugs hand-roll.</p>
+        <p class="price">$49/mo Pro + $0.50 to $2 per 1k actions</p>
+      </li>
+      <li class="managed-item m-up">
+        <span class="role">Persistent memory</span>
+        <span class="vend">Mem0 · Zep · Letta</span>
+        <p class="desc">Mem0 = user preferences. Zep = temporal knowledge graph. Letta = LLM-managed (LOCOMO 83.2%). Pick by use case, not benchmark.</p>
+        <p class="price">$20 to $99/mo at low scale · CF bundles its own</p>
+      </li>
+      <li class="managed-item m-up">
+        <span class="role">Observability + eval</span>
+        <span class="vend">Braintrust</span>
+        <p class="desc">Per-call traces, automated scorers, drift detection. Loop AI for custom scorers. There is no excuse to ship agents blind.</p>
+        <p class="price">Free tier 10k traces · $99/mo for 100k</p>
+      </li>
+      <li class="managed-item m-up">
+        <span class="role">Autonomous payments</span>
+        <span class="vend">x402 + Stripe Agent Toolkit</span>
+        <p class="desc">HTTP 402 stablecoin paywall (USDC on Base) plus Stripe Shared Payment Tokens for human-merchant flow. Ship the paywall even at $0.001.</p>
+        <p class="price">x402 facilitator free at low volume · Stripe 2.9% + $0.30 per txn</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- SLIDE 40 — COSTS BY SCALE -->
+  <section class="slide" id="s40" data-slide="40" aria-labelledby="t40">
+    <div class="eyebrow m-up"><span class="dot">●</span> the costs nobody quotes</div>
+    <h2 id="t40" class="display m-up" style="margin-top: var(--space-2xs);">$15/MONTH AT ONE TENANT. <span class="accent">$1,100 AT 100.</span></h2>
+    <div class="cost-table-wrap m-up">
+      <table class="cost-table">
+        <thead>
+          <tr><th>Scale</th><th>Lean managed (CF + Anthropic)</th><th>Hybrid</th><th>Self-hosted (Hetzner + OSS)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="scale">1 tenant (founder)</td><td>~$15/mo</td><td>~$25/mo</td><td>~$20/mo</td></tr>
+          <tr><td class="scale">10 tenants</td><td>~$120/mo</td><td>~$200/mo</td><td>$20 to $100/mo</td></tr>
+          <tr class="crossover"><td class="scale">~50 tenants · CROSSOVER</td><td>managed wins on ship-speed</td><td>—</td><td>self-host wins on cost</td></tr>
+          <tr><td class="scale">100 tenants</td><td>~$1,100/mo</td><td>~$1,800/mo</td><td>$100 to $500/mo</td></tr>
+          <tr><td class="scale">1,000 tenants</td><td>~$11,000/mo</td><td>~$18,000/mo</td><td>$500 to $2,500/mo</td></tr>
+          <tr><td class="scale">10,000 tenants</td><td>~$110,000/mo</td><td>~$180,000/mo</td><td>$5,000 to $25,000/mo</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cite m-up" style="margin-top: var(--space-s);">→ agentify · references/18-cost-estimator.md · May 2026 snapshots. crossover at ~50 tenants. plus hidden lines: SOC 2 ($15-30k once + $5-10k/yr), EU AI Act limited-risk ($2-5k legal), Clerk/Auth0, PagerDuty, Sentry.</p>
+  </section>
+
+  <!-- SLIDE 41 — TEMPLATES -->
+  <section class="slide" id="s41" data-slide="41" aria-labelledby="t41">
+    <div class="eyebrow m-up"><span class="dot">●</span> 12 templates · 5 scripts · 1 standalone CLI</div>
+    <h2 id="t41" class="display m-up" style="margin-top: var(--space-2xs);">YOU DON'T <span class="accent">WRITE</span> THE FILES.<br>YOU <span class="accent">REVIEW</span> THEM.</h2>
+    <ul class="templates-list m-up">
+      <li><span class="nm">SKILL.md.template</span> · cross-platform Skill (Claude, ChatGPT, Cursor, Copilot)</li>
+      <li><span class="nm">plugin.json.template</span> · Claude Code plugin manifest</li>
+      <li><span class="nm">marketplace.json.template</span> · plugin catalog entry</li>
+      <li><span class="nm">agent-card.json.template</span> · A2A discovery</li>
+      <li><span class="nm">mcp.json.template</span> · MCP discovery</li>
+      <li><span class="nm">ai-agent.json.template</span> · Aiia manifest</li>
+      <li><span class="nm">llms.txt.template</span> · curated LLM site map</li>
+      <li><span class="nm">robots-agentic.txt.template</span> · agent-aware robots</li>
+      <li><span class="nm">mcp-server-fastapi.py.template</span> · Python MCP server, Streamable HTTP</li>
+      <li><span class="nm">mcp-server-cf-worker.ts.template</span> · CF Worker MCP server, DO per session</li>
+      <li><span class="nm">agent-ci.yml.template</span> · GHA: validate + evals + score gate</li>
+      <li><span class="nm">x402-paywall.ts.template</span> · USDC paywall middleware on Base</li>
+    </ul>
+    <p class="cite m-up" style="margin-top: var(--space-m);">→ plus: scripts/audit.{sh,py} · scaffold.sh · verify-live.sh · check-freshness.sh · standalone CLI at scripts/agentify</p>
+  </section>
+
+  <!-- SLIDE 42 — SCENARIOS -->
+  <section class="slide" id="s42" data-slide="42" aria-labelledby="t42">
+    <div class="eyebrow m-up"><span class="dot">●</span> three real scenarios</div>
+    <h2 id="t42" class="display m-up" style="margin-top: var(--space-2xs); margin-bottom: var(--space-s);">THE RIGHT SCORE DEPENDS ON <span class="accent">WHAT YOU SHIP.</span></h2>
+    <div class="scenarios">
+      <article class="scenario m-up">
+        <div class="scenario-head">Solo SaaS</div>
+        <p class="scenario-line"><span class="lbl">start</span><span class="num">3 / 21</span></p>
+        <p class="scenario-line"><span class="lbl">plan</span>all well-known files + Skill + CF Worker MCP + auth A2A + Composio + Mem0 + Braintrust + x402 at $0.01</p>
+        <p class="scenario-line"><span class="lbl">time</span><span class="num">2 days</span> · 6 atomic commits</p>
+        <p class="scenario-line"><span class="lbl">end</span><span class="num">18 / 21</span> · 92/100 isitagentready · top 1%</p>
+        <p class="scenario-killer">killer move: x402 paywall set to $0.01 from day 1. revenue lit on first agent call.</p>
+      </article>
+      <article class="scenario m-up">
+        <div class="scenario-head">Enterprise team</div>
+        <p class="scenario-line"><span class="lbl">start</span><span class="num">8 / 21</span></p>
+        <p class="scenario-line"><span class="lbl">plan</span>gated well-known + MCP wrap of 47 endpoints (no rewrite) + internal Skill + auth A2A behind Keycloak + Confidential Inference + EU pinning</p>
+        <p class="scenario-line"><span class="lbl">time</span><span class="num">3 weeks</span> · 12 atomic commits</p>
+        <p class="scenario-line"><span class="lbl">end</span><span class="num">20 / 21</span> · open A2A intentionally skipped</p>
+        <p class="scenario-killer">killer move: Anthropic Confidential Inference becomes the compliance moat. EU AI Act transparency shipped day 1.</p>
+      </article>
+      <article class="scenario m-up">
+        <div class="scenario-head">OSS library</div>
+        <p class="scenario-line"><span class="lbl">start</span><span class="num">2 / 21</span></p>
+        <p class="scenario-line"><span class="lbl">plan</span>SKILL.md package + pdf-utils-mcp wrapper on PyPI + llms.txt + agent CI. no runtime infra.</p>
+        <p class="scenario-line"><span class="lbl">time</span><span class="num">1 day</span> · 4 commits</p>
+        <p class="scenario-line"><span class="lbl">end</span><span class="num">9 / 21</span> · the correct score for a library</p>
+        <p class="scenario-killer">killer move: first into agentskills.io's PDF slot. distribution compounds without infra cost.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- SLIDE 43 — THE PUNCH QUOTES -->
+  <section class="slide slide--quote" id="s43" data-slide="43" aria-labelledby="t43">
+    <div class="eyebrow m-up"><span class="dot">●</span> the punch</div>
+    <h2 id="t43" class="pull-quote-large m-up" style="margin-top: var(--space-s);">Average website in 2026: <span class="accent">38/100.</span> None over <span class="accent">70.</span> Run this skill and you ship at <span class="accent">18 to 21 out of 21.</span> Top one percent of the agentic web.</h2>
+    <p class="cite m-up" style="margin-top: var(--space-l);">→ agentify · SKILL.md · the actual punch quote</p>
+  </section>
+
+  <!-- ============================================================
+       ACT VIII — CTA + CLOSE (Slides 44-45)
+       ============================================================ -->
+
+  <!-- SLIDE 44 — STARTER -->
+  <section class="slide" id="s44" data-slide="44" aria-labelledby="t44">
+    <div class="eyebrow m-up"><span class="dot">●</span> ACT VIII &nbsp;&nbsp; the 5-step starter</div>
+    <h2 id="t44" class="display m-up" style="margin-top: var(--space-2xs); margin-bottom: var(--space-s);">FIVE COMMANDS. <span class="accent">ONE WEEK.</span></h2>
     <div class="starter">
       <div class="starter-step m-up">
         <div class="starter-num">01</div>
@@ -1604,7 +2501,7 @@ a { color: inherit; }
       </div>
       <div class="starter-step m-up">
         <div class="starter-num">03</div>
-        <div class="starter-cmd"><span class="pre">$</span> mcp serve  --transport=streamable-http  --oauth=rfc-9728<span class="note">layer 04 · remote MCP · authenticated · ~$5/mo on Cloudflare Workers</span></div>
+        <div class="starter-cmd"><span class="pre">$</span> mcp serve  --transport=streamable-http  --oauth=rfc-9728<span class="note">layer 04 · remote MCP · authenticated · ~$5/mo on cloudflare workers</span></div>
       </div>
       <div class="starter-step m-up">
         <div class="starter-num">04</div>
@@ -1615,28 +2512,22 @@ a { color: inherit; }
         <div class="starter-cmd"><span class="pre">$</span> x402 paywall  --chain=base  --currency=USDC  --price=$0.01<span class="note">layer 04 · ship the paywall even at $0.01 · instrumentation day 1, billing day 90</span></div>
       </div>
     </div>
-
-    <p class="kicker m-up" style="margin-top: var(--space-l);">compose, don't reinvent. → agentify · isitagentready.com</p>
+    <p class="kicker m-up" style="margin-top: var(--space-m);">compose, don't reinvent. → agentify · isitagentready.com</p>
   </section>
 
-  <!-- =========================================================
-       SLIDE 17 — CLOSING (REGISTER SHIFT — inverted palette)
-       ========================================================= -->
-  <section class="slide slide--close" id="s17" data-slide="17" aria-labelledby="t17">
+  <!-- SLIDE 45 — CLOSING (INVERSION) -->
+  <section class="slide slide--close" id="s45" data-slide="45" aria-labelledby="t45">
     <div class="eyebrow m-up" style="color:rgba(10,10,10,0.6);"><span class="dot" style="color: var(--color-discord);">●</span> closing</div>
-
-    <h2 id="t17" class="pull m-up" style="margin-top: var(--space-l);">AI stops being something you <em style="font-style:italic;font-weight:500;">ask</em>, and becomes something that <span class="discord">does.</span></h2>
-
+    <h2 id="t45" class="pull m-up" style="margin-top: var(--space-l);">AI stops being something you <em style="font-style:italic;font-weight:500;">ask</em>, and becomes something that <span class="discord">does.</span></h2>
     <p class="attr m-up">→ a16z · Big Ideas 2026 · The Agentic Interface · Andrusko · Wang · Zhang</p>
-
     <div class="ctas m-up">
       <div><span class="arrow">→</span><a href="https://immersivecommons.com" target="_blank" rel="noopener">build at floor10 · immersivecommons.com</a></div>
       <div><span class="arrow">→</span><a href="https://skew.site" target="_blank" rel="noopener">spin pages with claude · skew.site</a></div>
       <div><span class="arrow">→</span><a href="https://lobsterhoney.com" target="_blank" rel="noopener">harden against agents · lobsterhoney.com</a></div>
+      <div><span class="arrow">→</span><a href="https://isitagentready.com" target="_blank" rel="noopener">audit your repo · isitagentready.com</a></div>
       <div><span class="arrow">→</span><a href="https://x.com/supercoolraydude" target="_blank" rel="noopener">rayyan zahid · @supercoolraydude</a></div>
     </div>
-
-    <p class="attr m-up" style="margin-top: var(--space-l);">→ this deck has a /.well-known/ai-agent.json. agents can read it.</p>
+    <p class="attr m-up" style="margin-top: var(--space-m);">→ this deck has /.well-known/ai-agent.json. agents can read it. recursive proof.</p>
   </section>
 
 </main>
@@ -1646,65 +2537,52 @@ a { color: inherit; }
 </footer>
 
 <script>
-/* ============================================================
-   DECK JS — vanilla, no dependencies.
-   ============================================================ */
 (function(){
   'use strict';
   const slides = Array.from(document.querySelectorAll('.slide'));
   const total = slides.length;
   const counterNum = document.getElementById('counter-num');
   const progress = document.getElementById('progress');
+  document.querySelector('#counter').lastChild.textContent = ' / ' + String(total);
   let current = 0;
 
-  /* --- Slide navigation --- */
   function show(idx, push) {
     idx = Math.max(0, Math.min(total - 1, idx));
-    if (idx === current && document.querySelector('.slide.is-active')) {
-      // already on this slide, but make sure animations fire
-    }
     slides.forEach((s, i) => s.classList.toggle('is-active', i === idx));
     current = idx;
-    const num = String(idx + 1).padStart(2, '0');
-    counterNum.textContent = num;
+    counterNum.textContent = String(idx + 1).padStart(2, '0');
     progress.style.width = ((idx + 1) / total * 100) + '%';
+    // Reset scroll on active slide so it starts at top
+    slides[idx].scrollTop = 0;
     if (push) {
       const hash = '#' + (idx + 1);
       if (location.hash !== hash) history.replaceState(null, '', hash);
     }
-    // Fire slide-specific hooks
     runSlideHook(idx);
   }
   function next() { if (current < total - 1) show(current + 1, true); }
   function prev() { if (current > 0) show(current - 1, true); }
 
-  /* --- Keyboard nav --- */
   document.addEventListener('keydown', (e) => {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
     switch (e.key) {
       case 'ArrowRight':
-      case 'ArrowDown':
-      case ' ':
       case 'PageDown':
+      case ' ':
         e.preventDefault(); next(); break;
       case 'ArrowLeft':
-      case 'ArrowUp':
       case 'PageUp':
         e.preventDefault(); prev(); break;
       case 'Home': e.preventDefault(); show(0, true); break;
       case 'End': e.preventDefault(); show(total - 1, true); break;
-      case 'f': case 'F':
-        toggleFullscreen(); break;
-      case 'o': case 'O': case 'Escape':
-        toggleOverview(); break;
+      case 'f': case 'F': toggleFullscreen(); break;
+      case 'o': case 'O': case 'Escape': toggleOverview(); break;
       default:
         if (/^[1-9]$/.test(e.key)) { e.preventDefault(); show(parseInt(e.key, 10) - 1, true); }
-        if (e.key === '0') { e.preventDefault(); show(9, true); }
     }
   });
 
-  /* --- Hash deeplinks --- */
   function fromHash() {
     const m = location.hash.match(/^#(\d+)$/);
     if (m) {
@@ -1715,7 +2593,6 @@ a { color: inherit; }
   }
   window.addEventListener('hashchange', fromHash);
 
-  /* --- Touch swipe --- */
   let touchStartX = 0, touchStartY = 0, touchTime = 0;
   document.addEventListener('touchstart', (e) => {
     if (e.touches.length !== 1) return;
@@ -1729,30 +2606,25 @@ a { color: inherit; }
     const dy = e.changedTouches[0].clientY - touchStartY;
     const dt = Date.now() - touchTime;
     if (dt > 600) return;
-    if (Math.abs(dx) < 50) return;
-    if (Math.abs(dx) < Math.abs(dy)) return; // vertical scroll, ignore
+    if (Math.abs(dx) < 60) return;
+    if (Math.abs(dx) < Math.abs(dy)) return;
     if (dx < 0) next(); else prev();
   }, { passive: true });
 
-  /* --- Click on left/right halves to nav (desktop fallback) --- */
+  // Click-to-nav on bare slide background (not interactive elements or scrollable content)
   document.addEventListener('click', (e) => {
     if (document.body.classList.contains('overview-mode')) return;
-    if (e.target.closest('a, button, input, textarea, select, .terminal, .ctas, .exhibit-bullets, .exhibit-url, .stack-row, .receipt, .gap-row, .starter-step')) return;
+    if (e.target.closest('a, button, input, textarea, select, .terminal, .ctas, .exhibit-bullets, .exhibit-url, .stack-row, .receipt, .gap-row, .starter-step, .check-card, .managed-item, .scenario, .cost-table, .templates-list, .tools-list, .timeline')) return;
     const x = e.clientX;
-    if (x > window.innerWidth * 0.65) next();
-    else if (x < window.innerWidth * 0.35) prev();
+    if (x > window.innerWidth * 0.7) next();
+    else if (x < window.innerWidth * 0.3) prev();
   });
 
-  /* --- Fullscreen --- */
   function toggleFullscreen() {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen?.();
-    } else {
-      document.exitFullscreen?.();
-    }
+    if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+    else document.exitFullscreen?.();
   }
 
-  /* --- Overview mode --- */
   function toggleOverview() {
     const isOverview = document.body.classList.toggle('overview-mode');
     if (isOverview) {
@@ -1768,74 +2640,53 @@ a { color: inherit; }
     }
   }
 
-  /* ============================================================
-     SLIDE HOOKS — animations triggered per slide
-     ============================================================ */
   const slideHooksRun = new Set();
   function runSlideHook(idx) {
     const id = slides[idx].id;
     if (id === 's1' && !slideHooksRun.has(id)) { slideHooksRun.add(id); hookTitle(); }
     if (id === 's2' && !slideHooksRun.has(id)) { slideHooksRun.add(id); hookPunchCounter(); }
-    if (id === 's12' && !slideHooksRun.has(id)) { slideHooksRun.add(id); hookICExhibit(); }
+    if (id === 's34' && !slideHooksRun.has(id)) { slideHooksRun.add(id); hookICExhibit(); }
   }
 
-  /* ---- Hook: slide 1 typewriter ---- */
   function hookTitle() {
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      document.querySelectorAll('.typed').forEach(el => {
-        el.textContent = el.getAttribute('data-text');
-      });
+      document.querySelectorAll('#s1 .typed').forEach(el => el.textContent = el.getAttribute('data-text'));
       document.querySelector('.title-civic').classList.add('done');
       return;
     }
     const targets = Array.from(document.querySelectorAll('#s1 .typed'));
     let ti = 0;
     function typeNext() {
-      if (ti >= targets.length) {
-        document.querySelector('.title-civic').classList.add('done');
-        return;
-      }
+      if (ti >= targets.length) { document.querySelector('.title-civic').classList.add('done'); return; }
       const el = targets[ti];
       const txt = el.getAttribute('data-text');
       let i = 0;
       function chr() {
-        if (i <= txt.length) {
-          el.textContent = txt.slice(0, i);
-          i++;
-          setTimeout(chr, 45);
-        } else {
-          ti++;
-          setTimeout(typeNext, 110);
-        }
+        if (i <= txt.length) { el.textContent = txt.slice(0, i); i++; setTimeout(chr, 42); }
+        else { ti++; setTimeout(typeNext, 100); }
       }
       chr();
     }
-    setTimeout(typeNext, 240);
+    setTimeout(typeNext, 220);
   }
 
-  /* ---- Hook: slide 2 count-up ---- */
   function hookPunchCounter() {
     const el = document.getElementById('punch-counter');
     if (!el) return;
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      el.textContent = '>50';
-      return;
-    }
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) { el.textContent = '>50'; return; }
     const target = parseFloat(el.getAttribute('data-target') || '51');
     const start = performance.now();
     const dur = 820;
     function frame(t) {
       const k = Math.min(1, (t - start) / dur);
       const eased = 1 - Math.pow(1 - k, 3);
-      const v = (eased * target);
-      el.textContent = v.toFixed(1);
+      el.textContent = (eased * target).toFixed(1);
       if (k < 1) requestAnimationFrame(frame);
       else el.textContent = '>50';
     }
     requestAnimationFrame(frame);
   }
 
-  /* ---- Hook: slide 12 IC live fetch (SIGNATURE microfeature) ---- */
   function hookICExhibit() {
     const term = document.getElementById('ic-terminal');
     const status = document.getElementById('ic-status');
@@ -1845,39 +2696,17 @@ a { color: inherit; }
     const url = 'https://www.immersivecommons.com/.well-known/ai-agent.json';
     const fallback = {
       "spec": "ai-agent.json/1.0 (aiia.ro)",
-      "agent": {
-        "name": "Immersive Commons",
-        "version": "1.4.0",
-        "updated": "2026-05-11",
-        "callable": true
-      },
+      "agent": { "name": "Immersive Commons", "version": "1.4.0", "updated": "2026-05-11", "callable": true },
       "endpoints": {
         "mcp": "https://www.immersivecommons.com/api/mcp",
         "a2a": "https://www.immersivecommons.com/api/a2a",
         "card": "https://www.immersivecommons.com/.well-known/agent-card.json"
       },
-      "auth": {
-        "scheme": "Bearer",
-        "format": "agt_<base64url-32bytes>",
-        "scope": "highlights:submit",
-        "requires_human": true
-      },
-      "signing": {
-        "algorithm": "Ed25519",
-        "spec": "Web Bot Auth (RFC 9421 draft)",
-        "kid": "ic-bot-2026-05-11-a73c785f4d2114a5"
-      },
-      "rate_limits": {
-        "/api/ingest/highlights/pending": "3 per token per UTC day",
-        "/api/ingest/highlights/image": "30 per token per UTC day"
-      },
+      "auth": { "scheme": "Bearer", "format": "agt_<base64url-32bytes>", "scope": "highlights:submit", "requires_human": true },
+      "signing": { "algorithm": "Ed25519", "spec": "Web Bot Auth (RFC 9421 draft)" },
       "tools": [
-        "floor10_get_my_floor_member",
-        "floor10_list_my_pending",
-        "floor10_list_claimable_events",
-        "floor10_upload_image",
-        "floor10_submit_highlight",
-        "floor10_extract_event_metadata"
+        "floor10_get_my_floor_member","floor10_list_my_pending","floor10_list_claimable_events",
+        "floor10_upload_image","floor10_submit_highlight","floor10_extract_event_metadata"
       ]
     };
 
@@ -1903,15 +2732,10 @@ a { color: inherit; }
 
     const t0 = performance.now();
     fetch(url, { mode: 'cors', cache: 'no-store' })
-      .then(r => {
-        if (!r.ok) throw new Error('HTTP ' + r.status);
-        return r.json();
-      })
+      .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
       .then(json => {
         const elapsed = Math.round(performance.now() - t0);
-        // remove "resolving" cursor line
-        const last = term.lastElementChild;
-        if (last) last.remove();
+        const last = term.lastElementChild; if (last) last.remove();
         appendLine('ok', '● 200 OK · ' + elapsed + 'ms · live fetch · CORS allowed');
         appendJSON(json);
         status.textContent = '200 OK · live · ' + elapsed + 'ms';
@@ -1919,9 +2743,8 @@ a { color: inherit; }
       })
       .catch(err => {
         const elapsed = Math.round(performance.now() - t0);
-        const last = term.lastElementChild;
-        if (last) last.remove();
-        appendLine('note', '× browser CORS · ' + elapsed + 'ms · fetched & verified server-side');
+        const last = term.lastElementChild; if (last) last.remove();
+        appendLine('note', '× browser CORS · ' + elapsed + 'ms · server-side verified');
         appendLine('ok', '● cached snapshot · 2026-05-11 · ed25519 verified');
         appendJSON(fallback);
         status.textContent = 'cached · 2026-05-11';
@@ -1929,9 +2752,6 @@ a { color: inherit; }
       });
   }
 
-  /* ============================================================
-     TICKER — ambient HTTP traces
-     ============================================================ */
   const TRACES = [
     {pre: '> GET ', mid: '/.well-known/ai-agent.json', tail: ' → ', stat: '200 OK', after: ' · 14ms', ok: true},
     {pre: '> POST ', mid: '/api/a2a {"jsonrpc":"2.0","method":"agent/info"}', tail: ' → ', stat: '200 OK', after: ' · 47ms', ok: true},
@@ -1941,11 +2761,13 @@ a { color: inherit; }
     {pre: '> ', mid: 'navigator.modelContext.registerTool("floor10_submit_highlight")', tail: '', stat: '', after: '', ok: true},
     {pre: '> A2A handshake → capabilities: ', mid: '["highlights/submit","events/discover"]', tail: '', stat: '', after: '', ok: true},
     {pre: '> ', mid: '9,400 public MCP servers', tail: ' · 78% enterprise adoption · 2026 Q1', stat: '', after: '', ok: true},
-    {pre: '> stripe.agent_charge', mid: '({"amount": 0.01, "currency": "USDC", "session": "agt_..."})', tail: ' → ', stat: '200 OK', after: '', ok: true},
+    {pre: '> stripe.agent_charge', mid: '({"amount": 0.01, "currency": "USDC"})', tail: ' → ', stat: '200 OK', after: '', ok: true},
     {pre: '> ', mid: 'ed25519 verify ic-bot-2026-05-11-a73c785f4d2114a5', tail: ' → ', stat: 'OK', after: '', ok: true},
     {pre: '> GET ', mid: '/.well-known/agent-card.json', tail: ' → ', stat: '200 OK', after: ' · 9ms', ok: true},
     {pre: '> ', mid: '69,000 active x402 agents', tail: ' · 165M txns · $50M volume · LF April 2026', stat: '', after: '', ok: true},
-    {pre: '> CORS preflight ', mid: 'OPTIONS /api/a2a', tail: ' · Origin: https://internet-after-interfaces.vercel.app → ', stat: '204', after: '', ok: true},
+    {pre: '> ', mid: '150+ A2A orgs', tail: ' · Azure AI Foundry · Bedrock AgentCore · Google Cloud', stat: '', after: '', ok: true},
+    {pre: '> ', mid: '10,000+ active MCP servers', tail: ' · Anthropic · Dec 2025', stat: '', after: '', ok: true},
+    {pre: '> CORS preflight ', mid: 'OPTIONS /.well-known/ai-agent.json', tail: ' → ', stat: '204', after: '', ok: true},
   ];
   let ti = 0;
   const tline = document.getElementById('ticker-line');
@@ -1953,8 +2775,7 @@ a { color: inherit; }
     const t = TRACES[ti % TRACES.length];
     const statCls = t.err ? 'err' : 'ok';
     tline.innerHTML =
-      '<span class="muted">' + t.pre + '</span>' +
-      t.mid +
+      '<span class="muted">' + t.pre + '</span>' + t.mid +
       '<span class="muted">' + (t.tail || '') + '</span>' +
       (t.stat ? '<span class="' + statCls + '">' + t.stat + '</span>' : '') +
       '<span class="muted">' + (t.after || '') + '</span>';
@@ -1964,20 +2785,13 @@ a { color: inherit; }
     renderTicker();
     setInterval(() => {
       tline.classList.add('fade');
-      setTimeout(() => {
-        renderTicker();
-        tline.classList.remove('fade');
-      }, 240);
+      setTimeout(() => { renderTicker(); tline.classList.remove('fade'); }, 240);
     }, 2400);
   } else {
     renderTicker();
   }
 
-  /* ============================================================
-     BOOT
-     ============================================================ */
   if (!fromHash()) show(0, false);
-  // re-fire title hook on load even if hash sent us elsewhere
   setTimeout(() => runSlideHook(current), 60);
 })();
 </script>

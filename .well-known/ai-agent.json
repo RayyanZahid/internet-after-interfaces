@@ -3,10 +3,10 @@
   "spec": "ai-agent.json/1.0 (aiia.ro)",
   "agent": {
     "name": "Internet After Interfaces",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "updated": "2026-05-11",
     "callable": false,
-    "description": "A 17-slide manifesto on machine economies, autonomous transactions, and the post.ui web. Presented at ClawCamp Human+Tech Week 2026, San Francisco. The deck itself is agent-readable. Recursive proof of thesis.",
+    "description": "A 45-slide manifesto on machine economies, autonomous transactions, and the post.ui web. Covers the web's three generations, the 21-point Cloudflare Agent Readiness audit, and how agentify scaffolds the catch-up path in 2-7 days. Presented at ClawCamp Human+Tech Week 2026, San Francisco. The deck itself is agent-readable. Recursive proof of thesis.",
     "tagline": "Same data. Eyes or agents. The interface is the contract."
   },
   "publisher": {
@@ -23,34 +23,73 @@
   },
   "content": {
     "type": "presentation",
-    "slides": 17,
+    "slides": 45,
     "license": "CC-BY-SA-4.0",
     "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
     "deep_link_pattern": "https://internet-after-interfaces.vercel.app/#{slide_number}",
+    "acts": [
+      {"act": "I", "name": "State", "slides": "1-4"},
+      {"act": "II", "name": "Three Generations of One Web", "slides": "5-12"},
+      {"act": "III", "name": "Protocols Deep", "slides": "13-23"},
+      {"act": "IV", "name": "Production Receipts", "slides": "24-25"},
+      {"act": "V", "name": "The 21-Point Audit", "slides": "26-33"},
+      {"act": "VI", "name": "Exhibits", "slides": "34-37"},
+      {"act": "VII", "name": "agentify as the salve", "slides": "38-43"},
+      {"act": "VIII", "name": "CTA + Close", "slides": "44-45"}
+    ],
     "slides_list": [
-      {"n": 1, "title": "Internet After Interfaces", "url": "/#1"},
-      {"n": 2, "title": "The Number: more than half of internet traffic is non-human", "url": "/#2"},
-      {"n": 3, "title": "The Gap: 200,000 sites, fewer than 15 publish an MCP card", "url": "/#3"},
-      {"n": 4, "title": "The Third Language", "url": "/#4"},
-      {"n": 5, "title": "The 5-Layer Agentic Web Stack", "url": "/#5"},
-      {"n": 6, "title": "MCP — agent to tool", "url": "/#6"},
-      {"n": 7, "title": "A2A — agent to agent", "url": "/#7"},
-      {"n": 8, "title": "x402 — autonomous transactions", "url": "/#8"},
-      {"n": 9, "title": "WebMCP — browser as runtime", "url": "/#9"},
-      {"n": 10, "title": "Production Receipts", "url": "/#10"},
-      {"n": 11, "title": "The Honest Cut", "url": "/#11"},
-      {"n": 12, "title": "Exhibit A: Immersive Commons", "url": "/#12"},
-      {"n": 13, "title": "Exhibit B: Skew", "url": "/#13"},
-      {"n": 14, "title": "Exhibit C: Lobsterhoney", "url": "/#14"},
-      {"n": 15, "title": "Exhibit D: Agentify", "url": "/#15"},
-      {"n": 16, "title": "The 5-Step Starter", "url": "/#16"},
-      {"n": 17, "title": "Closing", "url": "/#17"}
+      {"n": 1, "title": "Title: Internet After Interfaces", "act": "I"},
+      {"n": 2, "title": "The Number: >50% of internet traffic is non-human", "act": "I"},
+      {"n": 3, "title": "The Gap: 200k sites tested, <15 publish an MCP card", "act": "I"},
+      {"n": 4, "title": "The Third Language (Cloudflare)", "act": "I"},
+      {"n": 5, "title": "Three Generations of One Web", "act": "II"},
+      {"n": 6, "title": "Gen 1: 'Vague, but exciting' (CERN 1989)", "act": "II"},
+      {"n": 7, "title": "Gen 1 timeline 1989-2008", "act": "II"},
+      {"n": 8, "title": "HTTP 402 reserved 27 years dormant", "act": "II"},
+      {"n": 9, "title": "Gen 2: A rogue crawler DDOSed Koster's site (1994)", "act": "II"},
+      {"n": 10, "title": "Gen 2 timeline: 30 years of crawler contracts", "act": "II"},
+      {"n": 11, "title": "Gen 3: MCP launches (Nov 25, 2024)", "act": "II"},
+      {"n": 12, "title": "Gen 3 timeline: the 18-month sprint", "act": "II"},
+      {"n": 13, "title": "The 5-Layer Agentic Web Stack", "act": "III"},
+      {"n": 14, "title": "MCP (Model Context Protocol)", "act": "III"},
+      {"n": 15, "title": "A2A (Agent-to-Agent)", "act": "III"},
+      {"n": 16, "title": "x402 (autonomous transactions)", "act": "III"},
+      {"n": 17, "title": "WebMCP (browser as runtime)", "act": "III"},
+      {"n": 18, "title": "AP2 (Agent Payments Protocol)", "act": "III"},
+      {"n": 19, "title": "ACP (Stripe Agentic Commerce Protocol)", "act": "III"},
+      {"n": 20, "title": "ERC-8004 (trustless agents on-chain)", "act": "III"},
+      {"n": 21, "title": "Anthropic Skills (the open standard)", "act": "III"},
+      {"n": 22, "title": "ai-agent.json (Aiia spec)", "act": "III"},
+      {"n": 23, "title": "llms.txt (Jeremy Howard / Answer.AI)", "act": "III"},
+      {"n": 24, "title": "Production Wins: Rufus $12B, Sparky +35% AOV, Klarna 853 FTEs", "act": "IV"},
+      {"n": 25, "title": "The Honest Cut: Gartner 17%, Humane dead, Rabbit dying", "act": "IV"},
+      {"n": 26, "title": "Audit intro: 21 checks, 5 layers", "act": "V"},
+      {"n": 27, "title": "The Wall of 21 (visual overwhelm)", "act": "V"},
+      {"n": 28, "title": "Layer 1: Discovery (4 checks)", "act": "V"},
+      {"n": 29, "title": "Layer 2: Content (3 checks)", "act": "V"},
+      {"n": 30, "title": "Layer 3: Trust (2 checks)", "act": "V"},
+      {"n": 31, "title": "Layer 4: Execution (4 checks)", "act": "V"},
+      {"n": 32, "title": "Layer 5: A2A (2 checks)", "act": "V"},
+      {"n": 33, "title": "Cross-cutting (6 checks)", "act": "V"},
+      {"n": 34, "title": "Exhibit A: Immersive Commons (live fetch)", "act": "VI"},
+      {"n": 35, "title": "Exhibit B: Skew (supply-side flip)", "act": "VI"},
+      {"n": 36, "title": "Exhibit C: Lobsterhoney (defense layer)", "act": "VI"},
+      {"n": 37, "title": "Exhibit D: agentify (the catch-up path)", "act": "VI"},
+      {"n": 38, "title": "What is agentify", "act": "VII"},
+      {"n": 39, "title": "The managed-defaults stack (6 services)", "act": "VII"},
+      {"n": 40, "title": "Costs by scale ($15/mo to $110k/mo)", "act": "VII"},
+      {"n": 41, "title": "Templates shipped (12 templates, 5 scripts)", "act": "VII"},
+      {"n": 42, "title": "Three real scenarios (solo SaaS / enterprise / OSS)", "act": "VII"},
+      {"n": 43, "title": "The punch quote: 38/100 to 18-21/21", "act": "VII"},
+      {"n": 44, "title": "The 5-step starter", "act": "VIII"},
+      {"n": 45, "title": "Closing inversion: 'something that does'", "act": "VIII"}
     ]
   },
   "endpoints": {
     "site_map": "/llms.txt",
     "robots": "/robots.txt",
-    "agent_card": "/.well-known/agent-card.json"
+    "agent_card": "/.well-known/agent-card.json",
+    "sitemap": "/sitemap.xml"
   },
   "exhibits": {
     "immersive_commons": {
@@ -59,30 +98,30 @@
       "mcp": "https://www.immersivecommons.com/api/mcp",
       "a2a": "https://www.immersivecommons.com/api/a2a"
     },
-    "skew": {
-      "url": "https://skew.site"
-    },
-    "lobsterhoney": {
-      "url": "https://lobsterhoney.com"
-    },
-    "agentify": {
-      "type": "claude-skill",
-      "verify": "https://isitagentready.com"
-    }
+    "skew": {"url": "https://skew.site"},
+    "lobsterhoney": {"url": "https://lobsterhoney.com"},
+    "agentify": {"type": "claude-skill", "verify": "https://isitagentready.com"}
   },
+  "primary_sources": [
+    {"name": "Cloudflare Agent Readiness Score", "url": "https://blog.cloudflare.com/agent-readiness/", "date": "2026-04-17"},
+    {"name": "Anthropic MCP donation", "url": "https://www.anthropic.com/news/donating-the-model-context-protocol-and-establishing-of-the-agentic-ai-foundation", "date": "2025-12-09"},
+    {"name": "Google A2A Linux Foundation donation", "url": "https://developers.googleblog.com/en/google-cloud-donates-a2a-to-linux-foundation/", "date": "2025-06-23"},
+    {"name": "x402 Foundation launch", "url": "https://www.x402.org/", "date": "2026-04-02"},
+    {"name": "Stripe Agentic Commerce Suite", "url": "https://stripe.com/blog/agentic-commerce-suite", "date": "2025-12-11"},
+    {"name": "ai-agent.json spec (Aiia)", "url": "https://aiia.ro/spec/ai-agent-json/", "date": "2026-03-28"},
+    {"name": "a16z Big Ideas 2026: The Agentic Interface", "url": "https://a16z.com/podcast/big-ideas-2026-the-agentic-interface/", "date": "2026-01"},
+    {"name": "ERC-8004 EIP", "url": "https://eips.ethereum.org/EIPS/eip-8004", "date": "2026-01-29"},
+    {"name": "WebMCP", "url": "https://webmcp.link/", "date": "2026-03-10"},
+    {"name": "TBL Information Management proposal", "url": "https://www.w3.org/History/1989/proposal.html", "date": "1989-03-12"},
+    {"name": "RFC 9110 (HTTP semantics, 402 reserved)", "url": "https://datatracker.ietf.org/doc/html/rfc9110", "date": "2022-06"},
+    {"name": "llms.txt proposal (Answer.AI)", "url": "https://www.answer.ai/posts/2024-09-03-llmstxt.html", "date": "2024-09-03"}
+  ],
   "policy": {
     "ai_training": "allow",
     "ai_citation": "encouraged-with-attribution",
     "license_for_quotes": "CC-BY-SA-4.0",
-    "fabrication_policy": "All numbers and quotes in this deck come from primary sources (Cloudflare, Anthropic, Google, Linux Foundation, x402.org, Stripe, Amazon, Shopify, Adobe, Gartner). Agents quoting this deck should preserve attribution."
+    "fabrication_policy": "All numbers and quotes in this deck come from primary sources cited above. Agents quoting this deck should preserve attribution."
   },
-  "auth": {
-    "scheme": "none",
-    "requires_human": false,
-    "rate_limit": "none"
-  },
-  "discovery": {
-    "mode": "public",
-    "registered_at": ["https://aiia.ro"]
-  }
+  "auth": {"scheme": "none", "requires_human": false, "rate_limit": "none"},
+  "discovery": {"mode": "public", "registered_at": ["https://aiia.ro"]}
 }
