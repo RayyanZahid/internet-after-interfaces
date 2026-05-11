@@ -2834,6 +2834,8 @@ a { color: inherit; }
     touchTime = Date.now();
   }, { passive: true });
   document.addEventListener('touchend', (e) => {
+    // When the notes drawer is open the dedicated notes-handler owns swipe nav.
+    if (document.body.classList.contains('notes-open')) return;
     if (!e.changedTouches.length) return;
     const dx = e.changedTouches[0].clientX - touchStartX;
     const dy = e.changedTouches[0].clientY - touchStartY;
@@ -2847,7 +2849,8 @@ a { color: inherit; }
   // Click-to-nav on bare slide background (not interactive elements or scrollable content)
   document.addEventListener('click', (e) => {
     if (document.body.classList.contains('overview-mode')) return;
-    if (e.target.closest('a, button, input, textarea, select, .terminal, .ctas, .exhibit-bullets, .exhibit-url, .stack-row, .receipt, .gap-row, .starter-step, .check-card, .managed-item, .scenario, .cost-table, .templates-list, .tools-list, .timeline')) return;
+    if (document.body.classList.contains('notes-open')) return;
+    if (e.target.closest('a, button, input, textarea, select, .terminal, .ctas, .exhibit-bullets, .exhibit-url, .stack-row, .receipt, .gap-row, .starter-step, .check-card, .managed-item, .scenario, .cost-table, .templates-list, .tools-list, .timeline, .qr-frame')) return;
     const x = e.clientX;
     if (x > window.innerWidth * 0.7) next();
     else if (x < window.innerWidth * 0.3) prev();
