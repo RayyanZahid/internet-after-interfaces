@@ -1662,7 +1662,14 @@ a { color: inherit; }
     transition: transform 340ms cubic-bezier(0.22, 1, 0.36, 1);
     z-index: 100;
     overflow: hidden;
+    /* Allow JS to handle horizontal swipes for slide nav; vertical pan for inner scroll. */
     touch-action: pan-y;
+  }
+  #notes-list {
+    transition: opacity 200ms ease-out;
+  }
+  #notes-meta .num {
+    transition: opacity 200ms ease-out;
   }
   #notes-drawer.dragging { transition: none; }
   body.notes-open #notes-drawer { transform: translateY(0); }
@@ -2781,6 +2788,10 @@ a { color: inherit; }
       if (location.hash !== hash) history.replaceState(null, '', hash);
     }
     runSlideHook(idx);
+    // Sync notes drawer if open (so horizontal swipe through slides updates notes in place)
+    if (document.body.classList.contains('notes-open') && typeof populateNotes === 'function') {
+      populateNotes(idx);
+    }
   }
   function next() { if (current < total - 1) show(current + 1, true); }
   function prev() { if (current > 0) show(current - 1, true); }
@@ -3171,10 +3182,24 @@ a { color: inherit; }
     const dy = c.clientY - nsY;
     const dt = Date.now() - nsT;
 
-    // drawer drag-to-close finish
+    // drawer is open — three possible gestures:
+    //   1) drag-down on the handle (drag-to-close)
+    //   2) partial drag (snap back)
+    //   3) horizontal swipe — advance/retreat slide WITHOUT closing
     if (document.body.classList.contains('notes-open')) {
-      if (nsDrag > 140) { closeNotes(); }
-      else { drawer.style.transform = ''; }
+      if (nsDrag > 140) {
+        closeNotes();
+      } else if (nsDrag > 0) {
+        // partial drag → snap back
+        drawer.style.transform = '';
+      } else if (dt < 800 && Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+        // horizontal swipe while drawer open · keep drawer open, advance slide
+        // briefly flash the notes-list so the user notices the swap
+        const list = document.getElementById('notes-list');
+        if (list) { list.style.opacity = '0.25'; setTimeout(() => list.style.opacity = '', 180); }
+        if (dx < 0) next(); else prev();
+        // notes already synced via show() → populateNotes hook
+      }
       return;
     }
 
