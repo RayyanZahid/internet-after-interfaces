@@ -1494,6 +1494,60 @@ a { color: inherit; }
 .slide--close .ctas .arrow { color: var(--color-discord); margin-right: 0.5ch; }
 .slide--close::after { display: none !important; }
 
+/* Closing two-column · QR on the right (desktop) / below (mobile) */
+.close-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: end;
+}
+@media (max-width: 768px) {
+  .close-grid { grid-template-columns: 1fr; gap: var(--space-l); align-items: start; }
+}
+.close-left { min-width: 0; }
+.close-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-s);
+  min-width: 0;
+}
+.qr-frame {
+  background: var(--color-fg);
+  padding: clamp(0.75rem, 1.5vw, 1.1rem);
+  border: 2px solid var(--color-bg);
+  width: clamp(180px, 22vw, 280px);
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.qr-frame img,
+.qr-frame svg { width: 100%; height: auto; display: block; }
+.qr-frame img { filter: none; }
+.qr-caption {
+  font-family: var(--font-accent);
+  font-size: var(--type-caption);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-bg);
+  text-align: center;
+  line-height: 1.4;
+}
+.qr-caption .url {
+  display: block;
+  margin-top: 0.35em;
+  color: var(--color-discord);
+  letter-spacing: 0;
+  text-transform: lowercase;
+  font-size: 0.92em;
+  word-break: break-all;
+}
+.qr-caption .arr {
+  color: var(--color-discord);
+  margin-right: 0.4ch;
+}
+
 /* ============================================================
    OVERVIEW MODE
    ============================================================ */
@@ -2662,15 +2716,28 @@ a { color: inherit; }
   <!-- SLIDE 45 — CLOSING (INVERSION) -->
   <section class="slide slide--close" id="s45" data-slide="45" aria-labelledby="t45">
     <div class="eyebrow m-up" style="color:rgba(10,10,10,0.6);"><span class="dot" style="color: var(--color-discord);">●</span> closing</div>
-    <h2 id="t45" class="pull m-up" style="margin-top: var(--space-l);">AI stops being something you <em style="font-style:italic;font-weight:500;">ask</em>, and becomes something that <span class="discord">does.</span></h2>
-    <p class="attr m-up">→ a16z · Big Ideas 2026 · The Agentic Interface · Andrusko · Wang · Zhang</p>
-    <div class="ctas m-up">
-      <div><span class="arrow">→</span><a href="https://immersivecommons.com" target="_blank" rel="noopener">build at floor10 · immersivecommons.com</a></div>
-      <div><span class="arrow">→</span><a href="https://skew.site" target="_blank" rel="noopener">spin pages with claude · skew.site</a></div>
-      <div><span class="arrow">→</span><a href="https://lobsterhoney.com" target="_blank" rel="noopener">harden against agents · lobsterhoney.com</a></div>
-      <div><span class="arrow">→</span><a href="https://isitagentready.com" target="_blank" rel="noopener">audit your repo · isitagentready.com</a></div>
-      <div><span class="arrow">→</span><a href="https://x.com/supercoolraydude" target="_blank" rel="noopener">rayyan zahid · @supercoolraydude</a></div>
+
+    <div class="close-grid">
+      <div class="close-left">
+        <h2 id="t45" class="pull m-up" style="margin-top: var(--space-l);">AI stops being something you <em style="font-style:italic;font-weight:500;">ask</em>, and becomes something that <span class="discord">does.</span></h2>
+        <p class="attr m-up">→ a16z · Big Ideas 2026 · The Agentic Interface · Andrusko · Wang · Zhang</p>
+        <div class="ctas m-up">
+          <div><span class="arrow">→</span><a href="https://immersivecommons.com" target="_blank" rel="noopener">build at floor10 · immersivecommons.com</a></div>
+          <div><span class="arrow">→</span><a href="https://skew.site" target="_blank" rel="noopener">spin pages with claude · skew.site</a></div>
+          <div><span class="arrow">→</span><a href="https://lobsterhoney.com" target="_blank" rel="noopener">harden against agents · lobsterhoney.com</a></div>
+          <div><span class="arrow">→</span><a href="https://isitagentready.com" target="_blank" rel="noopener">audit your repo · isitagentready.com</a></div>
+          <div><span class="arrow">→</span><a href="https://x.com/supercoolraydude" target="_blank" rel="noopener">rayyan zahid · @supercoolraydude</a></div>
+        </div>
+      </div>
+
+      <div class="close-right m-up">
+        <a class="qr-frame" href="https://linkedin.com/in/rayyanzahid" target="_blank" rel="noopener" aria-label="Open Rayyan Zahid's LinkedIn">
+          <img src="/qr-linkedin.svg" alt="QR code linking to linkedin.com/in/rayyanzahid" width="240" height="240" loading="lazy">
+        </a>
+        <p class="qr-caption"><span class="arr">→</span>connect on linkedin<span class="url">linkedin.com/in/rayyanzahid</span></p>
+      </div>
     </div>
+
     <p class="attr m-up" style="margin-top: var(--space-m);">→ this deck has /.well-known/ai-agent.json. agents can read it. recursive proof.</p>
   </section>
 
@@ -3008,8 +3075,8 @@ a { color: inherit; }
       "AI stops being something you <em class='dim'>ask</em>.",
       "Becomes something that <span class='discord'>does</span>.",
       "a16z · Big Ideas 2026.",
-      "Build at floor10.",
-      "<span class='em'>Audit your repo. Ship in a week.</span>",
+      "<span class='em'>Scan the QR. Let's connect.</span>",
+      "linkedin.com/in/rayyanzahid",
       "Your move."
     ] }
   };
