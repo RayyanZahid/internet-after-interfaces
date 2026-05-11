@@ -4,7 +4,7 @@ A 17-slide keynote manifesto on machine economies, autonomous transactions, and 
 
 Delivered at **ClawCamp Human+Tech Week 2026**, May 11, 2026, The Hibernia Bank, San Francisco.
 
-Speaker: **Rayyan Zahid** ([@supercoolraydude](https://x.com/supercoolraydude))
+Speaker: **Rayyan Zahid** ([linkedin.com/in/rayyanzahid](https://linkedin.com/in/rayyanzahid))
 
 Live: [internet-after-interfaces.vercel.app](https://internet-after-interfaces.vercel.app)
 
