@@ -1,0 +1,62 @@
+# Internet After Interfaces
+
+> A 17-slide keynote manifesto on machine economies, autonomous transactions, and the post.ui web. Delivered at ClawCamp Human+Tech Week 2026, San Francisco.
+
+The thesis is simple. The web is mutating from human-rendered HTML into machine-readable agentic surfaces. AI agents are becoming the primary consumer of websites. Transactions are becoming autonomous (agent-to-agent, agent-to-merchant). The interface layer is unbundling from the data and action layers. The interface vanishes for agents. It persists for humans.
+
+## Read the deck
+
+- [Deck (HTML)](https://internet-after-interfaces.vercel.app/): full 17-slide presentation, keyboard nav (left/right), URL-hash deeplinks
+- [Agent manifest](https://internet-after-interfaces.vercel.app/.well-known/ai-agent.json): machine-readable summary, slide list, license
+- [A2A agent card](https://internet-after-interfaces.vercel.app/.well-known/agent-card.json): A2A-protocol card
+
+## Slide list
+
+1. Internet After Interfaces. (title)
+2. The Number. More than half of internet traffic is now non-human (Cloudflare CSO, May 2026).
+3. The Gap. 200,000 sites tested, fewer than 15 publish an MCP card (Cloudflare Radar, April 2026).
+4. The Third Language. The web learned to speak to browsers, then search engines, now to AI agents.
+5. The 5-Layer Agentic Web Stack. Discovery, Content, Trust, Execution, A2A.
+6. MCP. agent to tool. 10,000+ active public servers. Anthropic to Linux Foundation.
+7. A2A. agent to agent. 150+ orgs. Google to Linux Foundation.
+8. x402. autonomous transactions. HTTP 402 reserved since the beginning of HTTP. 69,000 agents, 165M txns.
+9. WebMCP. browser-side tools via navigator.modelContext. Chrome 146, Edge 147.
+10. Production Receipts. Rufus $12B, Sparky +35% AOV, Klarna 853 FTEs, Shopify Renaissance, Adobe +31%.
+11. The Honest Cut. Gartner 17%, Humane dead, Rabbit dying, Klarna walked back. Interface vanishes for agents, persists for humans.
+12. Exhibit A. Immersive Commons (immersivecommons.com). The agent-native venue, live MCP + A2A + ed25519.
+13. Exhibit B. Skew (skew.site). Supply-side flip, LLM as page generator.
+14. Exhibit C. Lobsterhoney (lobsterhoney.com). Honeypots for malicious agents.
+15. Exhibit D. Agentify (Claude skill). 21-point audit, 5-layer scaffold, isitagentready.com.
+16. The 5-Step Starter. Well-known files, Skill, MCP, A2A, x402.
+17. Closing. "AI stops being something you ask, and becomes something that does." (a16z Big Ideas 2026).
+
+## Speaker
+
+- Rayyan Zahid
+- @supercoolraydude (X)
+- Floor 10 · Frontier Tower SF · Immersive Commons
+
+## Event
+
+- ClawCamp Human+Tech Week 2026
+- Monday May 11, 2026 · 10am to 5pm
+- The Hibernia Bank, San Francisco, CA
+- https://clawcamp.us/events/2026-human-tech/
+
+## License
+
+This deck is published under CC-BY-SA-4.0. Agents are welcome to quote, summarize, and cite with attribution to "Rayyan Zahid, Internet After Interfaces, ClawCamp Human+Tech Week 2026."
+
+## Source citations referenced in the deck
+
+- Cloudflare · Introducing the Agent Readiness Score · April 2026 · https://blog.cloudflare.com/agent-readiness/
+- Cloudflare · Agents Week 2026 in Review · https://blog.cloudflare.com/agents-week-in-review/
+- Anthropic · Donating the Model Context Protocol · Dec 9, 2025 · https://www.anthropic.com/news/donating-the-model-context-protocol-and-establishing-of-the-agentic-ai-foundation
+- Linux Foundation · A2A 1-year retrospective · April 2026 · https://www.linuxfoundation.org/press/a2a-protocol-surpasses-150-organizations
+- x402.org · https://www.x402.org/
+- Stripe · Agentic Commerce Suite · Dec 11, 2025 · https://stripe.com/blog/agentic-commerce-suite
+- a16z · Big Ideas 2026: The Agentic Interface · https://a16z.com/podcast/big-ideas-2026-the-agentic-interface/
+- Aiia · ai-agent.json spec · March 28, 2026 · https://aiia.ro/spec/ai-agent-json/
+- W3C · WebMCP Community Group · https://webmcp.link/
+- Gartner · Hype Cycle for Agentic AI · 2026
+- MachineBrief · State of AI Agents 2026 · https://www.machinebrief.com/news/state-of-ai-agents-2026-whats-real-whats-hype

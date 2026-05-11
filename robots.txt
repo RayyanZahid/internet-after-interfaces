@@ -1,0 +1,35 @@
+# robots.txt — agent-aware
+# Internet After Interfaces · ClawCamp Human+Tech Week 2026
+# This deck is meant to be read, indexed, and quoted (with attribution).
+
+User-agent: *
+Allow: /
+
+# AI crawlers — explicit allow + Content-Signals
+User-agent: ClaudeBot
+Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
+
+User-agent: GPTBot
+Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
+
+User-agent: PerplexityBot
+Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
+
+User-agent: CCBot
+Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
+
+User-agent: anthropic-ai
+Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+Sitemap: https://internet-after-interfaces.vercel.app/sitemap.xml

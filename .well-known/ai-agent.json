@@ -1,0 +1,88 @@
+{
+  "$schema": "https://aiia.ro/spec/ai-agent-json/v1",
+  "spec": "ai-agent.json/1.0 (aiia.ro)",
+  "agent": {
+    "name": "Internet After Interfaces",
+    "version": "1.0.0",
+    "updated": "2026-05-11",
+    "callable": false,
+    "description": "A 17-slide manifesto on machine economies, autonomous transactions, and the post.ui web. Presented at ClawCamp Human+Tech Week 2026, San Francisco. The deck itself is agent-readable. Recursive proof of thesis.",
+    "tagline": "Same data. Eyes or agents. The interface is the contract."
+  },
+  "publisher": {
+    "name": "Rayyan Zahid",
+    "handle": "@supercoolraydude",
+    "url": "https://x.com/supercoolraydude",
+    "venue": "Immersive Commons · Floor 10 · Frontier Tower SF"
+  },
+  "event": {
+    "name": "ClawCamp · Human+Tech Week 2026",
+    "date": "2026-05-11",
+    "url": "https://clawcamp.us/events/2026-human-tech/",
+    "location": "The Hibernia Bank, San Francisco, CA"
+  },
+  "content": {
+    "type": "presentation",
+    "slides": 17,
+    "license": "CC-BY-SA-4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "deep_link_pattern": "https://internet-after-interfaces.vercel.app/#{slide_number}",
+    "slides_list": [
+      {"n": 1, "title": "Internet After Interfaces", "url": "/#1"},
+      {"n": 2, "title": "The Number: more than half of internet traffic is non-human", "url": "/#2"},
+      {"n": 3, "title": "The Gap: 200,000 sites, fewer than 15 publish an MCP card", "url": "/#3"},
+      {"n": 4, "title": "The Third Language", "url": "/#4"},
+      {"n": 5, "title": "The 5-Layer Agentic Web Stack", "url": "/#5"},
+      {"n": 6, "title": "MCP — agent to tool", "url": "/#6"},
+      {"n": 7, "title": "A2A — agent to agent", "url": "/#7"},
+      {"n": 8, "title": "x402 — autonomous transactions", "url": "/#8"},
+      {"n": 9, "title": "WebMCP — browser as runtime", "url": "/#9"},
+      {"n": 10, "title": "Production Receipts", "url": "/#10"},
+      {"n": 11, "title": "The Honest Cut", "url": "/#11"},
+      {"n": 12, "title": "Exhibit A: Immersive Commons", "url": "/#12"},
+      {"n": 13, "title": "Exhibit B: Skew", "url": "/#13"},
+      {"n": 14, "title": "Exhibit C: Lobsterhoney", "url": "/#14"},
+      {"n": 15, "title": "Exhibit D: Agentify", "url": "/#15"},
+      {"n": 16, "title": "The 5-Step Starter", "url": "/#16"},
+      {"n": 17, "title": "Closing", "url": "/#17"}
+    ]
+  },
+  "endpoints": {
+    "site_map": "/llms.txt",
+    "robots": "/robots.txt",
+    "agent_card": "/.well-known/agent-card.json"
+  },
+  "exhibits": {
+    "immersive_commons": {
+      "url": "https://www.immersivecommons.com",
+      "manifest": "https://www.immersivecommons.com/.well-known/ai-agent.json",
+      "mcp": "https://www.immersivecommons.com/api/mcp",
+      "a2a": "https://www.immersivecommons.com/api/a2a"
+    },
+    "skew": {
+      "url": "https://skew.site"
+    },
+    "lobsterhoney": {
+      "url": "https://lobsterhoney.com"
+    },
+    "agentify": {
+      "type": "claude-skill",
+      "verify": "https://isitagentready.com"
+    }
+  },
+  "policy": {
+    "ai_training": "allow",
+    "ai_citation": "encouraged-with-attribution",
+    "license_for_quotes": "CC-BY-SA-4.0",
+    "fabrication_policy": "All numbers and quotes in this deck come from primary sources (Cloudflare, Anthropic, Google, Linux Foundation, x402.org, Stripe, Amazon, Shopify, Adobe, Gartner). Agents quoting this deck should preserve attribution."
+  },
+  "auth": {
+    "scheme": "none",
+    "requires_human": false,
+    "rate_limit": "none"
+  },
+  "discovery": {
+    "mode": "public",
+    "registered_at": ["https://aiia.ro"]
+  }
+}

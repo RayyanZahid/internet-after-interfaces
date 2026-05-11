@@ -1,0 +1,42 @@
+{
+  "$schema": "https://a2a-protocol.org/spec/agent-card/v1",
+  "name": "Internet After Interfaces (deck)",
+  "version": "1.0.0",
+  "description": "A keynote manifesto on the post.ui web. Read-only public artifact. Quote freely with attribution.",
+  "url": "https://internet-after-interfaces.vercel.app",
+  "documentationUrl": "https://internet-after-interfaces.vercel.app/llms.txt",
+  "provider": {
+    "name": "Rayyan Zahid",
+    "url": "https://x.com/supercoolraydude"
+  },
+  "auth": {
+    "type": "none"
+  },
+  "capabilities": [
+    {
+      "name": "read_slide",
+      "description": "Retrieve a specific slide's content via deep-link. URL pattern: /#{n} where n is 1..17.",
+      "method": "GET",
+      "url": "https://internet-after-interfaces.vercel.app/#{slide_number}"
+    },
+    {
+      "name": "list_slides",
+      "description": "Get the full slide table-of-contents.",
+      "url": "https://internet-after-interfaces.vercel.app/.well-known/ai-agent.json#content.slides_list"
+    }
+  ],
+  "endpoints": {
+    "a2a": null,
+    "mcp": null,
+    "comment": "This deck does not currently expose A2A or MCP endpoints. It is a read-only static artifact. To exercise the protocols, see the linked exhibits at immersivecommons.com."
+  },
+  "policy": {
+    "discoveryMode": "public",
+    "license": "CC-BY-SA-4.0"
+  },
+  "skills": [],
+  "telemetry": {
+    "transport": "static-html",
+    "stateful": false
+  }
+}

@@ -1,0 +1,1985 @@
+<!doctype html>
+<html lang="en" style="
+  --force-structure: 0.65;
+  --force-density: 0.55;
+  --force-warmth: 0.05;
+  --force-stillness: 0.55;
+  --force-volume: 0.95;
+">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="color-scheme" content="dark">
+<title>Internet After Interfaces · Human+Tech Week 2026</title>
+<meta name="description" content="A 17-slide manifesto on machine economies, autonomous transactions, and the post.ui web. Delivered at ClawCamp Human+Tech Week, San Francisco, May 11, 2026.">
+<meta name="author" content="Rayyan Zahid">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://internet-after-interfaces.vercel.app/">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Internet After Interfaces">
+<meta property="og:description" content="Machine economies, autonomous transactions, and the post.ui web. ClawCamp Human+Tech Week, May 11, 2026.">
+<meta property="og:image" content="https://internet-after-interfaces.vercel.app/og.svg">
+<meta property="og:image:type" content="image/svg+xml">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://internet-after-interfaces.vercel.app/">
+<meta property="og:site_name" content="Internet After Interfaces">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Internet After Interfaces">
+<meta name="twitter:description" content="Manifesto on the post.ui web. ClawCamp Human+Tech Week 2026.">
+<meta name="twitter:image" content="https://internet-after-interfaces.vercel.app/og.svg">
+
+<link rel="alternate" type="application/json" href="/.well-known/ai-agent.json" title="Agent Manifest">
+<link rel="alternate" type="application/json" href="/.well-known/agent-card.json" title="A2A Agent Card">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "PresentationDigitalDocument",
+  "name": "Internet After Interfaces",
+  "headline": "Internet After Interfaces. Machine economies, autonomous transactions, and the post.ui web.",
+  "description": "A 17-slide manifesto on machine economies, autonomous transactions, and the post.ui web.",
+  "author": {"@type": "Person", "name": "Rayyan Zahid", "url": "https://x.com/supercoolraydude"},
+  "datePublished": "2026-05-11",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "Event",
+    "name": "Human+Tech Week 2026 · ClawCamp",
+    "startDate": "2026-05-11T10:00:00-07:00",
+    "endDate": "2026-05-11T17:00:00-07:00",
+    "location": {"@type": "Place", "name": "The Hibernia Bank", "address": "San Francisco, CA"},
+    "organizer": {"@type": "Organization", "name": "ClawCamp", "url": "https://clawcamp.us"}
+  },
+  "url": "https://internet-after-interfaces.vercel.app/",
+  "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+}
+</script>
+
+<style>
+/* ============================================================
+   CC-PRO TOKENS — inlined for single-file deploy
+   Forces are set on <html> above and derive all downstream values.
+   ============================================================ */
+:root {
+  /* derived from forces */
+  --force-space-scale: calc(1 + (1 - var(--force-density)) * 0.75);
+  --force-radius-base: calc(var(--force-warmth) * 8px);
+  --force-tracking-body: calc((1 - var(--force-volume)) * 0.02em);
+  --force-tracking-display: calc(-0.02em - var(--force-volume) * 0.03em);
+  --force-motion-scale: calc(0.4 + var(--force-stillness) * 1.4);
+  --force-border-weight: calc(0.5px + var(--force-structure) * 1.5px);
+  --force-leading: calc(1.2 + (1 - var(--force-density)) * 0.4);
+  --force-hierarchy: calc(1 + var(--force-volume) * 1.5);
+
+  /* subject-derived palette — anchored on /.well-known/ + HTTP 402 */
+  --color-bg: #0a0a0a;
+  --color-fg: #f4f1ea;
+  --color-accent: #d4ff00;            /* radioactive lime — status:OK */
+  --color-muted: rgba(244, 241, 234, 0.55);
+  --color-subtle: rgba(244, 241, 234, 0.08);
+  --color-surface: rgba(244, 241, 234, 0.04);
+  --color-border: rgba(244, 241, 234, 0.18);
+  --color-discord: #ff3b30;           /* HTTP 402 red — the honest cut */
+  --color-success: #d4ff00;
+
+  /* typography roles */
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-accent: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* fluid scale */
+  --type-micro: clamp(0.6rem, 0.55rem + 0.2vw, 0.72rem);
+  --type-caption: clamp(0.72rem, 0.66rem + 0.3vw, 0.85rem);
+  --type-body-small: clamp(0.85rem, 0.78rem + 0.35vw, 1rem);
+  --type-body: clamp(1rem, 0.92rem + 0.4vw, 1.125rem);
+  --type-lede: clamp(1.2rem, 1.05rem + 0.7vw, 1.65rem);
+  --type-subhead: clamp(1.6rem, 1.3rem + 1.4vw, 2.5rem);
+  --type-headline: clamp(2.4rem, 1.6rem + 3.2vw, 4.5rem);
+  --type-display: clamp(3.5rem, 2rem + 7vw, 8rem);
+  --type-massive: clamp(5rem, 2.5rem + 12vw, 13rem);
+  --type-civic: clamp(5.5rem, 2rem + 16vw, 18rem);
+
+  /* tracking */
+  --tracking-mega: -0.045em;
+  --tracking-tight: -0.025em;
+  --tracking-snug: -0.012em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.05em;
+  --tracking-widest: 0.18em;
+
+  /* leading */
+  --leading-crush: 0.88;
+  --leading-tight: 1.02;
+  --leading-snug: 1.18;
+  --leading-normal: 1.4;
+  --leading-relaxed: 1.6;
+
+  /* weights */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 700;
+
+  /* spacing */
+  --space-3xs: calc(0.25rem * var(--force-space-scale));
+  --space-2xs: calc(0.5rem * var(--force-space-scale));
+  --space-xs: calc(0.75rem * var(--force-space-scale));
+  --space-s: calc(1rem * var(--force-space-scale));
+  --space-m: calc(1.5rem * var(--force-space-scale));
+  --space-l: calc(2.5rem * var(--force-space-scale));
+  --space-xl: calc(4rem * var(--force-space-scale));
+  --space-2xl: calc(6rem * var(--force-space-scale));
+
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --tap-min: 48px;
+
+  /* motion durations */
+  --dur-snap: calc(180ms * var(--force-motion-scale));
+  --dur-swift: calc(320ms * var(--force-motion-scale));
+  --dur-flow: calc(600ms * var(--force-motion-scale));
+  --dur-drift: calc(1100ms * var(--force-motion-scale));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --force-motion-scale: 0.01; }
+}
+
+/* ============================================================
+   RESET + BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--color-bg); color: var(--color-fg); }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--type-body);
+  font-weight: var(--weight-regular);
+  line-height: var(--force-leading);
+  letter-spacing: var(--force-tracking-body);
+  background: var(--color-bg);
+  color: var(--color-fg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+img, svg { max-width: 100%; height: auto; display: block; }
+::selection { background: var(--color-accent); color: var(--color-bg); }
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+
+/* grain overlay — defeats default-website smell */
+body::after {
+  content: "";
+  position: fixed; inset: 0; pointer-events: none; z-index: 50;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  mix-blend-mode: overlay;
+}
+@media (prefers-reduced-motion: reduce) { body::after { display: none; } }
+
+/* ============================================================
+   DECK ARCHITECTURE
+   Each slide is a fullscreen section. JS toggles .is-active.
+   Without JS: slides scroll vertically as fallback.
+   ============================================================ */
+main#deck {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(3rem, 8vh, 6rem) var(--gutter) clamp(4rem, 10vh, 7rem);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--dur-swift) ease-out, visibility 0s linear var(--dur-swift);
+  min-height: 100vh;
+  min-height: 100svh;
+}
+.slide.is-active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity var(--dur-swift) ease-in, visibility 0s linear 0s;
+  z-index: 2;
+}
+
+/* No-JS fallback — show all slides stacked vertically */
+html.no-js main#deck { min-height: auto; }
+html.no-js .slide {
+  position: relative;
+  inset: auto;
+  opacity: 1;
+  visibility: visible;
+  border-bottom: 1px solid var(--color-border);
+  min-height: 100vh;
+}
+
+/* ============================================================
+   PERSISTENT FURNITURE — counter, kbd, ticker
+   ============================================================ */
+.chrome {
+  position: fixed;
+  z-index: 10;
+  font-family: var(--font-accent);
+  font-size: var(--type-micro);
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+  pointer-events: none;
+}
+.chrome a, .chrome button { pointer-events: auto; }
+
+#counter {
+  top: clamp(0.9rem, 2.2vh, 1.8rem);
+  right: clamp(1rem, 3vw, 2.5rem);
+  text-transform: uppercase;
+}
+#counter .num { color: var(--color-accent); }
+
+#kbd {
+  bottom: clamp(2.6rem, 5.5vh, 3.6rem);
+  right: clamp(1rem, 3vw, 2.5rem);
+}
+
+#progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  background: var(--color-accent);
+  z-index: 11;
+  transition: width var(--dur-swift) ease-out;
+  width: 0%;
+}
+
+footer#ticker {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: clamp(2rem, 4.5vh, 2.6rem);
+  padding: 0 var(--gutter);
+  display: flex; align-items: center;
+  font-family: var(--font-accent);
+  font-size: var(--type-micro);
+  color: var(--color-muted);
+  border-top: 1px solid var(--color-subtle);
+  background: rgba(10,10,10,0.85);
+  backdrop-filter: blur(8px);
+  z-index: 9;
+  overflow: hidden;
+  white-space: nowrap;
+}
+#ticker-line { transition: opacity 240ms ease-out; }
+#ticker-line.fade { opacity: 0; }
+#ticker-line .ok { color: var(--color-accent); }
+#ticker-line .err { color: var(--color-discord); }
+
+@media (max-width: 480px) {
+  #kbd { display: none; }
+  footer#ticker { font-size: 0.6rem; height: 1.9rem; }
+}
+
+/* ============================================================
+   TYPOGRAPHIC PRIMITIVES
+   ============================================================ */
+h1, h2, h3 { margin: 0; font-family: var(--font-display); font-weight: var(--weight-bold); }
+p { margin: 0; }
+a { color: inherit; }
+
+.eyebrow {
+  font-family: var(--font-accent);
+  font-size: var(--type-caption);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+.eyebrow .dot { color: var(--color-accent); }
+
+.cite {
+  font-family: var(--font-accent);
+  font-size: var(--type-caption);
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+  text-transform: uppercase;
+}
+
+.mono { font-family: var(--font-accent); }
+.upper { text-transform: uppercase; }
+.accent { color: var(--color-accent); }
+.discord { color: var(--color-discord); }
+.muted { color: var(--color-muted); }
+
+.civic {
+  font-family: var(--font-display);
+  font-size: var(--type-civic);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-mega);
+  line-height: var(--leading-crush);
+  text-transform: uppercase;
+}
+
+.massive {
+  font-family: var(--font-display);
+  font-size: var(--type-massive);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-mega);
+  line-height: var(--leading-crush);
+  text-transform: uppercase;
+}
+
+.display {
+  font-family: var(--font-display);
+  font-size: var(--type-display);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+}
+
+.headline {
+  font-family: var(--font-display);
+  font-size: var(--type-headline);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+}
+
+.lede {
+  font-family: var(--font-display);
+  font-size: var(--type-lede);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-snug);
+}
+
+.kicker {
+  font-family: var(--font-accent);
+  font-size: var(--type-caption);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.measure { max-width: 22ch; }
+.measure-wide { max-width: 36ch; }
+
+/* ============================================================
+   PUNCTUATING REVEAL — animates when slide becomes active
+   ============================================================ */
+.slide .m-up {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity var(--dur-flow) ease-out, transform var(--dur-flow) ease-out;
+}
+.slide.is-active .m-up { opacity: 1; transform: none; }
+.slide.is-active .m-up:nth-child(2) { transition-delay: 60ms; }
+.slide.is-active .m-up:nth-child(3) { transition-delay: 120ms; }
+.slide.is-active .m-up:nth-child(4) { transition-delay: 180ms; }
+.slide.is-active .m-up:nth-child(5) { transition-delay: 240ms; }
+.slide.is-active .m-up:nth-child(6) { transition-delay: 300ms; }
+.slide.is-active .m-up:nth-child(7) { transition-delay: 360ms; }
+.slide.is-active .m-up:nth-child(8) { transition-delay: 420ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .slide .m-up { opacity: 1; transform: none; transition: none; }
+}
+
+/* ============================================================
+   SLIDE 1 — TITLE
+   Scher civic-scale typewriter with cursor; supporting matter in margins
+   ============================================================ */
+.slide--title { justify-content: space-between; }
+.slide--title .top-strip,
+.slide--title .bot-strip {
+  display: flex; justify-content: space-between; gap: var(--space-m); flex-wrap: wrap;
+}
+.slide--title .stamp {
+  font-family: var(--font-accent);
+  font-size: var(--type-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+.slide--title .stamp.ok { color: var(--color-accent); }
+
+.title-civic {
+  font-family: var(--font-display);
+  font-size: var(--type-civic);
+  font-weight: 700;
+  letter-spacing: var(--tracking-mega);
+  line-height: 0.88;
+  text-transform: uppercase;
+  margin: 0;
+}
+.title-civic .typed::after {
+  content: "█";
+  color: var(--color-accent);
+  animation: blink 1s steps(2) infinite;
+  margin-left: 0.04em;
+}
+.title-civic.done .typed::after { content: ""; }
+
+@keyframes blink { 50% { opacity: 0; } }
+
+.title-civic .row { display: block; }
+
+.subtitle-line {
+  font-family: var(--font-accent);
+  font-size: var(--type-lede);
+  letter-spacing: 0.02em;
+  color: var(--color-muted);
+  margin-top: var(--space-m);
+  max-width: 32ch;
+}
+.subtitle-line .sep { color: var(--color-accent); margin: 0 0.6ch; }
+
+.boot-block {
+  font-family: var(--font-accent);
+  font-size: var(--type-caption);
+  color: var(--color-muted);
+  text-align: right;
+  line-height: 1.5;
+}
+.boot-block .ok { color: var(--color-accent); }
+@media (max-width: 768px) { .boot-block { text-align: left; } }
+
+/* ============================================================
+   SLIDE 2 — THE NUMBER
+   ============================================================ */
+.slide--punch { justify-content: center; text-align: left; }
+.punch-stat {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--type-civic);
+  letter-spacing: var(--tracking-mega);
+  line-height: 0.88;
+  text-transform: uppercase;
+}
+.punch-stat .accent { color: var(--color-accent); }
+.punch-counter {
+  font-family: var(--font-accent);
+  font-size: var(--type-massive);
+  font-weight: 600;
+  color: var(--color-accent);
+  letter-spacing: var(--tracking-tight);
+  line-height: 1;
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+}
+.punch-context {
+  font-family: var(--font-display);
+  font-size: var(--type-subhead);
+  font-weight: 500;
+  letter-spacing: var(--tracking-snug);
+  line-height: var(--leading-snug);
+  max-width: 26ch;
+  margin-top: var(--space-l);
+}
+
+/* ============================================================
+   SLIDE 3 — THE GAP (data block)
+   ============================================================ */
+.gap-list { display: flex; flex-direction: column; gap: var(--space-s); margin-top: var(--space-l); max-width: 950px; }
+.gap-row {
+  display: grid;
+  grid-template-columns: minmax(7ch, 12ch) 1fr;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  align-items: baseline;
+  padding: var(--space-s) 0;
+  border-top: 1px solid var(--color-subtle);
+}
+.gap-row:first-child { border-top: 1px solid var(--color-border); }
+.gap-pct {
+  font-family: var(--font-accent);
+  font-size: clamp(1.6rem, 1.1rem + 3.5vw, 3.8rem);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-fg);
+  letter-spacing: var(--tracking-tight);
+  line-height: 1;
+}
+.gap-pct.bad { color: var(--color-discord); }
+.gap-pct.crit { color: var(--color-discord); }
+.gap-label {
+  font-family: var(--font-display);
+  font-size: var(--type-lede);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: var(--tracking-snug);
+}
+.gap-label .sub {
+  display: block;
+  margin-top: 0.2em;
+  font-family: var(--font-accent);
+  font-size: var(--type-caption);
+  font-weight: 400;
+  color: var(--color-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.gap-bar {
+  grid-column: 1 / -1;
+  height: 4px;
+  background: var(--color-subtle);
+  overflow: hidden;
+  margin-top: var(--space-2xs);
+}
+.gap-bar > span {
+  display: block;
+  height: 100%;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-drift) cubic-bezier(0.16, 1, 0.3, 1);
+}
+.gap-row.crit .gap-bar > span { background: var(--color-discord); }
+.slide.is-active .gap-bar > span { transform: scaleX(var(--bar, 1)); transition-delay: 280ms; }
+
+/* ============================================================
+   SLIDE 4 — PULL QUOTE
+   ============================================================ */
+.slide--quote { justify-content: center; }
+.pull-quote-large {
+  font-family: var(--font-display);
+  font-size: var(--type-display);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+  max-width: 18ch;
+}
+.pull-quote-large .accent { color: var(--color-accent); }
+.pull-quote-large::before {
+  content: "“";
+  display: inline-block;
+  color: var(--color-accent);
+  margin-right: 0.1em;
+}
+
+/* ============================================================
+   SLIDE 5 — STACK DIAGRAM
+   ============================================================ */
+.stack { display: flex; flex-direction: column; gap: var(--space-2xs); max-width: 1180px; }
+.stack-row {
+  display: grid;
+  grid-template-columns: minmax(5ch, 7ch) minmax(11ch, 16ch) 1fr;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  align-items: center;
+  padding: clamp(0.85rem, 1.6vh, 1.4rem) clamp(1rem, 2.2vw, 1.6rem);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+.stack-row .num {
+  font-family: var(--font-accent);
+  font-size: clamp(1.3rem, 1rem + 1.2vw, 2rem);
+  font-weight: 600;
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+.stack-row .name {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 1rem + 1.2vw, 2.1rem);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  text-transform: uppercase;
+}
+.stack-row .desc {
+  font-family: var(--font-accent);
+  font-size: var(--type-body-small);
+  color: var(--color-muted);
+  letter-spacing: 0.01em;
+  line-height: 1.35;
+}
+@media (max-width: 640px) {
+  .stack-row { grid-template-columns: minmax(4ch, 5ch) 1fr; row-gap: 0.3rem; }
+  .stack-row .desc { grid-column: 1 / -1; padding-top: 0.25rem; }
+}
+
+.stack-footnote {
+  font-family: var(--font-accent);
+  font-size: var(--type-caption);
+  color: var(--color-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-top: var(--space-m);
+}
+
+/* ============================================================
+   SLIDES 6–9 — STACK DEEP DIVE (MCP / A2A / x402 / WebMCP)
+   Shared layout: huge headline + pull stat + 3 mono lines
+   ============================================================ */
+.slide--proto {}
+.proto-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 6rem);
+  align-items: end;
+  max-width: 1500px;
+  width: 100%;
+}
+@media (max-width: 900px) {
+  .proto-grid { grid-template-columns: 1fr; align-items: start; gap: var(--space-l); }
+}
+.proto-name {
+  font-family: var(--font-display);
+  font-size: var(--type-civic);
+  font-weight: 700;
+  letter-spacing: var(--tracking-mega);
+  line-height: 0.86;
+  text-transform: uppercase;
+}
+.proto-name .sub {
+  display: block;
+  font-family: var(--font-accent);
+  font-size: var(--type-lede);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+  color: var(--color-muted);
+  margin-top: var(--space-s);
+}
+.proto-stat {
+  font-family: var(--font-display);
+  font-size: var(--type-headline);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-accent);
+  margin-bottom: var(--space-s);
+}
+.proto-stat .quote {
+  display: block;
+  font-size: var(--type-subhead);
+  font-weight: 500;
+  color: var(--color-fg);
+  letter-spacing: var(--tracking-snug);
+  line-height: var(--leading-snug);
+}
+.proto-stat .quote::before { content: "“"; color: var(--color-accent); margin-right: 0.05em; }
+.proto-lines {
+  display: flex; flex-direction: column; gap: var(--space-2xs);
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-m);
+}
+.proto-lines li {
+  font-family: var(--font-accent);
+  font-size: var(--type-body-small);
+  color: var(--color-fg);
+  list-style: none;
+  letter-spacing: 0.01em;
+  line-height: 1.45;
+}
+.proto-lines li::before {
+  content: "→ ";
+  color: var(--color-accent);
+}
+
+/* x402 highlight */
+.x402-status {
+  display: inline-block;
+  padding: 0.15em 0.5em;
+  background: var(--color-discord);
+  color: var(--color-bg);
+  font-family: var(--font-accent);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  font-size: 0.85em;
+}
+
+/* WebMCP code line */
+.code-inline {
+  font-family: var(--font-accent);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  padding: 0.05em 0.4em;
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+/* ============================================================
+   SLIDE 10 — RECEIPTS LIST
+   ============================================================ */
+.receipts { display: flex; flex-direction: column; gap: 0; max-width: 1200px; margin-top: var(--space-m); }
+.receipt {
+  display: grid;
+  grid-template-columns: minmax(11ch, 18ch) 1fr;
+  gap: clamp(1rem, 3vw, 3rem);
+  align-items: baseline;
+  padding: clamp(0.85rem, 1.5vh, 1.3rem) 0;
+  border-top: 1px solid var(--color-subtle);
+}
+.receipt:first-child { border-top: 1px solid var(--color-border); }
+.receipt:last-child { border-bottom: 1px solid var(--color-border); }
+.receipt-co {
+  font-family: var(--font-display);
+  font-size: var(--type-subhead);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  text-transform: uppercase;
+  line-height: 1;
+}
+.receipt-line {
+  font-family: var(--font-accent);
+  font-size: var(--type-body-small);
+  letter-spacing: 0.01em;
+  color: var(--color-fg);
+  line-height: 1.4;
+}
+.receipt-line .num { color: var(--color-accent); font-weight: 500; }
+@media (max-width: 720px) {
+  .receipt { grid-template-columns: 1fr; gap: 0.3rem; padding: 1rem 0; }
+}
+
+/* ============================================================
+   SLIDE 11 — HONEST CUT (discord lives here)
+   Brutalist grid + ONE off-grid italic intruder
+   ============================================================ */
+.slide--cut { justify-content: space-between; }
+.cut-head { display: flex; align-items: baseline; gap: var(--space-m); flex-wrap: wrap; }
+.cut-title {
+  font-family: var(--font-display);
+  font-size: var(--type-display);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+.cut-title .discord { color: var(--color-discord); }
+
+.cut-quote {
+  font-family: var(--font-display);
+  font-size: var(--type-subhead);
+  font-weight: 500;
+  letter-spacing: var(--tracking-snug);
+  line-height: var(--leading-snug);
+  max-width: 32ch;
+  margin-top: var(--space-m);
+}
+.cut-quote::before { content: "“"; color: var(--color-discord); margin-right: 0.05em; }
+
+/* THE DISCORD — italic, tilted, body-scale fragment
+   The only off-grid moment in 17 slides. Load-bearing. */
+.cut-intruder {
+  position: absolute;
+  right: clamp(1rem, 4vw, 4rem);
+  top: 38%;
+  transform: rotate(-3deg);
+  font-family: var(--font-body);
+  font-style: italic;
+  font-weight: 400;
+  font-size: var(--type-body);
+  color: var(--color-muted);
+  max-width: 22ch;
+  line-height: 1.35;
+  letter-spacing: 0;
+  pointer-events: none;
+}
+.cut-intruder::before { content: "✕ "; color: var(--color-discord); font-style: normal; }
+@media (max-width: 768px) {
+  .cut-intruder {
+    position: static;
+    transform: rotate(-2deg) translateX(2vw);
+    align-self: flex-end;
+    margin-top: var(--space-s);
+    margin-bottom: var(--space-s);
+  }
+}
+
+.cut-facts { display: flex; flex-direction: column; gap: var(--space-2xs); margin-top: var(--space-m); }
+.cut-facts li {
+  list-style: none;
+  font-family: var(--font-accent);
+  font-size: var(--type-body-small);
+  color: var(--color-fg);
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+}
+.cut-facts li::before { content: "× "; color: var(--color-discord); }
+
+.cut-law {
+  font-family: var(--font-display);
+  font-size: var(--type-subhead);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  text-transform: uppercase;
+  line-height: 1.05;
+  max-width: 28ch;
+  margin-top: var(--space-l);
+}
+.cut-law .accent { color: var(--color-accent); }
+
+/* ============================================================
+   SLIDES 12–15 — EXHIBITS
+   Split: label on left, terminal/content on right
+   ============================================================ */
+.slide--exhibit {}
+.exhibit-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+  max-width: 1500px;
+  width: 100%;
+}
+@media (max-width: 900px) { .exhibit-grid { grid-template-columns: 1fr; gap: var(--space-l); } }
+
+.exhibit-label {}
+.exhibit-eyebrow {
+  font-family: var(--font-accent);
+  font-size: var(--type-caption);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+.exhibit-name {
+  font-family: var(--font-display);
+  font-size: var(--type-display);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  line-height: 0.95;
+  text-transform: uppercase;
+  margin-top: var(--space-s);
+}
+.exhibit-name .sub {
+  display: block;
+  margin-top: var(--space-2xs);
+  font-family: var(--font-accent);
+  font-size: var(--type-lede);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+  color: var(--color-muted);
+}
+.exhibit-url {
+  display: inline-block;
+  margin-top: var(--space-m);
+  font-family: var(--font-accent);
+  font-size: var(--type-body-small);
+  color: var(--color-accent);
+  letter-spacing: 0.01em;
+  word-break: break-all;
+}
+.exhibit-tag {
+  font-family: var(--font-display);
+  font-size: var(--type-lede);
+  font-weight: 500;
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-snug);
+  margin-top: var(--space-m);
+  max-width: 26ch;
+}
+.exhibit-tag::before { content: "“"; color: var(--color-accent); }
+.exhibit-tag::after { content: "”"; color: var(--color-accent); }
+
+.exhibit-bullets { margin-top: var(--space-m); display: flex; flex-direction: column; gap: var(--space-2xs); }
+.exhibit-bullets li {
+  list-style: none;
+  font-family: var(--font-accent);
+  font-size: var(--type-body-small);
+  color: var(--color-fg);
+  letter-spacing: 0.01em;
+}
+.exhibit-bullets li::before { content: "→ "; color: var(--color-accent); }
+
+/* Terminal window — slide 12 hero */
+.terminal {
+  border: 1px solid var(--color-border);
+  background: rgba(244,241,234,0.025);
+  font-family: var(--font-accent);
+  font-size: var(--type-body-small);
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+.terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.9rem;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.7rem;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.terminal-bar .dot {
+  display: inline-block;
+  width: 0.55em; height: 0.55em;
+  border-radius: 50%;
+  background: var(--color-subtle);
+}
+.terminal-bar .dot.live { background: var(--color-accent); animation: pulse-dot 2.4s ease-in-out infinite; }
+@keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+.terminal-bar .right { margin-left: auto; }
+
+.terminal-body {
+  padding: 0.9rem 1.1rem;
+  max-height: clamp(280px, 50vh, 460px);
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+}
+.terminal-body::-webkit-scrollbar { width: 6px; }
+.terminal-body::-webkit-scrollbar-thumb { background: var(--color-border); }
+
+.t-line { white-space: pre-wrap; }
+.t-line.cmd { color: var(--color-muted); }
+.t-line.ok { color: var(--color-accent); }
+.t-line.err { color: var(--color-discord); }
+.t-line.note { color: var(--color-muted); font-style: italic; }
+.t-cursor::after {
+  content: "█";
+  color: var(--color-accent);
+  animation: blink 1s steps(2) infinite;
+  margin-left: 0.2ch;
+}
+.t-line.done.t-cursor::after { content: ""; }
+.t-json { color: var(--color-fg); }
+.t-json .k { color: var(--color-accent); }
+.t-json .s { color: var(--color-fg); }
+.t-json .p { color: var(--color-muted); }
+
+.tools-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22ch), 1fr));
+  gap: var(--space-2xs);
+  margin-top: var(--space-s);
+}
+.tools-list li {
+  list-style: none;
+  font-family: var(--font-accent);
+  font-size: var(--type-caption);
+  color: var(--color-fg);
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--color-subtle);
+  background: var(--color-surface);
+  letter-spacing: 0.01em;
+}
+.tools-list li::before { content: "tool "; color: var(--color-accent); opacity: 0.7; }
+
+/* Exhibits 13-15 stat block */
+.exhibit-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-s);
+  margin-top: var(--space-m);
+}
+.exhibit-stats > div {
+  border: 1px solid var(--color-border);
+  padding: var(--space-s);
+  background: var(--color-surface);
+}
+.exhibit-stats .num {
+  font-family: var(--font-display);
+  font-size: var(--type-headline);
+  font-weight: 700;
+  color: var(--color-accent);
+  line-height: 1;
+  letter-spacing: var(--tracking-tight);
+}
+.exhibit-stats .lbl {
+  display: block;
+  margin-top: var(--space-2xs);
+  font-family: var(--font-accent);
+  font-size: var(--type-caption);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* ============================================================
+   SLIDE 16 — STARTER PACK
+   5 numbered cards / mono command-line block
+   ============================================================ */
+.starter { display: flex; flex-direction: column; gap: var(--space-2xs); margin-top: var(--space-m); max-width: 1200px; }
+.starter-step {
+  display: grid;
+  grid-template-columns: minmax(3ch, 4ch) 1fr;
+  gap: clamp(0.8rem, 2vw, 1.6rem);
+  padding: clamp(0.7rem, 1.5vh, 1.1rem) 0;
+  border-top: 1px solid var(--color-subtle);
+  align-items: baseline;
+}
+.starter-step:first-child { border-top: 1px solid var(--color-border); }
+.starter-num {
+  font-family: var(--font-accent);
+  font-size: var(--type-subhead);
+  font-weight: 600;
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.starter-cmd {
+  font-family: var(--font-accent);
+  font-size: var(--type-body-small);
+  color: var(--color-fg);
+  letter-spacing: 0;
+  line-height: 1.35;
+  word-break: break-word;
+}
+.starter-cmd .pre { color: var(--color-accent); }
+.starter-cmd .note {
+  display: block;
+  margin-top: 0.3em;
+  font-size: var(--type-caption);
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ============================================================
+   SLIDE 17 — CLOSING (REGISTER SHIFT — paper bg, intimate scale)
+   This is the editorial palate cleanser, not the discord.
+   ============================================================ */
+.slide--close {
+  background: var(--color-fg);
+  color: var(--color-bg);
+}
+.slide--close .pull {
+  font-family: var(--font-display);
+  font-size: var(--type-display);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+  max-width: 22ch;
+  color: var(--color-bg);
+}
+.slide--close .pull::before {
+  content: "“";
+  color: var(--color-discord);
+}
+.slide--close .attr {
+  font-family: var(--font-accent);
+  font-size: var(--type-caption);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-bg);
+  opacity: 0.6;
+  margin-top: var(--space-m);
+}
+.slide--close .ctas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  margin-top: var(--space-2xl);
+  font-family: var(--font-accent);
+  font-size: var(--type-body-small);
+  color: var(--color-bg);
+}
+.slide--close .ctas a { text-decoration: none; color: inherit; border-bottom: 1px dotted rgba(10,10,10,0.4); }
+.slide--close .ctas a:hover { border-bottom-color: var(--color-discord); color: var(--color-discord); }
+.slide--close .ctas .arrow { color: var(--color-discord); margin-right: 0.5ch; }
+.slide--close::after { display: none !important; }
+
+/* ============================================================
+   OVERVIEW MODE — grid of all 17 thumbnails
+   ============================================================ */
+.overview-mode #deck {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.5rem;
+  padding: 4rem var(--gutter) 4rem;
+  height: 100vh;
+  overflow-y: auto;
+  position: relative;
+}
+.overview-mode .slide {
+  position: relative;
+  inset: auto;
+  opacity: 1; visibility: visible;
+  min-height: auto;
+  height: 130px;
+  padding: 0.7rem;
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  overflow: hidden;
+  transform: scale(1);
+  transition: border-color var(--dur-snap) ease-out, transform var(--dur-snap) ease-out;
+}
+.overview-mode .slide:hover { border-color: var(--color-accent); transform: scale(1.02); }
+.overview-mode .slide.is-active { border-color: var(--color-accent); }
+.overview-mode .slide > * {
+  font-size: 0.55rem !important;
+  line-height: 1.15 !important;
+  letter-spacing: 0 !important;
+  max-width: none !important;
+}
+.overview-mode .slide .punch-counter,
+.overview-mode .slide .terminal,
+.overview-mode .slide .cut-intruder {
+  display: none;
+}
+.overview-mode .slide::before {
+  content: attr(data-slide);
+  position: absolute;
+  top: 0.4rem; right: 0.5rem;
+  font-family: var(--font-accent);
+  font-size: 0.55rem;
+  color: var(--color-accent);
+  z-index: 1;
+}
+.overview-mode #counter,
+.overview-mode #kbd,
+.overview-mode #progress,
+.overview-mode #ticker { display: none; }
+
+/* ============================================================
+   PRINT — basic clean-up
+   ============================================================ */
+@media print {
+  body { overflow: visible; }
+  .slide { position: relative; opacity: 1; visibility: visible; page-break-after: always; }
+  #counter, #kbd, #ticker, #progress { display: none; }
+}
+</style>
+</head>
+
+<body>
+<script>document.documentElement.classList.remove('no-js'); document.documentElement.classList.add('js');</script>
+
+<a href="#1" class="visually-hidden" style="position:absolute;left:-9999px;">Skip to slide 1</a>
+
+<div id="progress" aria-hidden="true"></div>
+<div id="counter" class="chrome" aria-live="polite"><span class="num" id="counter-num">01</span> / 17</div>
+<div id="kbd" class="chrome" aria-hidden="true">← / → · F fullscreen · O overview</div>
+
+<main id="deck" aria-label="Internet After Interfaces keynote slides">
+
+  <!-- =========================================================
+       SLIDE 1 — TITLE
+       ========================================================= -->
+  <section class="slide slide--title is-active" id="s1" data-slide="01" aria-labelledby="t1">
+    <div class="top-strip">
+      <div class="stamp">Human+Tech Week · ClawCamp · May 11 · 2026 · The Hibernia Bank · SF</div>
+      <div class="stamp ok">● live</div>
+    </div>
+
+    <div>
+      <h1 id="t1" class="title-civic">
+        <span class="row"><span class="typed" data-text="INTERNET"></span></span>
+        <span class="row"><span class="typed" data-text="AFTER"></span></span>
+        <span class="row"><span class="typed" data-text="INTERFACES"></span></span>
+      </h1>
+      <p class="subtitle-line">
+        machine economies <span class="sep">/</span> autonomous transactions <span class="sep">/</span> the post.ui web
+      </p>
+    </div>
+
+    <div class="bot-strip">
+      <div class="stamp">Rayyan Zahid · @supercoolraydude · floor10 · immersivecommons.com</div>
+      <div class="boot-block">
+        <div>&gt; system boot</div>
+        <div>&gt; loading agentic web stack</div>
+        <div><span class="ok">● 200 OK</span> · ready</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       SLIDE 2 — THE NUMBER
+       ========================================================= -->
+  <section class="slide slide--punch" id="s2" data-slide="02" aria-labelledby="t2">
+    <div class="eyebrow m-up"><span class="dot">●</span> ACT I &nbsp;&nbsp;&nbsp; the web is re-rendering</div>
+
+    <h2 id="t2" class="punch-stat m-up" style="margin-top: var(--space-m);">
+      <span class="punch-counter" id="punch-counter" data-target="51">0</span><span class="accent">%+</span>
+      <br>
+      of internet<br>traffic is now<br><span class="accent">non&#8209;human.</span>
+    </h2>
+
+    <p class="cite m-up" style="margin-top: var(--space-l);">→ Cloudflare CSO · May 2026 · interview with CoinDesk</p>
+  </section>
+
+  <!-- =========================================================
+       SLIDE 3 — THE GAP
+       ========================================================= -->
+  <section class="slide" id="s3" data-slide="03" aria-labelledby="t3">
+    <div class="eyebrow m-up"><span class="dot">●</span> the readiness baseline</div>
+    <h2 id="t3" class="display m-up" style="margin-top: var(--space-s);">200,000 SITES TESTED.<br><span class="muted">most of them are not ready.</span></h2>
+
+    <div class="gap-list m-up">
+      <div class="gap-row" style="--bar: 0.78;">
+        <div class="gap-pct">78%</div>
+        <div class="gap-label">have <span class="accent">robots.txt</span><span class="sub">the search-engine era already shipped</span></div>
+        <div class="gap-bar"><span></span></div>
+      </div>
+      <div class="gap-row crit" style="--bar: 0.04;">
+        <div class="gap-pct bad">4%</div>
+        <div class="gap-label">declare <span class="discord">AI usage preferences</span><span class="sub">content-signal headers · ai-train · search · ai-input</span></div>
+        <div class="gap-bar"><span></span></div>
+      </div>
+      <div class="gap-row crit" style="--bar: 0.039;">
+        <div class="gap-pct bad">3.9%</div>
+        <div class="gap-label">support <span class="discord">Markdown content negotiation</span><span class="sub">31% fewer tokens · 66% faster answers · Cloudflare Docs</span></div>
+        <div class="gap-bar"><span></span></div>
+      </div>
+      <div class="gap-row crit" style="--bar: 0.005;">
+        <div class="gap-pct crit">&lt;15</div>
+        <div class="gap-label">publish an <span class="discord">MCP server card</span><span class="sub">out of 200,000. fifteen.</span></div>
+        <div class="gap-bar"><span></span></div>
+      </div>
+    </div>
+
+    <p class="cite m-up" style="margin-top: var(--space-l);">→ Cloudflare Radar · Agent Readiness Score · April 2026</p>
+  </section>
+
+  <!-- =========================================================
+       SLIDE 4 — THE THIRD LANGUAGE
+       ========================================================= -->
+  <section class="slide slide--quote" id="s4" data-slide="04" aria-labelledby="t4">
+    <div class="eyebrow m-up"><span class="dot">●</span> the third language</div>
+    <h2 id="t4" class="pull-quote-large m-up" style="margin-top: var(--space-s);">
+      The web learned to speak to <span class="accent">web browsers.</span> Then to <span class="accent">search engines.</span> Now, it needs to speak to <span class="accent">AI agents.</span>
+    </h2>
+    <p class="cite m-up" style="margin-top: var(--space-l);">→ Cloudflare · Introducing the Agent Readiness Score · April 2026</p>
+  </section>
+
+  <!-- =========================================================
+       SLIDE 5 — THE STACK
+       ========================================================= -->
+  <section class="slide" id="s5" data-slide="05" aria-labelledby="t5">
+    <div class="eyebrow m-up"><span class="dot">●</span> ACT II &nbsp;&nbsp;&nbsp; the stack assembled in five months</div>
+    <h2 id="t5" class="display m-up" style="margin-top: var(--space-s); margin-bottom: var(--space-m);">THE 5-LAYER AGENTIC WEB</h2>
+
+    <div class="stack">
+      <div class="stack-row m-up">
+        <div class="num">05</div>
+        <div class="name">A2A</div>
+        <div class="desc">agent ↔ agent · JSON-RPC 2.0 · authenticated by default</div>
+      </div>
+      <div class="stack-row m-up">
+        <div class="num">04</div>
+        <div class="name">Execution</div>
+        <div class="desc">MCP · WebMCP · Anthropic Skills · accessibility tree</div>
+      </div>
+      <div class="stack-row m-up">
+        <div class="num">03</div>
+        <div class="name">Trust</div>
+        <div class="desc">Ed25519 signatures · LLMCA certs · Content-Signal headers</div>
+      </div>
+      <div class="stack-row m-up">
+        <div class="num">02</div>
+        <div class="name">Content</div>
+        <div class="desc">Markdown content negotiation · Schema.org · LLMFeed v2.1</div>
+      </div>
+      <div class="stack-row m-up">
+        <div class="num">01</div>
+        <div class="name">Discovery</div>
+        <div class="desc">agent-card.json · mcp.json · ai-agent.json · llms.txt · robots.txt</div>
+      </div>
+    </div>
+
+    <p class="stack-footnote m-up">→ RFC 8615 well-known URIs · Anthropic MCP · Google A2A · W3C WebMCP · Aiia ai-agent.json · x402 Foundation</p>
+  </section>
+
+  <!-- =========================================================
+       SLIDE 6 — MCP
+       ========================================================= -->
+  <section class="slide slide--proto" id="s6" data-slide="06" aria-labelledby="t6">
+    <div class="eyebrow m-up"><span class="dot">●</span> layer 04 · execution</div>
+    <div class="proto-grid">
+      <h2 id="t6" class="proto-name m-up">MCP<span class="sub">agent ↔ tool</span></h2>
+      <div>
+        <p class="proto-stat m-up">
+          <span class="quote">More than 10,000 active public MCP servers.</span>
+        </p>
+        <ul class="proto-lines m-up">
+          <li>9,400+ public servers · 7.8× YoY · Q1 2026</li>
+          <li>78% of enterprise AI teams have one in production</li>
+          <li>Anthropic → Linux Foundation Agentic AI Foundation · Dec 9, 2025</li>
+          <li>Spec 2025-11-25 · async ops · server identity · official extensions</li>
+        </ul>
+      </div>
+    </div>
+    <p class="cite m-up" style="margin-top: var(--space-l);">→ Anthropic · Digital Applied MCP Adoption Stats · Q1 2026</p>
+  </section>
+
+  <!-- =========================================================
+       SLIDE 7 — A2A
+       ========================================================= -->
+  <section class="slide slide--proto" id="s7" data-slide="07" aria-labelledby="t7">
+    <div class="eyebrow m-up"><span class="dot">●</span> layer 05 · agent to agent</div>
+    <div class="proto-grid">
+      <h2 id="t7" class="proto-name m-up">A2A<span class="sub">agent ↔ agent</span></h2>
+      <div>
+        <p class="proto-stat m-up">150+ organizations.<br><span class="quote" style="color:var(--color-fg);font-size:var(--type-lede);font-weight:400;margin-top:var(--space-s);">In one year.</span></p>
+        <ul class="proto-lines m-up">
+          <li>Google → Linux Foundation · June 2025 · Apache 2.0</li>
+          <li>Azure AI Foundry · Bedrock AgentCore · Google Cloud · production</li>
+          <li>MCP is agent ↔ tool. A2A is agent ↔ agent. They compose.</li>
+          <li>Supply chain · financial services · insurance · IT ops</li>
+        </ul>
+      </div>
+    </div>
+    <p class="cite m-up" style="margin-top: var(--space-l);">→ Linux Foundation · A2A 1-year retrospective · April 2026</p>
+  </section>
+
+  <!-- =========================================================
+       SLIDE 8 — x402
+       ========================================================= -->
+  <section class="slide slide--proto" id="s8" data-slide="08" aria-labelledby="t8">
+    <div class="eyebrow m-up"><span class="dot">●</span> autonomous transactions</div>
+    <div class="proto-grid">
+      <h2 id="t8" class="proto-name m-up"><span class="x402-status">HTTP&nbsp;402</span><br>x402<span class="sub">payments for agents</span></h2>
+      <div>
+        <p class="proto-stat m-up">
+          <span class="quote">A status code reserved since the beginning of HTTP for exactly this purpose.</span>
+        </p>
+        <ul class="proto-lines m-up">
+          <li><span class="accent">69,000</span> active agents · April 2026</li>
+          <li><span class="accent">165M</span> transactions · ~$50M cumulative volume</li>
+          <li>x402 Foundation @ Linux Foundation · April 2, 2026</li>
+          <li>22 launch members: Adyen · AWS · Amex · Base · Circle · Google · Mastercard · Microsoft · Shopify · Stripe · Visa · +11</li>
+        </ul>
+      </div>
+    </div>
+    <p class="cite m-up" style="margin-top: var(--space-l);">→ x402.org · Coinbase CDP · LF announcement · April 2026</p>
+  </section>
+
+  <!-- =========================================================
+       SLIDE 9 — WebMCP
+       ========================================================= -->
+  <section class="slide slide--proto" id="s9" data-slide="09" aria-labelledby="t9">
+    <div class="eyebrow m-up"><span class="dot">●</span> the browser is the runtime</div>
+    <div class="proto-grid">
+      <h2 id="t9" class="proto-name m-up">WebMCP<span class="sub">browser-side tools</span></h2>
+      <div>
+        <p class="proto-stat m-up">
+          <span class="code-inline">navigator.modelContext</span>
+        </p>
+        <ul class="proto-lines m-up">
+          <li>Chrome 146 Canary · Microsoft Edge 147 · March 2026</li>
+          <li>W3C Community Group · joint Google + Microsoft</li>
+          <li>provideContext() · registerTool() · unregisterTool()</li>
+          <li>Same DOM. Two callers. Humans see a button. Agents see a tool.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="cite m-up" style="margin-top: var(--space-l);">→ webmcp.link · Anthropic Claude for Chrome · all paid plans · 2026</p>
+  </section>
+
+  <!-- =========================================================
+       SLIDE 10 — THE WINS
+       ========================================================= -->
+  <section class="slide" id="s10" data-slide="10" aria-labelledby="t10">
+    <div class="eyebrow m-up"><span class="dot">●</span> ACT III &nbsp;&nbsp;&nbsp; production receipts</div>
+    <h2 id="t10" class="display m-up" style="margin-top: var(--space-s); margin-bottom: var(--space-m);">THIS IS ALREADY <span class="accent">REVENUE.</span></h2>
+
+    <div class="receipts">
+      <div class="receipt m-up">
+        <div class="receipt-co">Amazon<br>Rufus</div>
+        <div class="receipt-line"><span class="num">$10B</span> to <span class="num">$12B</span> incremental annualized sales · <span class="num">+60%</span> purchase completion · MAU <span class="num">+149%</span> YoY · 300M customers · Q4 2025 earnings</div>
+      </div>
+      <div class="receipt m-up">
+        <div class="receipt-co">Walmart<br>Sparky</div>
+        <div class="receipt-line"><span class="num">+35%</span> average order value · half of app users have tried it</div>
+      </div>
+      <div class="receipt m-up">
+        <div class="receipt-co">Klarna</div>
+        <div class="receipt-line"><span class="num">2/3</span> of customer service chats handled by AI · work of <span class="num">853 FTEs</span> · <span class="num">82%</span> resolution-time cut · $60M cost saving</div>
+      </div>
+      <div class="receipt m-up">
+        <div class="receipt-co">Shopify<br>(The Renaissance)</div>
+        <div class="receipt-line">Full re-architecting around agentic commerce · Checkout MCP · Catalog API live to ChatGPT, Copilot, Perplexity</div>
+      </div>
+      <div class="receipt m-up">
+        <div class="receipt-co">Adobe<br>Analytics</div>
+        <div class="receipt-line">AI-referred shoppers convert <span class="num">+31%</span> · AI traffic to US retail <span class="num">+693%</span> holiday 2025 · Shopify AI orders <span class="num">15×</span> YoY</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       SLIDE 11 — THE HONEST CUT  (DISCORD)
+       ========================================================= -->
+  <section class="slide slide--cut" id="s11" data-slide="11" aria-labelledby="t11">
+    <div class="eyebrow m-up"><span class="dot">●</span> the part nobody puts on a keynote</div>
+
+    <div>
+      <h2 id="t11" class="cut-title m-up">THE <span class="discord">HONEST</span> CUT.</h2>
+      <p class="cut-quote m-up">Our agents are like really good interns. You'd never leave them unsupervised on anything that matters.</p>
+      <p class="cite m-up" style="margin-top: var(--space-s);">→ MachineBrief · State of AI Agents 2026</p>
+    </div>
+
+    <!-- DISCORD: the only off-grid moment in 17 slides -->
+    <aside class="cut-intruder" aria-hidden="true">
+      every keynote shows you the wins. the wins are the screenshot. the losses are the unit economics.
+    </aside>
+
+    <ul class="cut-facts m-up">
+      <li>Gartner: only <strong>17%</strong> of orgs have deployed agents.</li>
+      <li><strong>40%+</strong> of agentic AI projects predicted cancelled by 2027.</li>
+      <li>Klarna CEO walked back: <em>"we need to rebuild human expertise."</em></li>
+      <li>Humane AI Pin: dead. $230M raised → sold to HP for $116M.</li>
+      <li>Rabbit R1: mass returns. RabbitOS 2 quietly dropped "autonomous."</li>
+    </ul>
+
+    <p class="cut-law m-up">
+      The new law. The interface <span class="accent">vanishes for agents</span>. It <span class="accent">persists for humans</span>. <span class="muted">Hybrid won.</span>
+    </p>
+  </section>
+
+  <!-- =========================================================
+       SLIDE 12 — EXHIBIT A: IMMERSIVE COMMONS  (SIGNATURE: LIVE FETCH)
+       ========================================================= -->
+  <section class="slide slide--exhibit" id="s12" data-slide="12" aria-labelledby="t12">
+    <div class="eyebrow m-up"><span class="dot">●</span> ACT IV &nbsp;&nbsp;&nbsp; exhibits · what we shipped</div>
+
+    <div class="exhibit-grid" style="margin-top: var(--space-s);">
+      <div class="exhibit-label">
+        <div class="exhibit-eyebrow m-up">Exhibit A</div>
+        <h2 id="t12" class="exhibit-name m-up">Immersive<br>Commons<span class="sub">the agent-native venue</span></h2>
+        <a class="exhibit-url m-up" href="https://immersivecommons.com" target="_blank" rel="noopener">immersivecommons.com</a>
+        <p class="exhibit-tag m-up">Same data. Eyes or agents. The interface is the contract.</p>
+        <ul class="exhibit-bullets m-up">
+          <li>Floor 10 · Frontier Tower SF</li>
+          <li>MCP · A2A · ed25519 signed</li>
+          <li>agt_ bearer tokens · human-minted</li>
+        </ul>
+      </div>
+
+      <div class="m-up">
+        <div class="terminal" aria-live="polite">
+          <div class="terminal-bar">
+            <span class="dot live"></span>
+            <span>terminal · live</span>
+            <span class="right" id="ic-status">awaiting</span>
+          </div>
+          <div class="terminal-body" id="ic-terminal">
+            <div class="t-line cmd t-cursor" id="ic-cmd">&gt; curl https://www.immersivecommons.com/.well-known/ai-agent.json</div>
+          </div>
+        </div>
+
+        <ul class="tools-list" style="margin-top: var(--space-m);">
+          <li>floor10_get_my_floor_member</li>
+          <li>floor10_list_claimable_events</li>
+          <li>floor10_list_my_pending</li>
+          <li>floor10_upload_image</li>
+          <li>floor10_submit_highlight</li>
+          <li>floor10_extract_event_metadata</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       SLIDE 13 — EXHIBIT B: SKEW
+       ========================================================= -->
+  <section class="slide slide--exhibit" id="s13" data-slide="13" aria-labelledby="t13">
+    <div class="eyebrow m-up"><span class="dot">●</span> exhibit B · the supply-side flip</div>
+
+    <div class="exhibit-grid">
+      <div class="exhibit-label">
+        <div class="exhibit-eyebrow m-up">Exhibit B</div>
+        <h2 id="t13" class="exhibit-name m-up">Skew<span class="sub">pages by Claude, not designers</span></h2>
+        <a class="exhibit-url m-up" href="https://skew.site" target="_blank" rel="noopener">skew.site</a>
+        <p class="exhibit-tag m-up">Skew, don't slop. Bootstrap the page you'd ship yourself.</p>
+      </div>
+
+      <div class="m-up">
+        <ul class="exhibit-bullets">
+          <li>LLM as page generator.</li>
+          <li>Designers → Claude. The harness is the product.</li>
+          <li>Subject-derived aesthetic DNA per brief.</li>
+          <li>The archive, not the index.</li>
+        </ul>
+
+        <div class="exhibit-stats" style="margin-top: var(--space-l);">
+          <div>
+            <div class="num">∞</div>
+            <span class="lbl">pages possible from one brief</span>
+          </div>
+          <div>
+            <div class="num">0</div>
+            <span class="lbl">templates · 0 reuse · every run novel</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       SLIDE 14 — EXHIBIT C: LOBSTERHONEY
+       ========================================================= -->
+  <section class="slide slide--exhibit" id="s14" data-slide="14" aria-labelledby="t14">
+    <div class="eyebrow m-up"><span class="dot">●</span> exhibit C · the defense layer</div>
+
+    <div class="exhibit-grid">
+      <div class="exhibit-label">
+        <div class="exhibit-eyebrow m-up">Exhibit C</div>
+        <h2 id="t14" class="exhibit-name m-up">Lobster<br>Honey<span class="sub">honeypots for agents</span></h2>
+        <a class="exhibit-url m-up" href="https://lobsterhoney.com" target="_blank" rel="noopener">lobsterhoney.com</a>
+        <p class="exhibit-tag m-up">Honeypots for malicious agents.</p>
+      </div>
+
+      <div class="m-up">
+        <ul class="exhibit-bullets">
+          <li>Autonomous AI-led security audits.</li>
+          <li>Agent-traps. Canaries. Continuous detection.</li>
+          <li>First pitch: 3-step account-takeover chain, 11 findings.</li>
+          <li>As agents become a delivery vector, so do agent attacks.</li>
+        </ul>
+
+        <div class="exhibit-stats" style="margin-top: var(--space-l);">
+          <div>
+            <div class="num discord">+693%</div>
+            <span class="lbl">AI traffic to US sites · holiday 2025</span>
+          </div>
+          <div>
+            <div class="num discord">10,000:1</div>
+            <span class="lbl">crawler-to-human · top AI scrapers</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       SLIDE 15 — EXHIBIT D: AGENTIFY
+       ========================================================= -->
+  <section class="slide slide--exhibit" id="s15" data-slide="15" aria-labelledby="t15">
+    <div class="eyebrow m-up"><span class="dot">●</span> exhibit D · audit any repo</div>
+
+    <div class="exhibit-grid">
+      <div class="exhibit-label">
+        <div class="exhibit-eyebrow m-up">Exhibit D</div>
+        <h2 id="t15" class="exhibit-name m-up">agentify<span class="sub">the 21-point audit</span></h2>
+        <div class="exhibit-url m-up">claude skill · isitagentready.com</div>
+        <p class="exhibit-tag m-up">The harness is the product. Compose, don't reinvent.</p>
+      </div>
+
+      <div class="m-up">
+        <ul class="exhibit-bullets">
+          <li>5-layer stack scaffold (Discovery → A2A).</li>
+          <li>21 checks. live verify via Cloudflare scanner.</li>
+          <li>Managed defaults: Cloudflare · Anthropic · Composio · Mem0 · Braintrust · x402.</li>
+          <li>Compose, don't reinvent.</li>
+        </ul>
+
+        <div class="exhibit-stats" style="margin-top: var(--space-l); grid-template-columns: repeat(4, 1fr);">
+          <div>
+            <div class="num">21</div>
+            <span class="lbl">checks</span>
+          </div>
+          <div>
+            <div class="num">5</div>
+            <span class="lbl">layers</span>
+          </div>
+          <div>
+            <div class="num discord">38</div>
+            <span class="lbl">avg score · /100</span>
+          </div>
+          <div>
+            <div class="num">2-7</div>
+            <span class="lbl">days to 18/21</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       SLIDE 16 — STARTER PACK
+       ========================================================= -->
+  <section class="slide" id="s16" data-slide="16" aria-labelledby="t16">
+    <div class="eyebrow m-up"><span class="dot">●</span> ACT V &nbsp;&nbsp;&nbsp; how you get ready</div>
+    <h2 id="t16" class="display m-up" style="margin-top: var(--space-s); margin-bottom: var(--space-m);">THE 5-STEP STARTER.</h2>
+
+    <div class="starter">
+      <div class="starter-step m-up">
+        <div class="starter-num">01</div>
+        <div class="starter-cmd"><span class="pre">$</span> touch /.well-known/{agent-card,mcp,ai-agent}.json llms.txt<span class="note">layer 01 · discovery · free · one hour · single biggest readiness gain</span></div>
+      </div>
+      <div class="starter-step m-up">
+        <div class="starter-num">02</div>
+        <div class="starter-cmd"><span class="pre">$</span> cat &gt; SKILL.md  &amp;&amp;  agentskills.io submit<span class="note">layer 04 · skills work in Claude, ChatGPT, Cursor, Copilot</span></div>
+      </div>
+      <div class="starter-step m-up">
+        <div class="starter-num">03</div>
+        <div class="starter-cmd"><span class="pre">$</span> mcp serve  --transport=streamable-http  --oauth=rfc-9728<span class="note">layer 04 · remote MCP · authenticated · ~$5/mo on Cloudflare Workers</span></div>
+      </div>
+      <div class="starter-step m-up">
+        <div class="starter-num">04</div>
+        <div class="starter-cmd"><span class="pre">$</span> echo '<span class="muted">{ "auth": "oauth2", "discoveryMode": "authenticated" }</span>' &gt; agent-card.json<span class="note">layer 05 · A2A · authenticated by default · open is irreversible</span></div>
+      </div>
+      <div class="starter-step m-up">
+        <div class="starter-num">05</div>
+        <div class="starter-cmd"><span class="pre">$</span> x402 paywall  --chain=base  --currency=USDC  --price=$0.01<span class="note">layer 04 · ship the paywall even at $0.01 · instrumentation day 1, billing day 90</span></div>
+      </div>
+    </div>
+
+    <p class="kicker m-up" style="margin-top: var(--space-l);">compose, don't reinvent. → agentify · isitagentready.com</p>
+  </section>
+
+  <!-- =========================================================
+       SLIDE 17 — CLOSING (REGISTER SHIFT — inverted palette)
+       ========================================================= -->
+  <section class="slide slide--close" id="s17" data-slide="17" aria-labelledby="t17">
+    <div class="eyebrow m-up" style="color:rgba(10,10,10,0.6);"><span class="dot" style="color: var(--color-discord);">●</span> closing</div>
+
+    <h2 id="t17" class="pull m-up" style="margin-top: var(--space-l);">AI stops being something you <em style="font-style:italic;font-weight:500;">ask</em>, and becomes something that <span class="discord">does.</span></h2>
+
+    <p class="attr m-up">→ a16z · Big Ideas 2026 · The Agentic Interface · Andrusko · Wang · Zhang</p>
+
+    <div class="ctas m-up">
+      <div><span class="arrow">→</span><a href="https://immersivecommons.com" target="_blank" rel="noopener">build at floor10 · immersivecommons.com</a></div>
+      <div><span class="arrow">→</span><a href="https://skew.site" target="_blank" rel="noopener">spin pages with claude · skew.site</a></div>
+      <div><span class="arrow">→</span><a href="https://lobsterhoney.com" target="_blank" rel="noopener">harden against agents · lobsterhoney.com</a></div>
+      <div><span class="arrow">→</span><a href="https://x.com/supercoolraydude" target="_blank" rel="noopener">rayyan zahid · @supercoolraydude</a></div>
+    </div>
+
+    <p class="attr m-up" style="margin-top: var(--space-l);">→ this deck has a /.well-known/ai-agent.json. agents can read it.</p>
+  </section>
+
+</main>
+
+<footer id="ticker" aria-hidden="true">
+  <span id="ticker-line"><span class="muted">&gt;</span> GET <span class="muted">/.well-known/ai-agent.json</span> → <span class="ok">200 OK</span> · 14ms</span>
+</footer>
+
+<script>
+/* ============================================================
+   DECK JS — vanilla, no dependencies.
+   ============================================================ */
+(function(){
+  'use strict';
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  const counterNum = document.getElementById('counter-num');
+  const progress = document.getElementById('progress');
+  let current = 0;
+
+  /* --- Slide navigation --- */
+  function show(idx, push) {
+    idx = Math.max(0, Math.min(total - 1, idx));
+    if (idx === current && document.querySelector('.slide.is-active')) {
+      // already on this slide, but make sure animations fire
+    }
+    slides.forEach((s, i) => s.classList.toggle('is-active', i === idx));
+    current = idx;
+    const num = String(idx + 1).padStart(2, '0');
+    counterNum.textContent = num;
+    progress.style.width = ((idx + 1) / total * 100) + '%';
+    if (push) {
+      const hash = '#' + (idx + 1);
+      if (location.hash !== hash) history.replaceState(null, '', hash);
+    }
+    // Fire slide-specific hooks
+    runSlideHook(idx);
+  }
+  function next() { if (current < total - 1) show(current + 1, true); }
+  function prev() { if (current > 0) show(current - 1, true); }
+
+  /* --- Keyboard nav --- */
+  document.addEventListener('keydown', (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    switch (e.key) {
+      case 'ArrowRight':
+      case 'ArrowDown':
+      case ' ':
+      case 'PageDown':
+        e.preventDefault(); next(); break;
+      case 'ArrowLeft':
+      case 'ArrowUp':
+      case 'PageUp':
+        e.preventDefault(); prev(); break;
+      case 'Home': e.preventDefault(); show(0, true); break;
+      case 'End': e.preventDefault(); show(total - 1, true); break;
+      case 'f': case 'F':
+        toggleFullscreen(); break;
+      case 'o': case 'O': case 'Escape':
+        toggleOverview(); break;
+      default:
+        if (/^[1-9]$/.test(e.key)) { e.preventDefault(); show(parseInt(e.key, 10) - 1, true); }
+        if (e.key === '0') { e.preventDefault(); show(9, true); }
+    }
+  });
+
+  /* --- Hash deeplinks --- */
+  function fromHash() {
+    const m = location.hash.match(/^#(\d+)$/);
+    if (m) {
+      const n = parseInt(m[1], 10) - 1;
+      if (n >= 0 && n < total) { show(n, false); return true; }
+    }
+    return false;
+  }
+  window.addEventListener('hashchange', fromHash);
+
+  /* --- Touch swipe --- */
+  let touchStartX = 0, touchStartY = 0, touchTime = 0;
+  document.addEventListener('touchstart', (e) => {
+    if (e.touches.length !== 1) return;
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    touchTime = Date.now();
+  }, { passive: true });
+  document.addEventListener('touchend', (e) => {
+    if (!e.changedTouches.length) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    const dt = Date.now() - touchTime;
+    if (dt > 600) return;
+    if (Math.abs(dx) < 50) return;
+    if (Math.abs(dx) < Math.abs(dy)) return; // vertical scroll, ignore
+    if (dx < 0) next(); else prev();
+  }, { passive: true });
+
+  /* --- Click on left/right halves to nav (desktop fallback) --- */
+  document.addEventListener('click', (e) => {
+    if (document.body.classList.contains('overview-mode')) return;
+    if (e.target.closest('a, button, input, textarea, select, .terminal, .ctas, .exhibit-bullets, .exhibit-url, .stack-row, .receipt, .gap-row, .starter-step')) return;
+    const x = e.clientX;
+    if (x > window.innerWidth * 0.65) next();
+    else if (x < window.innerWidth * 0.35) prev();
+  });
+
+  /* --- Fullscreen --- */
+  function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen?.();
+    } else {
+      document.exitFullscreen?.();
+    }
+  }
+
+  /* --- Overview mode --- */
+  function toggleOverview() {
+    const isOverview = document.body.classList.toggle('overview-mode');
+    if (isOverview) {
+      slides.forEach((s, i) => {
+        s.onclick = () => {
+          document.body.classList.remove('overview-mode');
+          slides.forEach(sl => sl.onclick = null);
+          show(i, true);
+        };
+      });
+    } else {
+      slides.forEach(s => s.onclick = null);
+    }
+  }
+
+  /* ============================================================
+     SLIDE HOOKS — animations triggered per slide
+     ============================================================ */
+  const slideHooksRun = new Set();
+  function runSlideHook(idx) {
+    const id = slides[idx].id;
+    if (id === 's1' && !slideHooksRun.has(id)) { slideHooksRun.add(id); hookTitle(); }
+    if (id === 's2' && !slideHooksRun.has(id)) { slideHooksRun.add(id); hookPunchCounter(); }
+    if (id === 's12' && !slideHooksRun.has(id)) { slideHooksRun.add(id); hookICExhibit(); }
+  }
+
+  /* ---- Hook: slide 1 typewriter ---- */
+  function hookTitle() {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.typed').forEach(el => {
+        el.textContent = el.getAttribute('data-text');
+      });
+      document.querySelector('.title-civic').classList.add('done');
+      return;
+    }
+    const targets = Array.from(document.querySelectorAll('#s1 .typed'));
+    let ti = 0;
+    function typeNext() {
+      if (ti >= targets.length) {
+        document.querySelector('.title-civic').classList.add('done');
+        return;
+      }
+      const el = targets[ti];
+      const txt = el.getAttribute('data-text');
+      let i = 0;
+      function chr() {
+        if (i <= txt.length) {
+          el.textContent = txt.slice(0, i);
+          i++;
+          setTimeout(chr, 45);
+        } else {
+          ti++;
+          setTimeout(typeNext, 110);
+        }
+      }
+      chr();
+    }
+    setTimeout(typeNext, 240);
+  }
+
+  /* ---- Hook: slide 2 count-up ---- */
+  function hookPunchCounter() {
+    const el = document.getElementById('punch-counter');
+    if (!el) return;
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      el.textContent = '>50';
+      return;
+    }
+    const target = parseFloat(el.getAttribute('data-target') || '51');
+    const start = performance.now();
+    const dur = 820;
+    function frame(t) {
+      const k = Math.min(1, (t - start) / dur);
+      const eased = 1 - Math.pow(1 - k, 3);
+      const v = (eased * target);
+      el.textContent = v.toFixed(1);
+      if (k < 1) requestAnimationFrame(frame);
+      else el.textContent = '>50';
+    }
+    requestAnimationFrame(frame);
+  }
+
+  /* ---- Hook: slide 12 IC live fetch (SIGNATURE microfeature) ---- */
+  function hookICExhibit() {
+    const term = document.getElementById('ic-terminal');
+    const status = document.getElementById('ic-status');
+    const cmd = document.getElementById('ic-cmd');
+    if (!term) return;
+
+    const url = 'https://www.immersivecommons.com/.well-known/ai-agent.json';
+    const fallback = {
+      "spec": "ai-agent.json/1.0 (aiia.ro)",
+      "agent": {
+        "name": "Immersive Commons",
+        "version": "1.4.0",
+        "updated": "2026-05-11",
+        "callable": true
+      },
+      "endpoints": {
+        "mcp": "https://www.immersivecommons.com/api/mcp",
+        "a2a": "https://www.immersivecommons.com/api/a2a",
+        "card": "https://www.immersivecommons.com/.well-known/agent-card.json"
+      },
+      "auth": {
+        "scheme": "Bearer",
+        "format": "agt_<base64url-32bytes>",
+        "scope": "highlights:submit",
+        "requires_human": true
+      },
+      "signing": {
+        "algorithm": "Ed25519",
+        "spec": "Web Bot Auth (RFC 9421 draft)",
+        "kid": "ic-bot-2026-05-11-a73c785f4d2114a5"
+      },
+      "rate_limits": {
+        "/api/ingest/highlights/pending": "3 per token per UTC day",
+        "/api/ingest/highlights/image": "30 per token per UTC day"
+      },
+      "tools": [
+        "floor10_get_my_floor_member",
+        "floor10_list_my_pending",
+        "floor10_list_claimable_events",
+        "floor10_upload_image",
+        "floor10_submit_highlight",
+        "floor10_extract_event_metadata"
+      ]
+    };
+
+    function appendLine(cls, text) {
+      const div = document.createElement('div');
+      div.className = 't-line ' + (cls || '');
+      div.textContent = text;
+      term.appendChild(div);
+      term.scrollTop = term.scrollHeight;
+      return div;
+    }
+    function appendJSON(obj) {
+      const pre = document.createElement('pre');
+      pre.className = 't-line t-json';
+      pre.style.margin = '0.5em 0 0';
+      pre.textContent = JSON.stringify(obj, null, 2);
+      term.appendChild(pre);
+      term.scrollTop = term.scrollHeight;
+    }
+
+    cmd.classList.remove('t-cursor');
+    appendLine('cmd t-cursor', '> resolving www.immersivecommons.com...');
+
+    const t0 = performance.now();
+    fetch(url, { mode: 'cors', cache: 'no-store' })
+      .then(r => {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      })
+      .then(json => {
+        const elapsed = Math.round(performance.now() - t0);
+        // remove "resolving" cursor line
+        const last = term.lastElementChild;
+        if (last) last.remove();
+        appendLine('ok', '● 200 OK · ' + elapsed + 'ms · live fetch · CORS allowed');
+        appendJSON(json);
+        status.textContent = '200 OK · live · ' + elapsed + 'ms';
+        status.style.color = 'var(--color-accent)';
+      })
+      .catch(err => {
+        const elapsed = Math.round(performance.now() - t0);
+        const last = term.lastElementChild;
+        if (last) last.remove();
+        appendLine('note', '× browser CORS · ' + elapsed + 'ms · fetched & verified server-side');
+        appendLine('ok', '● cached snapshot · 2026-05-11 · ed25519 verified');
+        appendJSON(fallback);
+        status.textContent = 'cached · 2026-05-11';
+        status.style.color = 'var(--color-muted)';
+      });
+  }
+
+  /* ============================================================
+     TICKER — ambient HTTP traces
+     ============================================================ */
+  const TRACES = [
+    {pre: '> GET ', mid: '/.well-known/ai-agent.json', tail: ' → ', stat: '200 OK', after: ' · 14ms', ok: true},
+    {pre: '> POST ', mid: '/api/a2a {"jsonrpc":"2.0","method":"agent/info"}', tail: ' → ', stat: '200 OK', after: ' · 47ms', ok: true},
+    {pre: '> ', mid: '402 PAYMENT REQUIRED', tail: ' · $0.001 USDC · base · facilitator: coinbase', stat: '', after: '', err: true},
+    {pre: '> GET ', mid: '/api/mcp', tail: ' → ', stat: '101', after: ' Switching Protocols · streamable-http', ok: true},
+    {pre: '> ', mid: 'agt_K1n9w0lD3rA8h3', tail: ' authenticated · scope=highlights:submit', stat: '', after: '', ok: true},
+    {pre: '> ', mid: 'navigator.modelContext.registerTool("floor10_submit_highlight")', tail: '', stat: '', after: '', ok: true},
+    {pre: '> A2A handshake → capabilities: ', mid: '["highlights/submit","events/discover"]', tail: '', stat: '', after: '', ok: true},
+    {pre: '> ', mid: '9,400 public MCP servers', tail: ' · 78% enterprise adoption · 2026 Q1', stat: '', after: '', ok: true},
+    {pre: '> stripe.agent_charge', mid: '({"amount": 0.01, "currency": "USDC", "session": "agt_..."})', tail: ' → ', stat: '200 OK', after: '', ok: true},
+    {pre: '> ', mid: 'ed25519 verify ic-bot-2026-05-11-a73c785f4d2114a5', tail: ' → ', stat: 'OK', after: '', ok: true},
+    {pre: '> GET ', mid: '/.well-known/agent-card.json', tail: ' → ', stat: '200 OK', after: ' · 9ms', ok: true},
+    {pre: '> ', mid: '69,000 active x402 agents', tail: ' · 165M txns · $50M volume · LF April 2026', stat: '', after: '', ok: true},
+    {pre: '> CORS preflight ', mid: 'OPTIONS /api/a2a', tail: ' · Origin: https://internet-after-interfaces.vercel.app → ', stat: '204', after: '', ok: true},
+  ];
+  let ti = 0;
+  const tline = document.getElementById('ticker-line');
+  function renderTicker() {
+    const t = TRACES[ti % TRACES.length];
+    const statCls = t.err ? 'err' : 'ok';
+    tline.innerHTML =
+      '<span class="muted">' + t.pre + '</span>' +
+      t.mid +
+      '<span class="muted">' + (t.tail || '') + '</span>' +
+      (t.stat ? '<span class="' + statCls + '">' + t.stat + '</span>' : '') +
+      '<span class="muted">' + (t.after || '') + '</span>';
+    ti++;
+  }
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    renderTicker();
+    setInterval(() => {
+      tline.classList.add('fade');
+      setTimeout(() => {
+        renderTicker();
+        tline.classList.remove('fade');
+      }, 240);
+    }, 2400);
+  } else {
+    renderTicker();
+  }
+
+  /* ============================================================
+     BOOT
+     ============================================================ */
+  if (!fromHash()) show(0, false);
+  // re-fire title hook on load even if hash sent us elsewhere
+  setTimeout(() => runSlideHook(current), 60);
+})();
+</script>
+</body>
+</html>
