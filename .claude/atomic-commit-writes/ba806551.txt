@@ -4,3 +4,6 @@ index.html
 .well-known/ai-agent.json
 llms.txt
 _smoke/crawl_slides.py
+index.html
+index.html
+index.html

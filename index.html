@@ -1546,7 +1546,151 @@ a { color: inherit; }
 @media print {
   body { overflow: visible; }
   .slide { position: relative; opacity: 1; visibility: visible; page-break-after: always; min-height: auto; overflow: visible; }
-  #counter, #kbd, #ticker, #progress { display: none; }
+  #counter, #kbd, #ticker, #progress, #notes-drawer, #notes-hint { display: none; }
+}
+
+/* ============================================================
+   NOTES DRAWER (mobile only — swipe up to reveal)
+   ============================================================ */
+#notes-drawer, #notes-hint { display: none; }
+
+@media (max-width: 768px), (pointer: coarse) and (max-width: 900px) {
+  #notes-hint {
+    display: flex;
+    position: fixed;
+    bottom: calc(1.7rem + 4px);
+    left: 50%;
+    transform: translateX(-50%);
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.3rem 0.7rem;
+    z-index: 11;
+    font-family: var(--font-accent);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    background: rgba(10,10,10,0.7);
+    border: 1px solid var(--color-subtle);
+    backdrop-filter: blur(6px);
+    pointer-events: none;
+    opacity: 0;
+    animation: hint-pulse 3.5s ease-out 1.2s 2 forwards;
+  }
+  #notes-hint .arr {
+    color: var(--color-accent);
+    animation: hint-bounce 1.4s ease-in-out infinite;
+    display: inline-block;
+  }
+  @keyframes hint-pulse {
+    0% { opacity: 0; transform: translateX(-50%) translateY(8px); }
+    20% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    80% { opacity: 1; }
+    100% { opacity: 0; transform: translateX(-50%) translateY(-2px); }
+  }
+  @keyframes hint-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+  }
+  body.notes-open #notes-hint { animation: none; opacity: 0; }
+  body.notes-seen #notes-hint { display: none; }
+
+  #notes-drawer {
+    display: block;
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    height: 88vh; height: 88svh;
+    max-height: 88vh; max-height: 88svh;
+    background: var(--color-bg);
+    border-top: 1px solid var(--color-accent);
+    box-shadow: 0 -24px 60px rgba(0,0,0,0.85);
+    transform: translateY(102%);
+    transition: transform 340ms cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 100;
+    overflow: hidden;
+    touch-action: pan-y;
+  }
+  #notes-drawer.dragging { transition: none; }
+  body.notes-open #notes-drawer { transform: translateY(0); }
+
+  #notes-handle-bar {
+    position: relative;
+    height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: grab;
+    flex-shrink: 0;
+  }
+  #notes-handle-bar::before {
+    content: "";
+    width: 48px; height: 4px;
+    background: var(--color-accent);
+    border-radius: 2px;
+  }
+  #notes-content {
+    padding: 0 var(--gutter) 5rem;
+    height: calc(100% - 32px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+  #notes-meta {
+    font-family: var(--font-accent);
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin: 0.4rem 0 1.4rem;
+    display: flex; justify-content: space-between;
+  }
+  #notes-meta .num { color: var(--color-accent); }
+  #notes-list {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column;
+    gap: 1.4rem;
+  }
+  #notes-list li {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 1rem + 3.5vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    color: var(--color-fg);
+    padding-left: 1.4rem;
+    position: relative;
+  }
+  #notes-list li::before {
+    content: "→";
+    position: absolute;
+    left: 0; top: 0.05em;
+    color: var(--color-accent);
+    font-weight: 600;
+    font-size: 0.85em;
+  }
+  #notes-list li .em {
+    color: var(--color-accent);
+  }
+  #notes-list li .dim {
+    color: var(--color-muted);
+    font-weight: 500;
+  }
+  #notes-list li.discord {
+    color: var(--color-discord);
+  }
+  #notes-list li.discord::before { color: var(--color-discord); }
+  #notes-close-cta {
+    margin-top: 2rem;
+    text-align: center;
+    font-family: var(--font-accent);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  /* dim everything underneath when open */
+  body.notes-open .slide,
+  body.notes-open #ticker,
+  body.notes-open #counter,
+  body.notes-open #kbd { filter: brightness(0.4); transition: filter 240ms ease-out; }
 }
 </style>
 </head>
@@ -2536,6 +2680,17 @@ a { color: inherit; }
   <span id="ticker-line"><span class="muted">&gt;</span> GET <span class="muted">/.well-known/ai-agent.json</span> → <span class="ok">200 OK</span> · 14ms</span>
 </footer>
 
+<!-- Mobile-only · swipe up to reveal presenter notes -->
+<div id="notes-hint" aria-hidden="true"><span class="arr">▲</span> swipe up · notes</div>
+<aside id="notes-drawer" aria-label="Presenter notes" aria-hidden="true">
+  <div id="notes-handle-bar" aria-label="Drag to close"></div>
+  <div id="notes-content">
+    <div id="notes-meta"><span>Slide <span class="num" id="notes-num">01</span> / 45</span><span id="notes-title">Title</span></div>
+    <ul id="notes-list"></ul>
+    <p id="notes-close-cta">swipe down · or tap outside</p>
+  </div>
+</aside>
+
 <script>
 (function(){
   'use strict';
@@ -2793,6 +2948,201 @@ a { color: inherit; }
 
   if (!fromHash()) show(0, false);
   setTimeout(() => runSlideHook(current), 60);
+
+  /* ============================================================
+     PRESENTER NOTES — swipe up on mobile to reveal
+     Big-letter key points per slide. Mobile only.
+     ============================================================ */
+  const NOTES = {
+    1:  { t: "Title", n: ["Internet After Interfaces.", "<em class='dim'>Machine economies.</em>", "<em class='dim'>Autonomous transactions.</em>", "<em class='dim'>The post.ui web.</em>", "Ray Zahid · Human+Tech Week."] },
+    2:  { t: "The Number", n: ["<span class='em'>More than half</span> of internet traffic.", "Now <span class='em'>non-human</span>.", "Cloudflare · May 2026.", "The tipping point passed."] },
+    3:  { t: "The Gap", n: ["200,000 sites tested.", "78% have robots.txt.", "<span class='em'>4%</span> declare AI prefs.", "<span class='em'>Less than 15</span> publish MCP.", "Almost no one is ready."] },
+    4:  { t: "Third Language", n: ["First: browsers.", "Then: search engines.", "Now: <span class='em'>AI agents</span>.", "Cloudflare, April 2026."] },
+    5:  { t: "Three Generations", n: ["Every 15 years, a new language.", "<span class='em'>01</span> Read web. 1989–2008.", "<span class='em'>02</span> Searchable web. 1994–2024.", "<span class='em'>03</span> Agentic web. 2024–now."] },
+    6:  { t: "Gen 1 Origin", n: ["March 12, 1989. CERN.", "Tim Berners-Lee submits hypertext.", "Sendall: <em class='dim'>vague, but exciting</em>.", "Born from <span class='em'>info loss</span>."] },
+    7:  { t: "Gen 1 Timeline", n: ["19 years.", "From proposal to Chrome.", "1991: WWW announced.", "1996: HTTP/1.0.", "<span class='em'>1999: HTTP 402 reserved.</span>"] },
+    8:  { t: "HTTP 402 Dormancy", n: ["Reserved <span class='em'>1999</span>.", "Sat dormant for <span class='em'>27 years</span>.", "<em class='dim'>Reserved for future use.</em>", "The future arrived <span class='em'>April 2, 2026</span>."] },
+    9:  { t: "Gen 2 Origin", n: ["Feb 25, 1994.", "A rogue crawler DDOSed Koster.", "He wrote a text file in response.", "<span class='em'>robots.txt</span>.", "First publisher-machine contract."] },
+    10: { t: "Gen 2 Timeline", n: ["30 years of crawler contracts.", "robots.txt → sitemap → schema.org.", "Open Graph. /.well-known/.", "<span class='em'>llms.txt</span>: Sep 2024.", "Each is a <em class='dim'>promise to a machine</em>."] },
+    11: { t: "Gen 3 Origin", n: ["Nov 25, 2024.", "Anthropic launches <span class='em'>MCP</span>.", "Open standard from day 1.", "<span class='em'>18 months ago</span>.", "Donated to LF Dec 9, 2025."] },
+    12: { t: "Gen 3 Timeline", n: ["Stack assembled <em class='dim'>while you weren't looking</em>.", "MCP → A2A → x402 → WebMCP.", "Linux Foundation, NIST, FIDO, W3C.", "<span class='em'>17 events in 18 months</span>.", "Today: you are standing in this room."] },
+    13: { t: "The 5-Layer Stack", n: ["<span class='em'>5 layers</span>. Each standardized.", "01 Discovery. 02 Content.", "03 Trust. 04 Execution.", "05 A2A.", "RFC 8615 to Aiia. All 2026."] },
+    14: { t: "MCP", n: ["Agent ↔ tool.", "<span class='em'>10,000+</span> public servers.", "<span class='em'>7.8×</span> YoY through Q1 2026.", "<span class='em'>78%</span> of enterprise AI teams.", "Anthropic → Linux Foundation."] },
+    15: { t: "A2A", n: ["Agent ↔ agent.", "<span class='em'>150+ organizations</span>.", "In a single year.", "Google → Linux Foundation.", "Azure · Bedrock · Google Cloud."] },
+    16: { t: "x402", n: ["HTTP 402 activates.", "April 2, 2026.", "<span class='em'>69,000 agents</span>.", "<span class='em'>165M transactions</span>.", "<span class='em'>$50M volume</span>.", "22 LF members. Stripe + Visa + AWS."] },
+    17: { t: "WebMCP", n: ["The browser is the runtime.", "<span class='em'>navigator.modelContext</span>.", "Chrome 146 + Edge 147.", "Same DOM, two callers.", "Humans see a button. <em class='dim'>Agents see a tool.</em>"] },
+    18: { t: "AP2", n: ["Google + Coinbase.", "Mandates layer.", "Cryptographic proof of consent.", "60+ orgs at launch.", "AP2 authorizes. <span class='em'>x402 settles.</span>"] },
+    19: { t: "ACP", n: ["Stripe Agentic Commerce.", "Dec 11, 2025.", "<span class='em'>Live merchants on day 1</span>.", "Coach · Kate Spade · URBN · Etsy.", "Shared Payment Tokens."] },
+    20: { t: "ERC-8004", n: ["Trustless agents on-chain.", "Live Ethereum mainnet Jan 29.", "<span class='em'>22,900 agents in 3 days</span>.", "Identity · Reputation · Validation.", "Composes with A2A and x402."] },
+    21: { t: "Skills", n: ["SKILL.md is the format.", "<span class='em'>32 tools</span>, one standard.", "Claude · ChatGPT · Cursor · Copilot.", "VS Code added it in 48 hours.", "20,000+ stars."] },
+    22: { t: "ai-agent.json", n: ["Aiia spec. March 28, 2026.", "/.well-known/ai-agent.json.", "Sister to agent-card.json.", "<span class='em'>.agent TLD</span> at ICANN.", "NIST + FIDO + LF + Aiia."] },
+    23: { t: "llms.txt", n: ["Jeremy Howard. Answer.AI.", "Sep 3, 2024.", "<em class='dim'>Table of contents for an intern.</em>", "Curated. NOT exhaustive.", "Anthropic, Stripe, Cursor ship it."] },
+    24: { t: "Production Wins", n: ["This is already <span class='em'>revenue</span>.", "Rufus: <span class='em'>$12B</span> incremental.", "Sparky: <span class='em'>+35% AOV</span>.", "Klarna: <span class='em'>853 FTEs</span> of work.", "Shopify rewrote everything."] },
+    25: { t: "The Honest Cut", n: [
+      "<span class='discord'>Like good interns. Don't leave them unsupervised.</span>",
+      "Gartner: only <span class='em'>17%</span> deployed.",
+      "<span class='em'>40%</span> of agent projects cancelled by 2027.",
+      "Humane: dead. Rabbit: dying.",
+      "Interface <span class='em'>vanishes for agents</span>. <em class='dim'>Persists for humans.</em>"
+    ] },
+    26: { t: "Audit Intro", n: ["<span class='em'>21 checks. 5 layers.</span>", "Cloudflare published April 17.", "Same week MCP donated to LF.", "<em class='dim'>It's a checklist now</em>.", "Your turn. Two minutes."] },
+    27: { t: "The Wall of 21", n: ["<span class='discord'>Average website: 38/100.</span>", "<span class='discord'>None of 62 over 70/100.</span>", "This is your scorecard.", "Discovery + Content + Trust.", "Execution + A2A + Cross-cutting."] },
+    28: { t: "Layer 01 · Discovery", n: ["4 checks. Free, static files.", "agent-card.json.", "mcp.json.", "ai-agent.json.", "llms.txt + robots.", "<span class='em'>1 hour each. Single biggest gain.</span>"] },
+    29: { t: "Layer 02 · Content", n: ["3 checks.", "Markdown content negotiation.", "<span class='em'>80% token savings.</span>", "Schema.org Action declarations.", "LLMFeed export."] },
+    30: { t: "Layer 03 · Trust", n: ["2 checks.", "Ed25519 signatures.", "Content-Signal headers.", "<em class='dim'>Before agents start spending.</em>"] },
+    31: { t: "Layer 04 · Execution", n: ["4 checks. The product surface.", "Remote MCP server.", "SKILL.md.", "<span class='discord'>Accessibility tree (P19, #1 fail).</span>", "WebMCP exposure."] },
+    32: { t: "Layer 05 · A2A", n: ["2 checks.", "A2A endpoint live.", "Agent card · correct shape.", "<span class='em'>Authenticated by default.</span>", "Open A2A is irreversible."] },
+    33: { t: "Cross-cutting", n: ["6 checks. The connective tissue.", "Observability (Braintrust).", "Memory (Mem0, Zep, Letta).", "Durable execution (Inngest, CF).", "Tool auth (Composio · 500+).", "CI/CD + Live verify."] },
+    34: { t: "Exhibit A · IC", n: ["Same data. Eyes or agents.", "<span class='em'>The interface is the contract.</span>", "/.well-known/ai-agent.json live.", "/api/mcp · /api/a2a.", "Ed25519 signed. agt_ tokens."] },
+    35: { t: "Exhibit B · Skew", n: ["Supply-side flip.", "<em class='dim'>Skew, don't slop.</em>", "LLM as page generator.", "Designers → Claude.", "The harness is the product."] },
+    36: { t: "Exhibit C · Lobsterhoney", n: ["<em class='dim'>Honeypots for malicious agents.</em>", "Autonomous AI audits.", "Agent-traps. Canaries.", "First pitch: <span class='em'>3-step ATO chain</span>.", "Agents are now a delivery vector."] },
+    37: { t: "Exhibit D · agentify", n: ["The catch-up path.", "21-point readiness audit.", "12 templates. 5 scripts.", "Atomic commit per layer.", "<span class='em'>2-7 days. 38/100 → 18-21/21.</span>"] },
+    38: { t: "What is agentify", n: ["Claude skill. Point at repo.", "<span class='em'>AUDIT</span> the 21 points.", "<span class='em'>PLAN</span> with dollar-cost forks.", "<span class='em'>SCAFFOLD</span> from templates.", "<span class='em'>VERIFY</span> via CF scanner.", "<span class='em'>REGISTER</span> with catalogs."] },
+    39: { t: "Managed-Defaults Stack", n: ["<span class='em'>6 services. Zero reinvention.</span>", "Cloudflare Agents.", "Anthropic Managed Agents.", "Composio · 500+ integrations.", "Mem0 · Zep · Letta · memory.", "Braintrust · observability.", "x402 + Stripe · payments."] },
+    40: { t: "Costs by Scale", n: ["<span class='em'>$15/mo</span> at 1 tenant.", "<span class='em'>$120/mo</span> at 10.", "<span class='em'>$1,100/mo</span> at 100.", "<span class='em'>Crossover at ~50 tenants.</span>", "Below: managed wins ship-speed.", "Above: self-host wins on cost."] },
+    41: { t: "Templates Shipped", n: ["<span class='em'>12 templates. 5 scripts.</span>", "You don't WRITE the files.", "<em class='dim'>You REVIEW them.</em>", "SKILL.md, agent-card, ai-agent, mcp.json.", "MCP server in Python or CF Worker.", "x402 paywall. CI/CD pipeline."] },
+    42: { t: "Three Scenarios", n: ["Solo SaaS: <span class='em'>2 days, 18/21</span>.", "Killer move: x402 from day 1.", "Enterprise: <span class='em'>3 weeks, 20/21</span>.", "Killer move: Confidential Inference.", "OSS library: <span class='em'>1 day, 9/21</span>.", "Killer move: agentskills.io slot."] },
+    43: { t: "The Punch", n: ["<span class='discord'>Average website: 38/100.</span>", "<span class='discord'>None over 70.</span>", "Run agentify.", "<span class='em'>Ship at 18 to 21 out of 21.</span>", "<span class='em'>Top 1% of the agentic web.</span>"] },
+    44: { t: "5-Step Starter", n: ["Five commands. One week.", "01 · touch /.well-known/ files.", "02 · write SKILL.md.", "03 · mcp serve --oauth.", "04 · agent-card.json auth on.", "05 · x402 paywall · $0.01."] },
+    45: { t: "Closing", n: [
+      "AI stops being something you <em class='dim'>ask</em>.",
+      "Becomes something that <span class='discord'>does</span>.",
+      "a16z · Big Ideas 2026.",
+      "Build at floor10.",
+      "<span class='em'>Audit your repo. Ship in a week.</span>",
+      "Your move."
+    ] }
+  };
+
+  const drawer = document.getElementById('notes-drawer');
+  const handleBar = document.getElementById('notes-handle-bar');
+  const notesList = document.getElementById('notes-list');
+  const notesNum = document.getElementById('notes-num');
+  const notesTitle = document.getElementById('notes-title');
+
+  function isMobile() {
+    return window.matchMedia('(max-width: 768px), (pointer: coarse) and (max-width: 900px)').matches;
+  }
+
+  function populateNotes(slideIdx) {
+    const slideNum = slideIdx + 1;
+    const data = NOTES[slideNum];
+    if (!data) {
+      notesList.innerHTML = '<li class="dim">no notes for this slide</li>';
+      notesTitle.textContent = '';
+      notesNum.textContent = String(slideNum).padStart(2, '0');
+      return;
+    }
+    notesNum.textContent = String(slideNum).padStart(2, '0');
+    notesTitle.textContent = data.t;
+    notesList.innerHTML = data.n.map(line => {
+      const cls = line.includes("class='discord'") || line.includes('class="discord"') ? '' : '';
+      return '<li>' + line + '</li>';
+    }).join('');
+  }
+
+  function openNotes() {
+    if (!isMobile()) return;
+    populateNotes(current);
+    document.body.classList.add('notes-open');
+    document.body.classList.add('notes-seen');
+    drawer.setAttribute('aria-hidden', 'false');
+    try { localStorage.setItem('iai-notes-seen', '1'); } catch(e) {}
+  }
+  function closeNotes() {
+    document.body.classList.remove('notes-open');
+    drawer.setAttribute('aria-hidden', 'true');
+    drawer.style.transform = '';
+  }
+
+  // Already-seen hint suppression
+  try {
+    if (localStorage.getItem('iai-notes-seen') === '1') document.body.classList.add('notes-seen');
+  } catch(e) {}
+
+  // Re-populate when slide changes while drawer open
+  const _origShow = show;
+
+  // Wire swipe-up gesture detection
+  let nsX = 0, nsY = 0, nsT = 0, nsActive = false, nsDrag = 0;
+  document.addEventListener('touchstart', (e) => {
+    if (!isMobile()) return;
+    if (e.touches.length !== 1) return;
+    const t = e.touches[0];
+    nsX = t.clientX; nsY = t.clientY; nsT = Date.now();
+    nsActive = true;
+    nsDrag = 0;
+    // If drawer is open and touch starts on handle bar or top zone, allow drag-to-close
+    if (document.body.classList.contains('notes-open')) {
+      const r = drawer.getBoundingClientRect();
+      if (t.clientY - r.top < 90) {
+        drawer.classList.add('dragging');
+      }
+    }
+  }, { passive: true });
+
+  document.addEventListener('touchmove', (e) => {
+    if (!isMobile() || !nsActive) return;
+    const t = e.touches[0];
+    const dx = t.clientX - nsX;
+    const dy = t.clientY - nsY;
+    // drawer drag-to-close
+    if (document.body.classList.contains('notes-open') && drawer.classList.contains('dragging')) {
+      if (dy > 0 && Math.abs(dy) > Math.abs(dx)) {
+        nsDrag = dy;
+        drawer.style.transform = `translateY(${dy}px)`;
+      }
+    }
+  }, { passive: true });
+
+  document.addEventListener('touchend', (e) => {
+    if (!isMobile() || !nsActive) { nsActive = false; return; }
+    nsActive = false;
+    drawer.classList.remove('dragging');
+    const c = e.changedTouches[0];
+    const dx = c.clientX - nsX;
+    const dy = c.clientY - nsY;
+    const dt = Date.now() - nsT;
+
+    // drawer drag-to-close finish
+    if (document.body.classList.contains('notes-open')) {
+      if (nsDrag > 140) { closeNotes(); }
+      else { drawer.style.transform = ''; }
+      return;
+    }
+
+    // swipe up gesture (mostly vertical, upward, >70px, <800ms)
+    if (dt < 800 && Math.abs(dy) > 70 && Math.abs(dy) > Math.abs(dx) * 1.4 && dy < 0) {
+      // ignore if user is mid-scrolling content
+      const target = c.target.closest('.terminal-body, .gap-list, .stack, .receipts, .layer-deep, .audit-wall, .timeline, .templates-list, .scenarios, .managed-list, .cost-table-wrap, .starter');
+      // if target is scrollable area AND not at the bottom, treat as scroll
+      if (target) {
+        const isAtBottom = (target.scrollHeight - target.scrollTop - target.clientHeight) < 4;
+        if (!isAtBottom) return;
+      }
+      openNotes();
+    }
+  }, { passive: true });
+
+  // Tap outside drawer to close
+  document.addEventListener('click', (e) => {
+    if (!document.body.classList.contains('notes-open')) return;
+    if (e.target.closest('#notes-drawer') || e.target.closest('#notes-hint')) return;
+    closeNotes();
+  });
+
+  // Esc to close on mobile too
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.body.classList.contains('notes-open')) {
+      closeNotes();
+    }
+  });
+
+  // Repopulate notes when slide changes (in case drawer reopens on same slide)
+  const observer = new MutationObserver(() => {
+    if (document.body.classList.contains('notes-open')) populateNotes(current);
+  });
+  // (lightweight: no observer, just call on close/open)
 })();
 </script>
 </body>
