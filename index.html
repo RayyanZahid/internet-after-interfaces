@@ -3471,7 +3471,7 @@ body.iai-remote #notes-list li {
   // --- WORKER URL RESOLUTION ---
   const workerOverride = params.get('worker');
   const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-  const PROD_WORKER = 'wss://iai-sync.rayyanzahidpk-1395.workers.dev'; // update after deploy
+  const PROD_WORKER = 'wss://iai-sync.rayyanzahidpk.workers.dev';
   let WORKER = workerOverride
     || window.IAI_SYNC_WORKER
     || (isLocal ? 'ws://127.0.0.1:8787' : PROD_WORKER);
