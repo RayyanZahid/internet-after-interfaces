@@ -3439,10 +3439,14 @@ body.iai-remote #notes-list li {
     nsX = t.clientX; nsY = t.clientY; nsT = Date.now();
     nsActive = true;
     nsDrag = 0;
-    // If drawer is open and touch starts on handle bar or top zone, allow drag-to-close
+    // If drawer is open and touch starts on handle bar (top 60px of drawer
+    // only — was 90px which ate the badge area in remote mode), allow
+    // drag-to-close. In iai-remote mode the handle is hidden, so this is
+    // a smaller dead zone for the badge/toggle to live in.
     if (document.body.classList.contains('notes-open')) {
       const r = drawer.getBoundingClientRect();
-      if (t.clientY - r.top < 90) {
+      const handleZone = document.body.classList.contains('iai-remote') ? 0 : 60;
+      if (t.clientY - r.top >= 0 && t.clientY - r.top < handleZone) {
         drawer.classList.add('dragging');
       }
     }
@@ -3475,19 +3479,27 @@ body.iai-remote #notes-list li {
     //   1) drag-down on the handle (drag-to-close)
     //   2) partial drag (snap back)
     //   3) horizontal swipe — advance/retreat slide WITHOUT closing
+    // Conditions on (3) are deliberately loose. Real-phone swipes are slower
+    // and more diagonal than synthetic test ones; the previous dt<800 + ratio
+    // 1.2 left too many real swipes on the table. Now: dt<1500, |dx|>40,
+    // |dx| > |dy| (just-dominant axis). That still excludes vertical
+    // notes-content scrolling because that has |dy| > |dx|.
     if (document.body.classList.contains('notes-open')) {
       if (nsDrag > 140) {
         closeNotes();
-      } else if (nsDrag > 0) {
-        // partial drag → snap back
+      } else if (nsDrag > 30) {
+        // meaningful partial drag → snap back
         drawer.style.transform = '';
-      } else if (dt < 800 && Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+      } else if (dt < 1500 && Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
         // horizontal swipe while drawer open · keep drawer open, advance slide
         // briefly flash the notes-list so the user notices the swap
         const list = document.getElementById('notes-list');
         if (list) { list.style.opacity = '0.25'; setTimeout(() => list.style.opacity = '', 180); }
         if (dx < 0) next(); else prev();
         // notes already synced via show() → populateNotes hook
+      } else if (nsDrag > 0) {
+        // tiny drag (< 30px), snap back without doing anything
+        drawer.style.transform = '';
       }
       return;
     }
