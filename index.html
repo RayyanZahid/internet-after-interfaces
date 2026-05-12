@@ -3617,30 +3617,26 @@ body.iai-remote #notes-handle-bar {
     if (e.key === 'Escape') closePairOverlay();
   });
 
-  // --- QR GENERATION (lazy CDN load) ---
-  function loadQRLib() {
-    return new Promise((resolve, reject) => {
-      if (window.QRCode) return resolve(window.QRCode);
-      const s = document.createElement('script');
-      s.src = 'https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js';
-      s.onload = () => resolve(window.QRCode);
-      s.onerror = reject;
-      document.head.appendChild(s);
-    });
-  }
-  async function renderQR(url) {
+  // --- QR GENERATION ---
+  // Use an <img> backed by a free QR endpoint. Two-source fallback:
+  //   primary:   api.qrserver.com  (long-running, no auth, returns PNG)
+  //   fallback:  Google Charts QR   (deprecated but historically alive)
+  // No JS library load required.
+  function renderQR(url) {
     if (!pairQR) return;
-    pairQR.innerHTML = '<canvas></canvas>';
-    try {
-      const QR = await loadQRLib();
-      QR.toCanvas(pairQR.querySelector('canvas'), url, {
-        margin: 1,
-        width: 300,
-        color: { dark: '#0a0a0a', light: '#f4f1ea' },
-      });
-    } catch (e) {
-      pairQR.innerHTML = `<p class="pair-url" style="color: var(--color-discord);">QR library failed to load. URL above.</p>`;
-    }
+    const enc = encodeURIComponent(url);
+    const primary = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=4&data=${enc}`;
+    const fallback = `https://chart.googleapis.com/chart?cht=qr&chs=300x300&chld=L|1&chl=${enc}`;
+    pairQR.innerHTML = `<img id="pair-qr-img" alt="QR code linking to remote URL" width="300" height="300">`;
+    const img = pairQR.querySelector('img');
+    img.onerror = () => {
+      if (img.src.indexOf('chart.googleapis.com') === -1) {
+        img.src = fallback;
+        return;
+      }
+      pairQR.innerHTML = `<div style="text-align:center;color:var(--color-bg);font-family:var(--font-accent);font-size:0.7rem;letter-spacing:0.06em;padding:1rem;">QR service unreachable.<br>copy the URL above on your phone.</div>`;
+    };
+    img.src = primary;
   }
 
   // --- STATUS SETTER ---
