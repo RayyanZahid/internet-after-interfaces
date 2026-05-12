@@ -2799,6 +2799,8 @@ a { color: inherit; }
   document.addEventListener('keydown', (e) => {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    // When notes drawer is open the dedicated notes-handler owns Esc + arrow keys.
+    if (document.body.classList.contains('notes-open')) return;
     switch (e.key) {
       case 'ArrowRight':
       case 'PageDown':
