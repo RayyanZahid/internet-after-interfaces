@@ -21,3 +21,6 @@ llms.txt
 .well-known/ai-agent.json
 README.md
 .well-known/agent-card.json
+index.html
+index.html
+index.html

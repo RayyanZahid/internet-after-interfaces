@@ -1494,6 +1494,143 @@ a { color: inherit; }
 .slide--close .ctas .arrow { color: var(--color-discord); margin-right: 0.5ch; }
 .slide--close::after { display: none !important; }
 
+/* ============================================================
+   SYNC — display pairing overlay + remote status badge
+   ============================================================ */
+#pair-toggle {
+  position: fixed;
+  top: clamp(0.7rem, 1.8vh, 1.6rem);
+  left: clamp(0.8rem, 3vw, 2.5rem);
+  z-index: 12;
+  font-family: var(--font-accent);
+  font-size: var(--type-micro);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--color-surface);
+  color: var(--color-muted);
+  border: 1px solid var(--color-subtle);
+  padding: 0.35rem 0.7rem;
+  cursor: pointer;
+  transition: color 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+#pair-toggle:hover { color: var(--color-accent); border-color: var(--color-accent); }
+#pair-toggle.live {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  background: rgba(212,255,0,0.06);
+}
+#pair-toggle.live::before {
+  content: "● ";
+  animation: blink 1.5s steps(2) infinite;
+}
+
+#pair-overlay {
+  position: fixed; inset: 0;
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: blur(12px);
+  z-index: 200;
+  display: flex; align-items: center; justify-content: center;
+  padding: var(--gutter);
+}
+.pair-card {
+  display: flex; flex-direction: column; align-items: center;
+  gap: var(--space-m);
+  padding: var(--space-l);
+  background: var(--color-bg);
+  border: 1px solid var(--color-accent);
+  max-width: 480px; width: 100%;
+}
+.pair-card h3 {
+  font-family: var(--font-accent);
+  font-size: var(--type-caption);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin: 0;
+}
+.pair-qr {
+  width: clamp(220px, 50vw, 320px);
+  height: clamp(220px, 50vw, 320px);
+  background: var(--color-fg);
+  padding: clamp(0.6rem, 1.5vw, 1rem);
+  display: flex; align-items: center; justify-content: center;
+}
+.pair-qr canvas, .pair-qr img, .pair-qr svg {
+  width: 100%; height: auto; display: block;
+}
+.pair-code {
+  font-family: var(--font-display);
+  font-size: var(--type-display);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--color-accent);
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+.pair-url {
+  font-family: var(--font-accent);
+  font-size: var(--type-caption);
+  color: var(--color-muted);
+  letter-spacing: 0;
+  word-break: break-all;
+  text-align: center;
+}
+.pair-status {
+  font-family: var(--font-accent);
+  font-size: var(--type-caption);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+.pair-status.connected { color: var(--color-accent); }
+.pair-status.connected::before { content: "● "; animation: blink 1.5s steps(2) infinite; }
+.pair-status.error { color: var(--color-discord); }
+.pair-close-cta {
+  font-family: var(--font-accent);
+  font-size: var(--type-caption);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-top: var(--space-s);
+}
+
+#remote-badge {
+  position: fixed;
+  top: clamp(0.6rem, 1.8vh, 1.4rem);
+  left: 50%; transform: translateX(-50%);
+  z-index: 11;
+  font-family: var(--font-accent);
+  font-size: var(--type-micro);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-subtle);
+  color: var(--color-muted);
+  pointer-events: none;
+}
+#remote-badge .code { color: var(--color-accent); }
+#remote-badge .state.connected { color: var(--color-accent); }
+#remote-badge .state.error { color: var(--color-discord); }
+#remote-badge.live { border-color: var(--color-accent); }
+
+/* In remote mode, the notes drawer is always-open and the slide is dimmed.
+   Suppress the swipe-up hint and drag-to-close affordance. */
+body.iai-remote .slide {
+  filter: brightness(0.42);
+  transition: filter 240ms ease-out;
+}
+body.iai-remote #notes-hint { display: none !important; }
+body.iai-remote #notes-drawer {
+  height: 72vh; height: 72svh;
+  max-height: 72vh; max-height: 72svh;
+  transform: translateY(0) !important;
+}
+body.iai-remote #notes-handle-bar {
+  cursor: default;
+  pointer-events: none;
+}
+
 /* Closing two-column · QR on the right (desktop) / below (mobile) */
 .close-grid {
   display: grid;
@@ -2754,6 +2891,22 @@ a { color: inherit; }
   <span id="ticker-line"><span class="muted">&gt;</span> GET <span class="muted">/.well-known/ai-agent.json</span> → <span class="ok">200 OK</span> · 14ms</span>
 </footer>
 
+<!-- Sync · pairing chrome (hidden unless ?as=display or ?as=remote) -->
+<button id="pair-toggle" hidden type="button" aria-label="Pair a phone remote">📱 pair phone</button>
+<div id="pair-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="pair-h">
+  <div class="pair-card">
+    <h3 id="pair-h">scan or visit</h3>
+    <div class="pair-qr" id="pair-qr"></div>
+    <p class="pair-code" id="pair-code">BIRD</p>
+    <p class="pair-url" id="pair-url">internet-after-interfaces.vercel.app/?as=remote&amp;room=BIRD</p>
+    <p class="pair-status" id="pair-status">waiting for phone…</p>
+    <p class="pair-close-cta">tap outside or press ESC</p>
+  </div>
+</div>
+<div id="remote-badge" hidden aria-live="polite">
+  REMOTE · room <span class="code" id="remote-code">----</span> · <span class="state" id="remote-state">connecting…</span>
+</div>
+
 <!-- Mobile-only · swipe up to reveal presenter notes -->
 <div id="notes-hint" aria-hidden="true"><span class="arr">▲</span> swipe up · notes</div>
 <aside id="notes-drawer" aria-label="Presenter notes" aria-hidden="true">
@@ -2792,15 +2945,29 @@ a { color: inherit; }
     if (document.body.classList.contains('notes-open') && typeof populateNotes === 'function') {
       populateNotes(idx);
     }
+    // Dispatch a deck-level event so cross-device sync (and any other consumer) can listen.
+    document.dispatchEvent(new CustomEvent('slide-change', { detail: { n: idx + 1, push: !!push } }));
   }
+
+  // Expose a small API for cross-device sync + console debugging.
+  window.IAI_DECK = {
+    show: (n, push) => show(n, push),
+    next: () => next(),
+    prev: () => prev(),
+    current: () => current,
+    total: () => total,
+    openNotes: () => { if (typeof openNotes === 'function') openNotes(); },
+    closeNotes: () => { if (typeof closeNotes === 'function') closeNotes(); },
+  };
   function next() { if (current < total - 1) show(current + 1, true); }
   function prev() { if (current > 0) show(current - 1, true); }
 
   document.addEventListener('keydown', (e) => {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-    // When notes drawer is open the dedicated notes-handler owns Esc + arrow keys.
+    // When notes drawer or pair overlay is open the dedicated handlers own keys.
     if (document.body.classList.contains('notes-open')) return;
+    if (document.body.classList.contains('pair-open')) return;
     switch (e.key) {
       case 'ArrowRight':
       case 'PageDown':
@@ -2852,7 +3019,8 @@ a { color: inherit; }
   document.addEventListener('click', (e) => {
     if (document.body.classList.contains('overview-mode')) return;
     if (document.body.classList.contains('notes-open')) return;
-    if (e.target.closest('a, button, input, textarea, select, .terminal, .ctas, .exhibit-bullets, .exhibit-url, .stack-row, .receipt, .gap-row, .starter-step, .check-card, .managed-item, .scenario, .cost-table, .templates-list, .tools-list, .timeline, .qr-frame')) return;
+    if (document.body.classList.contains('pair-open')) return;
+    if (e.target.closest('a, button, input, textarea, select, .terminal, .ctas, .exhibit-bullets, .exhibit-url, .stack-row, .receipt, .gap-row, .starter-step, .check-card, .managed-item, .scenario, .cost-table, .templates-list, .tools-list, .timeline, .qr-frame, #pair-toggle, #pair-overlay')) return;
     const x = e.clientX;
     if (x > window.innerWidth * 0.7) next();
     else if (x < window.innerWidth * 0.3) prev();
@@ -3028,6 +3196,9 @@ a { color: inherit; }
   } else {
     renderTicker();
   }
+
+  // Window-level helper for the sync IIFE
+  window.IAI_DECK_HASH_NAV = fromHash;
 
   if (!fromHash()) show(0, false);
   setTimeout(() => runSlideHook(current), 60);
@@ -3240,6 +3411,251 @@ a { color: inherit; }
     if (document.body.classList.contains('notes-open')) populateNotes(current);
   });
   // (lightweight: no observer, just call on close/open)
+})();
+
+/* ============================================================
+   IAI-SYNC — cross-device deck sync.
+   Display (laptop) + Remote (phone) connect to a Cloudflare Worker
+   WebSocket relay. Swipe on phone → slide changes on laptop.
+   See projects/iai-sync-worker/ for the server.
+
+   Modes via query string:
+     ?as=display              → display (laptop). Shows pair button.
+     ?as=display&pair=1       → display + open pairing overlay on load.
+     ?as=remote&room=BIRD     → remote (phone). Always-open notes drawer.
+
+   Worker URL precedence:
+     1. ?worker=ws://...      (override for testing)
+     2. window.IAI_SYNC_WORKER (set in HTML if needed)
+     3. ws://127.0.0.1:8787   (localhost auto-detect)
+     4. wss://iai-sync.<account>.workers.dev (production, TBD post-deploy)
+   ============================================================ */
+(function() {
+  'use strict';
+  const params = new URLSearchParams(location.search);
+  const mode = (params.get('as') || '').toLowerCase();
+  if (mode !== 'display' && mode !== 'remote') return;
+
+  // --- WORKER URL RESOLUTION ---
+  const workerOverride = params.get('worker');
+  const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+  const PROD_WORKER = 'wss://iai-sync.rayyanzahidpk-1395.workers.dev'; // update after deploy
+  let WORKER = workerOverride
+    || window.IAI_SYNC_WORKER
+    || (isLocal ? 'ws://127.0.0.1:8787' : PROD_WORKER);
+  // Ensure ws/wss scheme
+  WORKER = WORKER.replace(/^http(s?):\/\//, 'ws$1://');
+
+  // --- ROOM ---
+  function genRoomCode() {
+    const C = 'BCDFGHJKLMNPQRSTVWXZ';
+    const V = 'AEIOU';
+    const pick = s => s[Math.floor(Math.random() * s.length)];
+    return pick(C) + pick(V) + pick(C) + pick(V);
+  }
+  let room = (params.get('room') || '').toUpperCase().replace(/[^A-Z]/g, '').slice(0, 4);
+  if (mode === 'display' && !/^[A-Z]{4}$/.test(room)) room = genRoomCode();
+  if (mode === 'remote' && !/^[A-Z]{4}$/.test(room)) {
+    console.warn('[iai-sync] remote mode requires ?room=XXXX (4 uppercase letters)');
+    return;
+  }
+
+  // --- STATE ---
+  let ws = null;
+  let reconnectAttempts = 0;
+  let reconnectTimer = null;
+  let pendingRebroadcast = true;
+  // Suppress local rebroadcast when applying a remote slide change
+  let applyingRemote = false;
+
+  // --- DOM REFS ---
+  const pairToggle = document.getElementById('pair-toggle');
+  const pairOverlay = document.getElementById('pair-overlay');
+  const pairQR = document.getElementById('pair-qr');
+  const pairCode = document.getElementById('pair-code');
+  const pairUrl = document.getElementById('pair-url');
+  const pairStatus = document.getElementById('pair-status');
+  const remoteBadge = document.getElementById('remote-badge');
+  const remoteCode = document.getElementById('remote-code');
+  const remoteState = document.getElementById('remote-state');
+
+  // --- MODE BOOTSTRAP ---
+  if (mode === 'display') {
+    if (pairToggle) {
+      pairToggle.hidden = false;
+      pairToggle.addEventListener('click', openPairOverlay);
+    }
+    if (params.get('pair') === '1') setTimeout(openPairOverlay, 200);
+  } else if (mode === 'remote') {
+    document.body.classList.add('iai-remote', 'notes-open', 'notes-seen');
+    if (remoteBadge) {
+      remoteBadge.hidden = false;
+      remoteBadge.classList.add('live');
+      if (remoteCode) remoteCode.textContent = room;
+      if (remoteState) { remoteState.textContent = 'connecting…'; remoteState.className = 'state'; }
+    }
+    // Auto-populate notes for current slide
+    setTimeout(() => {
+      if (window.IAI_DECK) {
+        // touch the slide so populateNotes fires (it runs inside show())
+        const cur = window.IAI_DECK.current();
+        window.IAI_DECK.show(cur, false);
+      }
+    }, 100);
+  }
+
+  connect();
+
+  // --- WEBSOCKET ---
+  function connect() {
+    try {
+      const url = `${WORKER}/room/${room}/ws?as=${mode}`;
+      ws = new WebSocket(url);
+    } catch (e) {
+      console.error('[iai-sync] WS construct failed', e);
+      scheduleReconnect();
+      return;
+    }
+    ws.addEventListener('open', () => {
+      reconnectAttempts = 0;
+      setStatus('paired ·');
+      ws.send(JSON.stringify({t: 'join', role: mode}));
+      // If display, push current state so a catching-up remote syncs immediately
+      if (mode === 'display' && window.IAI_DECK) {
+        ws.send(JSON.stringify({t: 'slide', n: window.IAI_DECK.current() + 1}));
+      }
+    });
+    ws.addEventListener('message', (ev) => {
+      let msg; try { msg = JSON.parse(ev.data); } catch { return; }
+      handleMessage(msg);
+    });
+    ws.addEventListener('close', () => {
+      setStatus('reconnecting…', 'error');
+      scheduleReconnect();
+    });
+    ws.addEventListener('error', () => {
+      setStatus('connection error', 'error');
+    });
+  }
+  function scheduleReconnect() {
+    if (reconnectTimer) return;
+    reconnectAttempts++;
+    const delay = Math.min(1000 * Math.pow(1.6, reconnectAttempts), 8000);
+    reconnectTimer = setTimeout(() => { reconnectTimer = null; connect(); }, delay);
+  }
+  function handleMessage(msg) {
+    if (msg.t === 'slide' && msg.from && msg.from !== mode) {
+      const n = parseInt(msg.n, 10);
+      if (Number.isFinite(n) && n >= 1 && window.IAI_DECK) {
+        applyingRemote = true;
+        window.IAI_DECK.show(n - 1, false);
+        applyingRemote = false;
+      }
+    } else if (msg.t === 'state') {
+      if (mode === 'remote' && msg.slide && window.IAI_DECK) {
+        applyingRemote = true;
+        window.IAI_DECK.show(msg.slide - 1, false);
+        applyingRemote = false;
+      }
+      if (mode === 'display') {
+        if (msg.remote) setStatus('phone paired ·', 'connected');
+        else setStatus('waiting for phone…');
+      }
+      if (mode === 'remote') {
+        if (msg.display) setStatus('display paired ·', 'connected');
+        else setStatus('display offline', 'error');
+      }
+    } else if (msg.t === 'joined') {
+      if (mode === 'display' && msg.role === 'remote') setStatus('phone paired ·', 'connected');
+      if (mode === 'remote' && msg.role === 'display') setStatus('display paired ·', 'connected');
+    } else if (msg.t === 'left') {
+      if (mode === 'display' && msg.role === 'remote') setStatus('phone disconnected', 'error');
+      if (mode === 'remote' && msg.role === 'display') setStatus('display disconnected', 'error');
+    }
+  }
+
+  // --- LOCAL NAV → BROADCAST ---
+  document.addEventListener('slide-change', (e) => {
+    if (applyingRemote) return;
+    if (!ws || ws.readyState !== WebSocket.OPEN) return;
+    const n = e.detail && e.detail.n;
+    if (!Number.isFinite(n)) return;
+    ws.send(JSON.stringify({t: 'slide', n: n}));
+  });
+  // open/close notes — display follows phone's signal
+  document.addEventListener('notes-toggle', (e) => {
+    if (!ws || ws.readyState !== WebSocket.OPEN) return;
+    if (mode === 'remote') ws.send(JSON.stringify({t: e.detail.open ? 'open_notes' : 'close_notes'}));
+  });
+
+  // --- PAIR OVERLAY (display) ---
+  function openPairOverlay() {
+    if (!pairOverlay) return;
+    pairOverlay.hidden = false;
+    document.body.classList.add('pair-open');
+    pairCode.textContent = room;
+    const remoteUrl = `${location.origin}${location.pathname}?as=remote&room=${room}${workerOverride ? '&worker=' + encodeURIComponent(workerOverride) : ''}`;
+    pairUrl.textContent = remoteUrl;
+    renderQR(remoteUrl);
+    if (pairToggle) pairToggle.classList.add('live');
+  }
+  function closePairOverlay() {
+    if (!pairOverlay) return;
+    pairOverlay.hidden = true;
+    document.body.classList.remove('pair-open');
+  }
+  if (pairOverlay) {
+    // Only listener for pair-overlay clicks; uses backdrop-vs-card target check.
+    pairOverlay.addEventListener('click', (e) => {
+      if (!document.body.classList.contains('pair-open')) return;
+      if (e.target === pairOverlay) closePairOverlay();
+    });
+  }
+  // Esc-to-close (only fires when pair-open; other keydown handlers bail on pair-open via body class)
+  document.addEventListener('keydown', (e) => {
+    if (!document.body.classList.contains('pair-open')) return;
+    if (e.key === 'Escape') closePairOverlay();
+  });
+
+  // --- QR GENERATION (lazy CDN load) ---
+  function loadQRLib() {
+    return new Promise((resolve, reject) => {
+      if (window.QRCode) return resolve(window.QRCode);
+      const s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js';
+      s.onload = () => resolve(window.QRCode);
+      s.onerror = reject;
+      document.head.appendChild(s);
+    });
+  }
+  async function renderQR(url) {
+    if (!pairQR) return;
+    pairQR.innerHTML = '<canvas></canvas>';
+    try {
+      const QR = await loadQRLib();
+      QR.toCanvas(pairQR.querySelector('canvas'), url, {
+        margin: 1,
+        width: 300,
+        color: { dark: '#0a0a0a', light: '#f4f1ea' },
+      });
+    } catch (e) {
+      pairQR.innerHTML = `<p class="pair-url" style="color: var(--color-discord);">QR library failed to load. URL above.</p>`;
+    }
+  }
+
+  // --- STATUS SETTER ---
+  function setStatus(text, cls) {
+    if (mode === 'display' && pairStatus) {
+      pairStatus.textContent = text;
+      pairStatus.className = 'pair-status' + (cls ? ' ' + cls : '');
+    }
+    if (mode === 'remote' && remoteState) {
+      remoteState.textContent = text;
+      remoteState.className = 'state' + (cls ? ' ' + cls : '');
+    }
+  }
+
+  console.log(`[iai-sync] mode=${mode} room=${room} worker=${WORKER}`);
 })();
 </script>
 </body>
