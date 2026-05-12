@@ -1614,21 +1614,48 @@ a { color: inherit; }
 #remote-badge .state.error { color: var(--color-discord); }
 #remote-badge.live { border-color: var(--color-accent); }
 
-/* In remote mode, the notes drawer is always-open and the slide is dimmed.
-   Suppress the swipe-up hint and drag-to-close affordance. */
-body.iai-remote .slide {
-  filter: brightness(0.42);
-  transition: filter 240ms ease-out;
+/* In remote mode, the notes drawer IS the screen.
+   Hide the slide content entirely so nothing (esp. the slide-45 LinkedIn QR)
+   bleeds through the notes overlay. Suppress the swipe-up hint and
+   drag-to-close affordance — the drawer is permanently open here. */
+body.iai-remote main#deck { display: none; }
+body.iai-remote::after { display: none; }     /* drop the grain overlay */
+body.iai-remote #ticker,
+body.iai-remote #counter,
+body.iai-remote #kbd,
+body.iai-remote #progress,
+body.iai-remote #notes-hint,
+body.iai-remote #pair-toggle,
+body.iai-remote #pair-overlay { display: none !important; }
+body.iai-remote {
+  background: var(--color-bg);
+  overflow: hidden;
 }
-body.iai-remote #notes-hint { display: none !important; }
 body.iai-remote #notes-drawer {
-  height: 72vh; height: 72svh;
-  max-height: 72vh; max-height: 72svh;
+  height: calc(100vh - 3.2rem); height: calc(100svh - 3.2rem);
+  max-height: calc(100vh - 3.2rem); max-height: calc(100svh - 3.2rem);
+  top: 3.2rem; bottom: 0;
   transform: translateY(0) !important;
+  border-top: 0;
+  box-shadow: none;
 }
 body.iai-remote #notes-handle-bar {
   cursor: default;
   pointer-events: none;
+  height: 0;
+  display: none;
+}
+body.iai-remote #notes-content {
+  padding-top: 0.6rem;
+  height: 100%;
+}
+body.iai-remote #notes-meta {
+  margin-top: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--color-subtle);
+  margin-bottom: 1rem;
 }
 
 /* Closing two-column · QR on the right (desktop) / below (mobile) */
