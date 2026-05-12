@@ -248,8 +248,9 @@ html.no-js .slide {
 }
 #counter .num { color: var(--color-accent); }
 #kbd {
+  /* Bottom-LEFT now — yields the right corner to the pair button. */
   bottom: clamp(2.6rem, 5.5vh, 3.6rem);
-  right: clamp(0.8rem, 3vw, 2.5rem);
+  left: clamp(0.8rem, 3vw, 2.5rem);
 }
 #progress {
   position: fixed;
@@ -1498,9 +1499,10 @@ a { color: inherit; }
    SYNC — display pairing overlay + remote status badge
    ============================================================ */
 #pair-toggle {
+  /* Bottom-RIGHT — small button when un-paired, tiny lime dot once paired. */
   position: fixed;
-  top: clamp(0.7rem, 1.8vh, 1.6rem);
-  left: clamp(0.8rem, 3vw, 2.5rem);
+  bottom: clamp(2.6rem, 5.5vh, 3.6rem);
+  right: clamp(0.8rem, 3vw, 2.5rem);
   z-index: 12;
   font-family: var(--font-accent);
   font-size: var(--type-micro);
@@ -1511,7 +1513,9 @@ a { color: inherit; }
   border: 1px solid var(--color-subtle);
   padding: 0.35rem 0.7rem;
   cursor: pointer;
-  transition: color 180ms ease, border-color 180ms ease, background 180ms ease;
+  transition: color 180ms ease, border-color 180ms ease, background 180ms ease,
+              width 240ms ease, height 240ms ease, padding 240ms ease,
+              box-shadow 240ms ease;
 }
 #pair-toggle:hover { color: var(--color-accent); border-color: var(--color-accent); }
 #pair-toggle.live {
@@ -1522,6 +1526,36 @@ a { color: inherit; }
 #pair-toggle.live::before {
   content: "● ";
   animation: blink 1.5s steps(2) infinite;
+}
+/* Phone-paired state · shrinks to a 14px lime dot. Tap reopens QR. */
+#pair-toggle.paired {
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  border-radius: 50%;
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: transparent;
+  font-size: 0;
+  letter-spacing: 0;
+  overflow: hidden;
+  box-shadow: 0 0 8px rgba(212,255,0,0.4);
+}
+#pair-toggle.paired::before {
+  content: "";
+  display: block;
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid var(--color-accent);
+  opacity: 0.6;
+  animation: pair-pulse 2s ease-in-out infinite;
+}
+#pair-toggle.paired { position: fixed; }   /* override absolute from pseudo */
+#pair-toggle.paired:hover { box-shadow: 0 0 16px rgba(212,255,0,0.7); }
+@keyframes pair-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%      { opacity: 0;   transform: scale(1.4); }
 }
 
 #pair-overlay {
@@ -1604,7 +1638,7 @@ body.pair-open #pair-overlay {
 #remote-badge {
   position: fixed;
   top: clamp(0.6rem, 1.8vh, 1.4rem);
-  left: 50%; transform: translateX(-50%);
+  left: 0.7rem;
   z-index: 11;
   font-family: var(--font-accent);
   font-size: var(--type-micro);
@@ -1621,11 +1655,47 @@ body.pair-open #pair-overlay {
 #remote-badge .state.error { color: var(--color-discord); }
 #remote-badge.live { border-color: var(--color-accent); }
 
-/* In remote mode, the notes drawer IS the screen.
-   Hide the slide content entirely so nothing (esp. the slide-45 LinkedIn QR)
-   bleeds through the notes overlay. Suppress the swipe-up hint and
-   drag-to-close affordance — the drawer is permanently open here. */
+/* REMOTE VIEW TOGGLE · top-right two-button switch (slides | notes).
+   Shown only when body.iai-remote is set. */
+#remote-view-toggle {
+  display: none;
+  position: fixed;
+  top: clamp(0.55rem, 1.8vh, 1.35rem);
+  right: 0.7rem;
+  z-index: 12;
+  background: var(--color-surface);
+  border: 1px solid var(--color-subtle);
+}
+body.iai-remote #remote-view-toggle { display: flex; }
+#remote-view-toggle button {
+  font-family: var(--font-accent);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.36rem 0.7rem;
+  background: transparent;
+  color: var(--color-muted);
+  border: 0;
+  cursor: pointer;
+  transition: color 180ms ease, background 180ms ease;
+  min-height: 32px;
+}
+#remote-view-toggle button:not(:last-child) { border-right: 1px solid var(--color-subtle); }
+#remote-view-toggle button.active {
+  color: var(--color-accent);
+  background: rgba(212,255,0,0.08);
+}
+
+/* REMOTE MODE — two views the user can flip between:
+   - default (notes): slide content hidden, notes drawer is the full screen
+   - remote-view-slides: notes drawer hidden, slide content visible like normal
+   Swipe still advances slides in both views.
+
+   Suppress the swipe-up hint and drag-to-close affordance — the drawer is
+   permanently open in the notes view. */
 body.iai-remote main#deck { display: none; }
+body.iai-remote.remote-view-slides main#deck { display: block; }
+body.iai-remote.remote-view-slides #notes-drawer { display: none !important; }
 body.iai-remote::after { display: none; }     /* drop the grain overlay */
 body.iai-remote #ticker,
 body.iai-remote #counter,
@@ -2945,6 +3015,10 @@ body.iai-remote #notes-list li {
 <div id="remote-badge" hidden aria-live="polite">
   REMOTE · room <span class="code" id="remote-code">----</span> · <span class="state" id="remote-state">connecting…</span>
 </div>
+<div id="remote-view-toggle" role="group" aria-label="Remote view">
+  <button data-view="notes" class="active" type="button">notes</button>
+  <button data-view="slides" type="button">slides</button>
+</div>
 
 <!-- Mobile-only · swipe up to reveal presenter notes -->
 <div id="notes-hint" aria-hidden="true"><span class="arr">▲</span> swipe up · notes</div>
@@ -3541,6 +3615,20 @@ body.iai-remote #notes-list li {
         window.IAI_DECK.show(cur, false);
       }
     }, 100);
+    // Wire the notes/slides view toggle. Scoped click handlers, no conflict
+    // with the document-level slide-nav (which already bails on .iai-remote
+    // via the click-target exclusion list, and on button targets).
+    const viewToggle = document.getElementById('remote-view-toggle');
+    if (viewToggle) {
+      viewToggle.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const v = btn.dataset.view;
+          document.body.classList.toggle('remote-view-slides', v === 'slides');
+          viewToggle.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === btn));
+        });
+      });
+    }
   }
 
   connect();
@@ -3597,20 +3685,46 @@ body.iai-remote #notes-list li {
         applyingRemote = false;
       }
       if (mode === 'display') {
-        if (msg.remote) setStatus('phone paired ·', 'connected');
-        else setStatus('waiting for phone…');
+        if (msg.remote) { setStatus('phone paired ·', 'connected'); notifyDisplayPaired(); }
+        else            { setStatus('waiting for phone…');         notifyDisplayUnpaired(); }
       }
       if (mode === 'remote') {
         if (msg.display) setStatus('display paired ·', 'connected');
         else setStatus('display offline', 'error');
       }
     } else if (msg.t === 'joined') {
-      if (mode === 'display' && msg.role === 'remote') setStatus('phone paired ·', 'connected');
+      if (mode === 'display' && msg.role === 'remote') { setStatus('phone paired ·', 'connected'); notifyDisplayPaired(); }
       if (mode === 'remote' && msg.role === 'display') setStatus('display paired ·', 'connected');
     } else if (msg.t === 'left') {
-      if (mode === 'display' && msg.role === 'remote') setStatus('phone disconnected', 'error');
+      if (mode === 'display' && msg.role === 'remote') { setStatus('phone disconnected', 'error'); notifyDisplayUnpaired(); }
       if (mode === 'remote' && msg.role === 'display') setStatus('display disconnected', 'error');
     }
+  }
+
+  /* Pair-toggle paired-dot state.
+     When a phone joins, shrink the bottom-right button to a tiny lime dot
+     after a short delay (so the user sees the 'phone paired ·' confirmation),
+     then auto-close the overlay. Clicking the dot re-opens the QR. */
+  let _pairLabelDefault = null;
+  function notifyDisplayPaired() {
+    if (!pairToggle) return;
+    if (_pairLabelDefault === null) _pairLabelDefault = pairToggle.innerHTML;
+    pairToggle.classList.remove('live');
+    pairToggle.classList.add('paired');
+    pairToggle.setAttribute('aria-label', 'Phone paired · click to show QR again');
+    pairToggle.title = 'Phone paired · click to show QR again';
+    // Auto-close the overlay 1.4s after pairing (let the user see the confirmation).
+    setTimeout(() => {
+      if (document.body.classList.contains('pair-open')) closePairOverlay();
+    }, 1400);
+  }
+  function notifyDisplayUnpaired() {
+    if (!pairToggle) return;
+    pairToggle.classList.remove('paired');
+    pairToggle.classList.remove('live');
+    pairToggle.setAttribute('aria-label', 'Pair a phone remote');
+    pairToggle.title = '';
+    if (_pairLabelDefault !== null) pairToggle.innerHTML = _pairLabelDefault;
   }
 
   // --- LOCAL NAV → BROADCAST ---
