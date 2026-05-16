@@ -15,7 +15,7 @@
   "capabilities": [
     {
       "name": "read_slide",
-      "description": "Retrieve a specific slide's content via deep-link. URL pattern: /#{n} where n is 1..17.",
+      "description": "Retrieve a specific slide's content via deep-link. URL pattern: /#{n} where n is 1..45.",
       "method": "GET",
       "url": "https://internet-after-interfaces.vercel.app/#{slide_number}"
     },
